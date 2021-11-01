@@ -1,0 +1,67 @@
+.saleTag{
+    clip-path: polygon(100% 25%, 78% 53%, 100% 79%, 0 77%, 0 50%, 0 25%);
+    padding:7px 20px 7px 10px;
+    font-size:12px;
+}
+.border-box{
+    box-sizing: border-box;
+}
+
+.banner-shadow-hover{
+    position: relative;
+}
+
+.banner-shadow-hover::before {
+    bottom: 0;
+    content: "";
+    left: 0;
+    margin: 0 auto;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all 300ms ease-in 0s;
+}
+
+
+.banner-shadow-hover:hover::before {
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.7) inset;
+    transition: all 300ms ease-in 0s;
+}
+.fa-star{
+    color:#F07C29
+}
+
+ul.star{
+    padding:0px;
+}
+
+ul.star li{
+    /* width: 15px; */
+    padding:5px;
+    max-width:20px;
+    min-width:0px;
+}
+
+.scrollToTopBreakPoint{
+    
+}
+
+
+.baseInput{
+    color: #555555;
+    border: 1px solid #ccc;
+    padding: 8px 8px;
+    width: 100%;
+    font-size: 14px;
+    background: #f9f9f9;
+    outline: none!important;
+}
+
+.select{
+    width:100%;
+    color: #555555;
+    /* border: 1px solid #ccc; */
+    padding: 8px 8px;
+    /* background: #f9f9f9; */
+}
