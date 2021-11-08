@@ -36,6 +36,10 @@
     background-image: url("../img//bg2.jpg");
 }
 
+.slideBtn {
+    outline: none !important;
+}
+
 .slideContent {
     position: absolute;
     width: 40%;
@@ -54,7 +58,7 @@
 }
 
 .slideContent .slideHeader2 {
-    color: #fff;
+    color: #333;
     font-size: 80px;
 }
 
@@ -89,7 +93,7 @@
 }
 
 .owl-carousel .navButton {
-    color: #fff;
+    color: #fff !important;
     border: none !important
 }
 
@@ -287,7 +291,7 @@
     line-height: 30px;
     padding: 10px;
     width: 100%;
-    outline: none!important;
+    outline: none !important;
 }
 
 .blockLetter input::placeholder {
@@ -328,46 +332,54 @@
     z-index: -1;
 }
 
+#newArrivalSlide .owl-dot {
+    display: none;
+}
 
-.bookCategoryItem{
+#newArrivalSlide .owl-nav {
+    top: 30%;
+}
+
+#newArrivalSlide .owl-nav.disabled {
+    display: flex;
+}
+
+#newArrivalSlide .newArrivalNavButton {
+    background: #f6f6f6 none repeat scroll 0 0;
     display: flex;
     align-items: center;
-    height:100px;
-    padding:5px;
-}
-.bookCategoryItemName{
-    color: #333333;
-    font-size: 16px;
-    line-height: 1.3;
-    text-transform: capitalize;
-    font-family: 'Rufina', serif;
-    font-weight: 400;
-    text-decoration: none;
+    justify-content: center;
+    padding: 5px;
+    height: 35px;
+    width: 35px;
+    border-radius: 5px;
+    color: #666 !important;
 }
 
-.bookCategoryItemWrapper{
-    padding-left:10px
+#newArrivalSlide .owl-stage{
+    /* transition: all 1s ease 0s!important; */
 }
 
-.bookCategoryItemPrice .currentPrice{
-    color: #f07c29;
-    font-size: 20px;
-    font-weight: 600;
-    font-family: 'Rufina', serif;
-    font-style: italic;
-}
-.bookCategoryItemPrice .actualPrice{
-    color: #666;
-    font-size: 15px;
-    font-weight: 400;
-    margin-left: 5px;
-    text-decoration: line-through;
-    display:flex;
-    align-items: center;
+.navRightButton {
+    transform: translateX(-10px);
+    visibility: hidden;
+    transition: all 0.3s;
 }
 
+.navLeftButton {
+    transform: translateX(10px);
+    visibility: hidden;
+    transition: all 0.3s;
+}
 
-.bookCategoryItemImg{
-height:90px;
-width: 65px;
+.owl-carousel:hover .navRightButton {
+    transform: translateX(0px);
+    visibility: visible;
+
+}
+
+.owl-carousel:hover .navLeftButton{
+    transform: translateX(0px);
+    visibility: visible;
+
 }

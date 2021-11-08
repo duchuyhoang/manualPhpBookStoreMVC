@@ -79,7 +79,7 @@
 
   </section>
 
-  <div class="owl-carousel">
+  <div class="owl-carousel" id="mainSlide">
     <div class="bgSlide1 bgSlide">
       <div class="slideContent">
         <h1 class="slideHeader animate__animated">
@@ -110,46 +110,117 @@
       ll definitely find what you are looking for..</p>
 
     <div class="d-flex justify-content-center mt-3">
-      <div class="tab col-4 d-flex justify-content-around">
-        <button class="tablinks active" onclick="openCity(event, 'New Arrival')">London</button>
-        <button class="tablinks" onclick="openCity(event, 'OnSale')">Paris</button>
-        <button class="tablinks" onclick="openCity(event, 'Product')">Tokyo</button>
+      <div class="tab col-6 d-flex justify-content-around">
+        <button class="tablinks active" onclick="openCity(event, 'New Arrival')">New Arrival</button>
+        <button class="tablinks" onclick="openCity(event, 'OnSale')">OnSale</button>
+        <button class="tablinks" onclick="openCity(event, 'Product')">Product</button>
       </div>
 
     </div>
 
-    <div id="New Arrival" class="tabcontent" style="display:block">
+    <div id="New Arrival" class="tabcontent container" style="display:flex">
 
-      <div class="bookWrapper">
-        <div class="bookImg">
-          <div class="bookView">
-            <div class="bookIconWrapper">
-              <a href="">
-                <i class="fas fa-search fa-1x "></i>
-              </a>
+      <div class="newArrivalSlide owl-carousel" id="newArrivalSlide">
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
             </div>
-
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/5.jpg" alt="book" />
           </div>
-          <img src="https://template.hasthemes.com/koparion/koparion/img/product/5.jpg" alt="book" />
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <p class="bookPrice">100$</p>
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
         </div>
-        <div class="bookDetail">
-          <div class="bookName">Harry Potter</div>
-          <p class="bookPrice">100$</p>
+
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/3.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <p class="bookPrice">100$</p>
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
         </div>
-        <div class="tagContainer d-flex flex-column">
-          <div class="saleTag sale">5%</div>
-          <div class="saleTag new">NEW</div>
+
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/9.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <p class="bookPrice">100$</p>
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
         </div>
+
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/7.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <p class="bookPrice">100$</p>
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
+        </div>
+
+
       </div>
+
 
     </div>
 
-    <div id="OnSale" class="tabcontent">
+    <div id="OnSale" class="tabcontent container">
       <h3>Paris</h3>
       <p>Paris is the capital of France.</p>
     </div>
 
-    <div id="Product" class="tabcontent">
+    <div id="Product" class="tabcontent container">
       <h3>Tokyo</h3>
       <p>Tokyo is the capital of Japan.</p>
     </div>
@@ -364,15 +435,33 @@
 <script>
   function changeSlideAnimatition(event) {
     var item = event.item.index - 2; // Position of the current item
+    // console.log($(".owl-item"));
+    let listOwlItem = document.getElementById("mainSlide").getElementsByClassName("owl-item");
+
+    // $(".owl-item")
+    for (let i = 0; i < listOwlItem.length; i++) {
+      if (listOwlItem[i].classList.length) {
+        console.log("dad");
+        let element = listOwlItem[i].children[0];
+        element.getElementsByClassName("slideHeader")[0].classList.remove("animate__animated", "animate__backInLeft");
+        element.getElementsByClassName("slideHeader2")[0].classList.remove("animate__animated", "animate__backInRight");
+        element.getElementsByClassName("slideBtn")[0].classList.remove("animate__animated", "animate__backInDown");
+
+        // console.log(element.getElementsByClassName("slideHeader2"));
+      }
+    }
+
+
     $('h1').removeClass('animated bounce');
-    $('.owl-item').find('.slideHeader').not('.cloned').eq(item).addClass('animate__animated animate__backInLeft');
-    $('.owl-item').find('.slideHeader2').not('.cloned').eq(item).addClass('animate__animated animate__backInRight');
-    $('.owl-item').find('.slideBtn').not('.cloned').eq(item).addClass('animate__animated animate__backInDown');
+    $('.owl-item').find('.slideHeader').not('.cloned').eq(item).removeClass('animate__animated animate__backInLeft').addClass('animate__animated animate__backInLeft');
+    $('.owl-item').find('.slideHeader2').not('.cloned').eq(item).removeClass('animate__animated animate__backInRight').addClass('animate__animated animate__backInRight');
+    $('.owl-item').find('.slideBtn').not('.cloned').eq(item).removeClass('animate__animated animate__backInDown').addClass('animate__animated animate__backInDown');
   }
 
   $(document).ready(function() {
 
-    var owl = $('.owl-carousel');
+    // var owl = $('.owl-carousel');/
+    var owl = $('#mainSlide');
     owl.on('initialized.owl.carousel', changeSlideAnimatition);
     owl.owlCarousel({
       nav: true,
@@ -399,7 +488,43 @@
   }
 </script>
 
-
+<script>
+  $(document).ready(function() {
+    $("#newArrivalSlide").owlCarousel({
+      loop: true,
+      nav:true,
+      slideSpeed: 5000,
+      mouseDrag: true,
+      navText: ["<i class='fa fa-angle-left fa-2x newArrivalNavButton navLeftButton'></i>", "<i class='fa fa-angle-right navRightButton fa-2x newArrivalNavButton'></i>"],
+      // margin: 10,
+      responsiveClass: true,
+      items:2,
+      responsive: {
+        0: {
+          items: 1,
+          nav: true
+        },
+        600: {
+          items: 2,
+          nav: true
+        },
+        768: {
+          items: 3,
+          nav: false
+        },
+        992: {
+          items: 4,
+          nav: true,
+          loop: false
+        },
+        1200: {
+          items: 5,
+          nav: true,
+          loop: false
+        }
+      }
+    })
+  })
 </script>
 
 </html>

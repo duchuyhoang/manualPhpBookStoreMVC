@@ -14,13 +14,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sifter/0.5.4/sifter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microplugin/0.0.3/microplugin.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/selectize.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/snackbarjs/1.1.0/snackbar.css" crossorigin="anonymous">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap4.min.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./css/admin.css">
     <link rel="stylesheet" type="text/css" href="./css/base.css">
 
     <title>Document</title>
 </head>
-<?php require dirname(__FILE__) . "/../../shared/constants.php";
+<?php
+require dirname(__FILE__) . "/../../shared/constants.php";
+require dirname(__FILE__) . "/../../shared/actionsType.php";
 $tab = isset($_GET["tab"]) ? $_GET["tab"] : "";
 ?>
 
@@ -71,6 +75,8 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "";
     <section id="adminContent">
 
         <?php require dirname(__FILE__) . "/AdminAddProduct.php" ?>
+        </div>
+
 
         <div id=<?php echo $EDIT_PRODUCT ?> class="<?php echo $tab == $EDIT_PRODUCT ? "active" : "" ?>">
             edit product
@@ -84,14 +90,16 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "";
 
 
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/snackbarjs/1.1.0/snackbar.min.js"></script>
+
 <script>
-    function reset() {
-        console.log("hello");
-        $("#addBookForm").trigger('reset');
-        $select.clear();
-        $newBookManufactureSelect.clear();
-        $newBookCategorySelect.clear();
-    }
+    // function reset() {
+    //     console.log("hello");
+    //     $("#addBookForm").trigger('reset');
+    //     $select.clear();
+    //     $newBookManufactureSelect.clear();
+    //     $newBookCategorySelect.clear();
+    // }
 </script>
 
 </html>

@@ -12,13 +12,6 @@ class View
     }
 
 
-    /**
-     * Load view
-     * 
-     * @param   string
-     * @param   array
-     * @desc    hàm load view, tham số truyền vào là tên của view và dữ liệu truyền qua view
-     */
     public function load($view, $data = array())
     {
         extract($data);

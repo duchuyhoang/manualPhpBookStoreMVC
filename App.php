@@ -6,14 +6,15 @@ require_once "./Controller/AuthController.php";
 require_once "./Controller/SiteMapController.php";
 require_once "./Controller/ProductInfoController.php";
 require_once "./Controller/AdminController.php";
+require_once "./Controller/ContactController.php";
+require_once "./Controller/CartPageController.php";
+require_once "./Controller/CheckoutController.php";
+
 
 require_once "./shared/functions.php";
 require_once "./Model/Router.php";
 class App
 {
-
-    // regex path
-
 
     private $routers = array();
 
@@ -29,6 +30,9 @@ class App
         array_push($this->routers, new Router("/sitemap", true, new SiteMapController()));
         array_push($this->routers, new Router("/product", true, new ProductInfoController()));
         array_push($this->routers, new Router("/admin", true, new AdminController()));
+        array_push($this->routers, new Router("/contact", true, new ContactController()));
+        array_push($this->routers, new Router("/myCart", true, new CartPageController()));
+        array_push($this->routers, new Router("/checkout", true, new CheckoutController()));
 
     }
 

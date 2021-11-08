@@ -299,11 +299,7 @@ section.header-not-at-top {
 }
 
 .fa-search {
-    color: #fff
-}
-
-body {
-    height: 200vh
+    color: #fff!important;
 }
 
 .modal-header {

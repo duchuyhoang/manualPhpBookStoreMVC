@@ -8,14 +8,16 @@ class HomeDao extends BaseDao{
 private $listBook;
 
 public function __construct(){
-parent::__construct();
+// parent::__construct();
+BaseDao::connectDB();
+
 $this->listBook =array();
 }
 
 public function getAll(){
 $query="SELECT * FROM category";
 // $stmt=$conn;
-$stmt =$this->db->query($query);
+$stmt =parent::$db->query($query);
 $list_books=$stmt->fetchAll();
 $list=array();
 foreach(

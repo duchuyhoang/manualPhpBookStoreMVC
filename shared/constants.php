@@ -11,6 +11,10 @@ $LOGIN_SUCCESS="Login successfully";
 $LOGIN_FAILED="Wrong email or password";
 $LOGIN_EMAIL="email";
 $LOGIN_PASSWORD="password";
+
+$SIGN_UP_EMAIL="signup_email";
+$SIGN_UP_PASSWORD="signup_password";
+
 $DEL_FLAG_VALID=0;
 $DEL_FLAG_INVALIDA=1;
 

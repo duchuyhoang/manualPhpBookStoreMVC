@@ -11,8 +11,11 @@
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;
-    font-size: 17px;
+    font-size: 16px;
     position: relative;
+    color:#333;
+    font-weight: 700;
+    text-transform: uppercase;
   }
   
   .tab button::before{
@@ -30,7 +33,7 @@
   .tab button:hover:before{
     visibility: visible;
     opacity: 1;
-    bottom:10px;
+    bottom:13px;
   }
 
   /* Create an active/current tablink class */

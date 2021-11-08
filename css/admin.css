@@ -1,6 +1,9 @@
 body{
     font-family: 'Open Sans', sans-serif;;
 }
+
+
+
 .sidebar {
     position: fixed;
     display: flex;
@@ -46,7 +49,7 @@ body{
 #adminContent {
     margin-left: 65px;
     min-height: 100vh;
-    background: black;
+    /* background: black; */
     padding:10px;
 }
 
@@ -72,6 +75,14 @@ body{
 }
 #adminContent form{
     /* width: ; */
-    min-width: 40%;
+    max-width: 60%;
     padding:10px
+}
+.submitButton{
+    background:#f07c29;
+    /* width:58%; */
+    color:#fff;
+    padding:5px;
+    outline: none;
+    border: none;
 }

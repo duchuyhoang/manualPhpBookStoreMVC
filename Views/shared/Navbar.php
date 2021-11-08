@@ -24,7 +24,10 @@
         </ul>
         {$_SESSION[$CURRENT_USER_INFO]->getName()}
          </div>" :
-            '<div data-toggle="modal" data-target="#loginModal">Sign in</div>'
+            '
+            <div data-toggle="modal" data-target="#signupModal">Sign up</div>
+            <div data-toggle="modal" data-target="#loginModal">Sign in</div>
+            '
         ?>
 
     </div>
@@ -66,7 +69,7 @@
 <section class="w-100 pt-1 d-flex justify-content-center mt-3" id="navbar">
     <ul>
         <li class="cate">
-            <a href="/404Page">
+            <a href="./home">
                 Home
                 <i class="fa fa-angle-down mt-1 ml-2"></i>
             </a>
@@ -140,6 +143,7 @@
 </section>
 
 <div id="headerAnchor"></div>
+
 <div class="modal fade" id="loginModal" role="dialog">
     <div class="modal-dialog">
 
@@ -182,10 +186,67 @@
 </div>
 
 
-<div class="position-fixed scrollToTop cursor-pointer" id="scrollToTop">
+<div class="modal fade" id="signupModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Login</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="auth" id="loginForm">
+                    <div class="d-flex flex-column w-75 m-auto">
+
+                        <div class="form-group">
+                            <label for="email">Email address:</label>
+                            <input type="email" name=<?php echo $SIGN_UP_EMAIL ?> class="form-control mb-2" id=<?php echo $SIGN_UP_EMAIL ?> placeholder="Email..." />
+                        </div>
+
+                        <div class="form-group">
+                            <label for=<?php echo $SIGN_UP_PASSWORD ?>>Password</label>
+                            <input type="password" name=<?php echo $SIGN_UP_PASSWORD ?> class="form-control mb-2" id=<?php echo $SIGN_UP_PASSWORD ?> placeholder="Password..." />
+                        </div>
+                        <div class="form-group">
+                            <p class="text-danger m-0" id="signupError"></p>
+                        </div>
+                        <div class="form-group d-flex justify-content-center w-100">
+                            <button type='submit' class="btn btn-primary" name="submit" value=<?php echo $ACTION_SIGN_UP ?> id="btnLog">Sign up</button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="position-fixed scrollToTop cursor-pointer" id="scrollToTop" onclick="scrollToTop()">
     <i class="fa fa-angle-up"></i>
 
 </div>
+
+<script>
+function scrollToTop(){
+    let topElement=document.getElementById("accountZone");
+    topElement.scrollIntoView({
+  behavior: "smooth",
+  block: "start",
+  inline: "nearest"
+});
+}
+
+</script>
+
+
 
 <script>
     $("#loginForm").submit(function(event) {

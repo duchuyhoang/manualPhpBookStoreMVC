@@ -15,13 +15,13 @@ switch ($actionType) {
                 $password = isset($_POST["password"]) ? $_POST["password"] : "";
                 $result = $UserDao->login($email, $password);
                 $_SESSION[$CURRENT_USER_INFO] = $result;
-                $break=1;
+                $break = 1;
                 if ($result == null) throw new Exception("Login failed");
                 else
-                echo json_encode($result);
+                    echo json_encode($result);
                 break;
             } catch (Exception $e) {
-                $error=new stdClass();
+                $error = new stdClass();
                 $error->message = "Wrong email or password";
                 $error->status = "401";
                 http_response_code(401);
@@ -30,15 +30,14 @@ switch ($actionType) {
             }
         }
 
-case $SIGN_OUT:{
-    $_SESSION[$CURRENT_USER_INFO] = NULL;
-    $response=new stdClass();
-    $response->message = "Sign out success";
-    echo json_encode($response);
-}
+    case $SIGN_OUT: {
+            $_SESSION[$CURRENT_USER_INFO] = NULL;
+            $response = new stdClass();
+            $response->message = "Sign out success";
+            echo json_encode($response);
+        }
 
 
     default: {
         }
 }
-

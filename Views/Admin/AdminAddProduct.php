@@ -1,7 +1,7 @@
 <div id=<?php echo $ADD_PRODUCT ?> class="<?php echo $tab == "" || $tab == $ADD_PRODUCT ? "active" : "" ?>">
     <h2>Add product</h2>
-    <section class="mt-3">
-        <form action="./" method="post" id="addBookForm">
+    <section class="mt-3 justify-content-center flex-column align-items-center">
+        <form id="addBookForm">
             <div class="mt-1 w-100 form-group">
                 <label for="newBookName">Book name</label>
                 <input type="text" class="baseInput" placeholder="Enter book name..." id="newBookName">
@@ -51,9 +51,21 @@
                 <textarea class="baseInput" id="newBookDescription"></textarea>
             </div>
 
-            <button type="reset" onclick="reset()">Submit btn</button>
+            <div class="mt-1 w-100 form-group">
+                <label for="newBookImage">Images</label>
+                <input type="file" accept="image/*" id="newBookImage" multiple />
+
+            </div>
+            <div class="w-100 text-center">
+                <button type="button" id="addNewProduct" value='<?php echo $ADD_NEW_PRODUCT ?>' class="submitButton">Submit btn</button>
+
+            </div>
+
         </form>
+        <!-- onclick="reset()" -->
     </section>
+    <div id="snackbar-container">
+    </div>
 </div>
 
 <script>
@@ -65,7 +77,10 @@
 
     let $select, $newBookManufactureSelect, $newBookCategorySelect = null;
 
+
     function openTab(event, id) {
+        console.log("đâ");
+
         $("#adminContent").children("div").each(function(index, element) {
             element.classList.remove("active");
         })
@@ -76,6 +91,8 @@
 
         $(`#${id}`).addClass("active");
     }
+
+
     $(document).ready(function() {
         $select = $("#newBookAuthor").selectize({
             ...selectizeSetting
@@ -94,11 +111,57 @@
         $newBookCategorySelect[0].selectize.setValue("Search here");
     })
 
-    // function reset() {
-    //     console.log("hello");
-    //     $("#addBookForm").trigger('reset');
-    //     $select.clear();
-    //     $newBookManufactureSelect.clear();
-    //     $newBookCategorySelect.clear();
-    // }
+    function reset() {
+        $("#addBookForm").trigger('reset');
+        $select[0].selectize.clear();
+        $newBookManufactureSelect[0].selectize.clear();
+        $newBookCategorySelect[0].selectize.clear();
+    }
+
+    $("#addNewProduct").click(function(event) {
+        event.preventDefault();
+        $("#loading").addClass("loadingShow");
+        const data = new FormData();
+        data.append("submit", $("#addNewProduct").val());
+        data.append("bookName", $("#newBookName").val());
+        data.append("bookQuantity", $("#newBookQuantity").val());
+        data.append("bookPrice", $("#newBookPrice").val());
+        data.append("bookAuthor", $select[0].selectize.getValue());
+        data.append("bookDescription", $("#newBookDescription").val());
+        data.append("bookManufacture", $newBookManufactureSelect[0].selectize.getValue());
+        data.append("bookCategory", $newBookCategorySelect[0].selectize.getValue());
+
+        const fileList = $("#newBookImage")[0].files
+        if (fileList.length > 0) {
+            for (let i = 0; i < fileList.length; i++) {
+                data.append("bookImage[]", fileList[i]);
+            }
+        } else if (fileList.length === 1) {
+            data.append("bookImage[]", fileList["0"]);
+        }
+        reset();
+        request = $.ajax({
+            url: "./ajax/admin.php",
+            type: "post",
+            data: data,
+            processData: false,
+            contentType: false,
+        });
+        request.done(function(response, textStatus, jqXHR) {
+            $.snackbar({
+                content: "Success!!!",
+                timeout: 5000,
+                style: "customSnackbar snackbar-error"
+            });
+        });
+        request.fail(function(jqXHR, textStatus, errorThrown) {
+            console.log(JSON.parse(jqXHR.responseText));
+            $.snackbar({
+                content: "Error!",
+                timeout: 5000,
+                style: "customSnackbar snackbar-error"
+            });
+            $("#loading").removeClass("loadingShow");
+        });
+    })
 </script>

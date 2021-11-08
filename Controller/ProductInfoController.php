@@ -45,7 +45,8 @@ $a=$_SERVER['REQUEST_METHOD'];
         if ($id_product) {
             $bookInfo = $this->BookDao->getById($id_product);
 
-            $this->view->load("ProductInfo",);
+            $this->view->load("ProductInfo",array($bookInfo));
+            $this->view->show();
         } else {
             header('Location: ' . $protocol . $_SERVER['SERVER_NAME'] . "/banSach" . "" . "/home");
         }

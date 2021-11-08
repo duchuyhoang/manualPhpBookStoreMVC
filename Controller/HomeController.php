@@ -4,6 +4,7 @@
 require_once "BaseController.php";
 require_once dirname(__FILE__) . "/../Views/View.php";
 require_once dirname(__FILE__) . "/../Dao/HomeDao.php";
+require_once dirname(__FILE__) . "/../Dao/BookDao.php";
 
 
 class HomeController extends BaseController
@@ -11,6 +12,7 @@ class HomeController extends BaseController
 
     private $view;
     private $HomeDao;
+    private $BookDao;
 
     public function showView()
     {
@@ -18,6 +20,8 @@ class HomeController extends BaseController
             // require_once dirname(__FILE__) . "/../shared/constant.php";
             $this->view = new View();
             $this->HomeDao = new HomeDao();
+            $this->BookDao = new BookDao();
+
             // $this->view->load('Home',);
             // $this->view->show();
             $this->initialActions();
@@ -43,7 +47,8 @@ class HomeController extends BaseController
         switch ($actionType) {
             case $ACTION_HOME_INITIAL: {
                     $listBooking = $this->HomeDao->getAll();
-                    $this->view->load('Home', [$listBooking]);
+                    $listLatestBook=$this->BookDao->getLatest();
+                    $this->view->load('Home', [$listBooking,$listLatestBook]);
                     break;
                 }
 
