@@ -3,13 +3,14 @@
 require_once dirname(__FILE__) . "/../db.php";
 require_once dirname(__FILE__) . "/../Model/Manufacture.php";
 require_once dirname(__FILE__) . "/BaseDao.php";
+require_once dirname(__FILE__) . "/../DBConnector.php";
 
 
-class ManufactureDao extends BaseDao
+class ManufactureDao extends DBConnector
 {
     public function __construct()
     {
-        BaseDao::connectDB();           
+        DBConnector::connectDB();           
         // parent::__construct();
     }
 

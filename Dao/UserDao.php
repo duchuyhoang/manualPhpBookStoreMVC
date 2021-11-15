@@ -2,19 +2,20 @@
 require_once dirname(__FILE__) . "/../db.php";
 require_once dirname(__FILE__) . "/../Model/User.php";
 require_once dirname(__FILE__) . "/../Model/Address.php";
+require_once dirname(__FILE__) . "/../DBConnector.php";
 
 require_once dirname(__FILE__) . "/BaseDao.php";
 
 
 
-class UserDao extends BaseDao
+class UserDao extends DBConnector
 {
 
     private $currentUser = null;
 
     public function __construct()
     {
-        parent::__construct();
+        DBConnector::connectDB();
     }
 
     public function login($email, $password)
@@ -24,7 +25,7 @@ class UserDao extends BaseDao
 FROM thuvien.user INNER JOIN province ON user.id_province=province.id 
 INNER JOIN district ON user.id_district=district.id 
 INNER JOIN ward ON user.id_ward=ward.id WHERE email=? AND password=? AND delFlag={$DEL_FLAG_VALID} LIMIT 1";
-        $stmt = $this->db->prepare($query);
+        $stmt = parent::$db->prepare($query);
         $stmt->bindParam(1, $email);
         $stmt->bindParam(2, $password);
         $stmt->execute();

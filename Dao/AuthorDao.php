@@ -1,11 +1,13 @@
 <?php
 require_once dirname(__FILE__) . "/../Model/Author.php";
 require_once dirname(__FILE__) . "/BaseDao.php";
-class AuthorDao extends BaseDao
+require_once dirname(__FILE__) . "/../DBConnector.php";
+
+class AuthorDao extends DBConnector
 {
     public function __construct()
     {
-        BaseDao::connectDB();
+        DBConnector::connectDB();
         // parent::__construct();
     }
 

@@ -2,11 +2,12 @@
 require_once dirname(__FILE__)."/../db.php";
 require_once dirname(__FILE__) . "/../Model/City.php";
 require_once dirname(__FILE__) . "/BaseDao.php";
+require_once dirname(__FILE__) . "/../DBConnector.php";
 
 
-class CityDao extends BaseDao{
+class CityDao extends DBConnector{
     public function __construct(){
-        BaseDao::connectDB();           
+        DBConnector::connectDB();           
     }
 
 public function getAllCity(){
