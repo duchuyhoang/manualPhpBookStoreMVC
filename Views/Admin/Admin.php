@@ -37,7 +37,7 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "";
 <body>
 
 <!-- <?php
-    require_once dirname(__FILE__) . "./../shared/" . 'Navbar.php';
+    // require_once dirname(__FILE__) . "./../shared/" . 'Navbar.php';
 ?> -->
 
 

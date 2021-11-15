@@ -1,9 +1,12 @@
 <?php require dirname(__FILE__) . "/../../shared/" . 'constants.php' ?>
 <?php require dirname(__FILE__) . "/../../shared/" . 'actionsType.php' ?>
 <?php $url = isset($_GET["url"]) ? $_GET["url"] : "";
-
+// $_SESSION[$CURRENT_USER_INFO]=null;
 
 ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/snackbarjs/1.1.0/snackbar.css" crossorigin="anonymous">
+
+
 <div id="accountZone">
 
     <div class="account d-flex ">
@@ -254,23 +257,36 @@
                     <div class="d-flex flex-column w-75 m-auto">
 
                         <div class="form-group">
-                            <label for="email">Email address:</label>
-                            <input type="email" name=<?php echo $SIGN_UP_EMAIL ?> class="form-control mb-2" id=<?php echo $SIGN_UP_EMAIL ?> placeholder="Email..." />
+                            <label for="sgName">Name:</label>
+                            <input type="text" name="sgName" class="form-control mb-2" id="sgName" placeholder="Name..." autocomplete="nope" />
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="sgEmail">Email address:</label>
+                            <input type="email" name="email" class="form-control mb-2" id="sgEmail" placeholder="Email..." />
                         </div>
 
                         <div class="form-group">
-                            <label for=<?php echo $SIGN_UP_PASSWORD ?>>Password</label>
-                            <input type="password" name=<?php echo $SIGN_UP_PASSWORD ?> class="form-control mb-2" id=<?php echo $SIGN_UP_PASSWORD ?> placeholder="Password..." />
+                            <label for="sgPassword">Password:</label>
+                            <input type="password" name="sgPassword" class="form-control mb-2" id="sgPassword" placeholder="Password..." />
                         </div>
 
                         <div class="form-group">
-                            <label for="signUpPhone">Phone</label>
-                            <input type="tel" class="form-control mb-2" id="signUpPhone" placeholder="Phone..." onkeypress="return event.charCode >= 48&&event.charCode<57" maxlength="10" />
+                            <label for="sgPhone">Phone:</label>
+                            <input type="tel" class="form-control mb-2" id="sgPhone" placeholder="Phone..." onkeypress="return event.charCode >= 48&&event.charCode<57" maxlength="10" autocomplete="off" />
                         </div>
+
                         <div class="form-group">
-                            <label for="signUpBirthday">Phone</label>
-                            <input type="date" class="form-control mb-2" id="signUpBirthday" placeholder="Phone..." />
+                            <label for="sgBirthday">Birthday:</label>
+                            <input type="date" class="form-control mb-2" id="sgBirthday" placeholder="Birthday..." />
                         </div>
+
+                        <div class="form-group">
+                            <label for="sgAvatar">Avatar:</label>
+                            <input type="file" class="form-control mb-2" id="sgAvatar" accept="image/png, image/jpeg" />
+                        </div>
+
 
                         <div class="form-group">
                             <p class="text-danger m-0" id="signupError"></p>
@@ -297,6 +313,10 @@
     <i class="fa fa-angle-up"></i>
 
 </div>
+<div id="snackbar-container">
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/snackbarjs/1.1.0/snackbar.min.js"></script>
+
 
 <script>
     function scrollToTop() {
@@ -310,8 +330,13 @@
 </script>
 
 
-
 <script>
+    setTimeout(() => {
+
+    }, 1000)
+
+
+
     $("#loginForm").submit(function(event) {
         event.preventDefault();
         $("#loading").addClass("loadingShow");
@@ -330,6 +355,7 @@
             // }
         });
         request.done(function(response, textStatus, jqXHR) {
+            // console.log(response);
             window.location.reload();
         });
         request.fail(function(jqXHR, textStatus, errorThrown) {
@@ -342,6 +368,48 @@
 
     $("#signUpForm").submit(function(event) {
         event.preventDefault();
+        const data = new FormData();
+        $("#loading").addClass("loadingShow");
+
+        data.append("submit", $("#signUpBtn").attr('value'));
+        data.append("email", $("#sgEmail").val());
+        data.append("password", $("#sgPassword").val());
+        data.append("phone", $("#sgPhone").val());
+        data.append("birthday", $("#sgBirthday").val())
+        data.append("name", $("#sgName").val())
+
+        const fileList = $("#sgAvatar")[0].files;
+        data.append("avatar", fileList.length > 0 ? fileList[0] : null);
+
+
+        request = $.ajax({
+            url: "./ajax/authentication.php",
+            type: "post",
+            data: data,
+            processData: false,
+            contentType: false,
+        });
+
+        request.done(function(response, textStatus, jqXHR) {
+            $("#loading").removeClass("loadingShow");
+            $.snackbar({
+                content: "Sign up success.Wait page reload and login",
+                timeout: 5000,
+                style: "customSnackbar snackbar-success"
+            });
+            
+            // window.location.reload();
+        });
+        request.fail(function(jqXHR, textStatus, errorThrown) {
+            $.snackbar({
+                content: "Sign up fail!!!",
+                timeout: 5000,
+                style: "customSnackbar snackbar-error"
+            });
+            $("#loading").removeClass("loadingShow");
+            $("#signupModal").modal('hide');
+        });
+
     })
 
 

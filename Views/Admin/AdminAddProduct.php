@@ -151,7 +151,7 @@
             $.snackbar({
                 content: "Success!!!",
                 timeout: 5000,
-                style: "customSnackbar snackbar-error"
+                style: "customSnackbar snackbar-success"
             });
         });
         request.fail(function(jqXHR, textStatus, errorThrown) {

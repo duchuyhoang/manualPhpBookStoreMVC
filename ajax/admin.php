@@ -79,6 +79,7 @@ switch ($actionType) {
             // header('HTTP/1.1 400 Bad Request');
             $response=new stdClass();
             $response->message ="Error";
+            $response->status=400;
              die(json_encode($response));
         }
 

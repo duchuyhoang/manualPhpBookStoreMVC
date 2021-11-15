@@ -2,11 +2,12 @@
 require_once dirname(__FILE__) . "/../Controller/AuthController.php";
 require_once dirname(__FILE__) . "/../shared/constants.php";
 require_once dirname(__FILE__) . "/../shared/actionsType.php";
+require_once dirname(__FILE__) . "/../shared/functions.php";
 require_once dirname(__FILE__) . "/../Dao/UserDao.php";
 session_start();
 
 $actionType = isset($_POST["submit"]) ? $_POST["submit"] : null;
-$a = 1;
+error_reporting(E_ALL ^ E_NOTICE);
 switch ($actionType) {
     case $ACTION_LOGIN: {
             try {
@@ -40,12 +41,46 @@ switch ($actionType) {
     case $ACTION_SIGN_UP: {
             $email = isset($_POST["email"]) ? $_POST["email"] : "";
             $password = isset($_POST["password"]) ? $_POST["password"] : "";
-            $avatar = isset($_FILES["avatar"]["name"]) ? $_POST["password"] : [];
+
+            $avatar = isset($_FILES["avatar"]["name"]) ? [$_FILES["avatar"]["name"]] : [];
+            $name = isset($_POST["name"]) ? $_POST["name"] : "";
             // $province = isset($_POST["province"]) ? $_POST["province"] : "";
             // $district = isset($_POST["district"]) ? $_POST["district"] : "";
             // $ward = isset($_POST["ward"]) ? $_POST["ward"] : "";
-            $birthday = isset($_POST["birthday"]) ? $_POST["birthday"] : "";
+            $birthday = isset($_POST["birthday"]) ? new DateTime($_POST["birthday"]) : null;
             $phone = isset($_POST["phone"]) ? $_POST["phone"] : "";
+
+            // $length = count($_FILES["avatar"]);
+            $a = count($avatar);
+            
+
+            try {
+            $_avatar = count($avatar) > 0  ? uploadFile($avatar, [$_FILES["avatar"]["tmp_name"]], [$_FILES["avatar"]["error"]])[0] : null;
+                $userDao = new UserDao();
+                $newUserId = $userDao->signUp(
+                    User::newSignupUser(
+                        $name,
+                        $birthday,
+                        $_avatar,
+                        $DEL_FLAG_VALID,
+                        $email,
+                        $phone,
+                        $PERMISSION_USER
+                    ),
+                    $password
+                );
+
+                $result = new stdClass();
+                $result->message = "Success";
+                echo json_encode($result);
+            } catch (Exception $e) {
+                http_response_code(400);
+                $result = new stdClass();
+                $result->message = "Something wrong";
+                die(json_encode($result));
+
+                break;
+            }
         }
 
 

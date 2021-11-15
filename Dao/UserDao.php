@@ -31,15 +31,18 @@ INNER JOIN ward ON user.id_ward=ward.id WHERE email=? AND password=? AND delFlag
         $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $result = $stmt->fetchAll();
+        // date("Y-m-d h:i:s")
         if (count($result) === 0) {
             $this->currentUser = null;
         } else {
             $record = $result[0];
-            $this->currentUser = new User(
+
+            $this->currentUser = User::newNormalUser(
                 $record["id_user"],
                 $record["name"],
-                $record["birthday"],
+               date_create($record["birthday"]),
                 $record["self_describe"],
+                $record["avatar"],
                 $record["delFlag"],
                 $record["email"],
                 new Address(
@@ -56,5 +59,23 @@ INNER JOIN ward ON user.id_ward=ward.id WHERE email=? AND password=? AND delFlag
         }
 
         return $this->currentUser;
+    }
+
+    public function signUp(User $user, String $password)
+    {
+        require dirname(__FILE__) . "/../shared/constants.php";
+        $query = "INSERT INTO user(name,phone,email,delFlag,password,avatar,birthday,permission) 
+        VALUES(?,?,?,?,?,?,?,?)";
+        $stmt = parent::$db->prepare($query);
+        $stmt->bindParam(1, $user->getName());
+        $stmt->bindParam(2, $user->getPhone());
+        $stmt->bindParam(3, $user->getEmail());
+        $stmt->bindParam(4, $user->getDelFlag());
+        $stmt->bindParam(5, $user->$password);
+        $stmt->bindParam(6, $user->getAvatar());
+        $stmt->bindParam(7, $user->getBirthday()->format('Y-m-d H:i:s'));
+        $stmt->bindParam(8, $user->getPermission());
+        $stmt->execute();
+        return parent::$db->lastInsertId();
     }
 }
