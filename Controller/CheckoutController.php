@@ -13,7 +13,7 @@ class CheckoutController extends BaseController
     public function showView()
     {
         try {
-            $view = new View();
+            $this->view = new View();
             $this->cityDao = new CityDao();
             $this->districtDao = new DistrictDao();
             $this->wardDao = new WardDao();
@@ -22,13 +22,13 @@ class CheckoutController extends BaseController
             $listDistrict = $this->districtDao->getAll();
             $listWard = $this->wardDao->getAll();
 
-            $view->load('Checkout', array(
+            $this->view->load('Checkout', array(
                 "listCity" => $listCityReturn["listCity"],
                 "listCityJson" => $listCityReturn["listCityJson"],
                 "listDistrict" => $listDistrict,
                 "listWard" => $listWard
             ));
-            $view->show();
+            $this->view->show();
         } catch (PDOException $e) {
         }
     }

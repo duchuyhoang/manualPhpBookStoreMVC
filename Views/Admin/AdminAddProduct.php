@@ -1,5 +1,5 @@
 <div id=<?php echo $ADD_PRODUCT ?> class="<?php echo $tab == "" || $tab == $ADD_PRODUCT ? "active" : "" ?>">
-    <h2>Add product</h2>
+    <h3>Add product</h3>
     <section class="mt-3 justify-content-center flex-column align-items-center">
         <form id="addBookForm">
             <div class="mt-1 w-100 form-group">

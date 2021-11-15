@@ -24,7 +24,10 @@
 
 <body>
 <?php require_once dirname(__FILE__) . "./shared/" . 'Navbar.php'; ?>
+<div class="d-flex align-items-center justify-content-center mt-5">
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.6514813864273!2d105.78995061476363!3d21.04662668598874!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab306caa83a7%3A0xbfe4b316823e38f7!2zSOG7jWMgVmnhu4duIEPDtG5nIE5naOG7hyBCxrB1IENow61uaCBWaeG7hW4gVGjDtG5n!5e0!3m2!1svi!2s!4v1632743261043!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+</div>
 
 </body>
 

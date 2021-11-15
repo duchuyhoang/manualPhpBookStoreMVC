@@ -11,8 +11,8 @@
 }
 
 #productSlide {
-    width: 318px;
-    height: 400px
+    max-width: 318px;
+    /* height: 400px */
 }
 
 .slideIcon {
@@ -24,8 +24,25 @@
 
 .carousel-control-prev-icon {}
 
-.carousel-control-next {
+.carousel-control-next,.carousel-control-prev {
+    visibility: hidden;
+    transition:0.2s all;
     /* right:35px; */
+}
+.carousel-control-next{
+    transform: translateX(50px);
+
+}
+.carousel-control-prev {
+transform: translateX(-50px);
+}
+.carousel-inner:hover .carousel-control-next{
+    transform: translateX(0px);
+    visibility: visible;
+}
+.carousel-inner:hover .carousel-control-prev{
+    transform: translateX(0px);
+    visibility: visible;
 }
 
 .bookName {

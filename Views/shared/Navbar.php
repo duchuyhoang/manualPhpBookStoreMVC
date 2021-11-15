@@ -1,26 +1,27 @@
 <?php require dirname(__FILE__) . "/../../shared/" . 'constants.php' ?>
 <?php require dirname(__FILE__) . "/../../shared/" . 'actionsType.php' ?>
+<?php $url = isset($_GET["url"]) ? $_GET["url"] : "";
 
+
+?>
 <div id="accountZone">
 
     <div class="account d-flex ">
 
-        <div>Check out</div>
+        <a href="./checkout" class="checkout">Check out</a>
         <?php
         echo isset($_SESSION[$CURRENT_USER_INFO]) ?
             "<div class='userInfoMenu'>
         <ul class='menu'>
         <li>
         <i class='fas fa-user fa-lg'></i>
-        <a href='./user?id_user={$_SESSION[$CURRENT_USER_INFO]->getId()}'>Profile</a>
+        <a href='./myProfile'>Profile</a>
         </li>
         <li id='signOutBtn' value={$SIGN_OUT}>
 
         <i class='fas fa-sign-out-alt fa-lg'></i>
         <span>Sign out</span>
         </li>
-        <li>Home3</li>
-
         </ul>
         {$_SESSION[$CURRENT_USER_INFO]->getName()}
          </div>" :
@@ -46,7 +47,9 @@
 
     </div>
     <div class="col-4 d-flex justify-content-center align-items-center">
-        <img src="https://template.hasthemes.com/koparion/koparion/img/logo/logo.png" alt="Logo" />
+        <a href="./home">
+            <img src="https://template.hasthemes.com/koparion/koparion/img/logo/logo.png" alt="Logo" />
+        </a>
     </div>
     <div class="col-4 d-flex justify-content-center align-items-center">
         <div class="cartContainer position-relative">
@@ -54,7 +57,58 @@
             <div class="productCount">0</div>
             <div>
                 <div class="productMenu">
-                    <div class="d-flex justify-content-center">My cart</div>
+                    <div class="d-flex justify-content-center flex-column align-items-center" id="myCart">My cart
+
+
+                        <section class="cartItemContainer">
+                            <div class="cartItem">
+                                <a href="./productInfo?id_product=1" class="cartItemImg">
+                                    <img src="https://template.hasthemes.com/koparion/koparion/img/product/1.jpg" alt="" width="100%" height="100%">
+                                </a>
+                                <div class="cartItemContent">
+                                    <p>
+                                        <a href="./productInfo?id_product=1">
+                                            Harry potter
+                                        </a>
+
+                                    </p>
+                                    <p>1x 60$</p>
+                                </div>
+                                <div class="cartItemDelete">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="cartItem">
+                                <a href="./productInfo?id_product=1" class="cartItemImg">
+                                    <img src="https://template.hasthemes.com/koparion/koparion/img/product/22.jpg" alt="" width="100%" height="100%">
+                                </a>
+                                <div class="cartItemContent">
+                                    <p>
+                                        <a href="./productInfo?id_product=1">
+                                            Harry potter
+                                        </a>
+
+                                    </p>
+                                    <p>1x 60$</p>
+                                </div>
+                                <div class="cartItemDelete">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </div>
+
+                        </section>
+
+                        <div class="cartItemTotal">
+                            <h5>Total</h5>
+                            <p>$12.00</p>
+                        </div>
+                        <a href="./myCart" class="cartBtn">
+                            View cart
+                        </a>
+                        <a href="./checkout" class="cartBtn mt-2">
+                            Checkout
+                        </a>
+                    </div>
 
                 </div>
             </div>
@@ -68,7 +122,7 @@
 
 <section class="w-100 pt-1 d-flex justify-content-center mt-3" id="navbar">
     <ul>
-        <li class="cate">
+        <li class="cate <?php echo $url === "" || $url === "home" ? "active" : "" ?>">
             <a href="./home">
                 Home
                 <i class="fa fa-angle-down mt-1 ml-2"></i>
@@ -83,7 +137,7 @@
 
             </div>
         </li>
-        <li class="cate">
+        <li class="cate <?php echo $url === "list" ? "active" : "" ?>">
             <a href="">
                 Book
                 <i class="fa fa-angle-down mt-1 ml-2"></i>
@@ -131,8 +185,8 @@
                 <i class="fa fa-angle-down mt-1 ml-2"></i>
             </a>
         </li>
-        <li class="cate">
-            <a href="">
+        <li class="cate <?php echo $url === "contact" ? "active" : "" ?>">
+            <a href="./contact">
                 About us
                 <!-- <i class="fa fa-angle-down mt-1 ml-2"></i> -->
             </a>
@@ -154,7 +208,7 @@
                 <h4 class="modal-title">Login</h4>
             </div>
             <div class="modal-body">
-                <form method="post" action="auth" id="loginForm">
+                <form method="post" id="loginForm">
                     <div class="d-flex flex-column w-75 m-auto">
 
                         <div class="form-group">
@@ -177,9 +231,9 @@
 
                 </form>
             </div>
-            <div class="modal-footer">
+            <!-- <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            </div> -->
         </div>
 
     </div>
@@ -196,7 +250,7 @@
                 <h4 class="modal-title">Login</h4>
             </div>
             <div class="modal-body">
-                <form method="post" action="auth" id="loginForm">
+                <form method="post" id="signUpForm">
                     <div class="d-flex flex-column w-75 m-auto">
 
                         <div class="form-group">
@@ -208,20 +262,30 @@
                             <label for=<?php echo $SIGN_UP_PASSWORD ?>>Password</label>
                             <input type="password" name=<?php echo $SIGN_UP_PASSWORD ?> class="form-control mb-2" id=<?php echo $SIGN_UP_PASSWORD ?> placeholder="Password..." />
                         </div>
+
+                        <div class="form-group">
+                            <label for="signUpPhone">Phone</label>
+                            <input type="tel" class="form-control mb-2" id="signUpPhone" placeholder="Phone..." onkeypress="return event.charCode >= 48&&event.charCode<57" maxlength="10" />
+                        </div>
+                        <div class="form-group">
+                            <label for="signUpBirthday">Phone</label>
+                            <input type="date" class="form-control mb-2" id="signUpBirthday" placeholder="Phone..." />
+                        </div>
+
                         <div class="form-group">
                             <p class="text-danger m-0" id="signupError"></p>
                         </div>
                         <div class="form-group d-flex justify-content-center w-100">
-                            <button type='submit' class="btn btn-primary" name="submit" value=<?php echo $ACTION_SIGN_UP ?> id="btnLog">Sign up</button>
+                            <button type='submit' class="btn btn-primary" name="submit" value=<?php echo $ACTION_SIGN_UP ?> id="signUpBtn">Sign up</button>
                         </div>
 
                     </div>
 
                 </form>
             </div>
-            <div class="modal-footer">
+            <!-- <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            </div> -->
         </div>
 
     </div>
@@ -235,15 +299,14 @@
 </div>
 
 <script>
-function scrollToTop(){
-    let topElement=document.getElementById("accountZone");
-    topElement.scrollIntoView({
-  behavior: "smooth",
-  block: "start",
-  inline: "nearest"
-});
-}
-
+    function scrollToTop() {
+        let topElement = document.getElementById("accountZone");
+        topElement.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "nearest"
+        });
+    }
 </script>
 
 
@@ -276,6 +339,11 @@ function scrollToTop(){
             $("#loginError").html(error.message || "Login failed");
         });
     })
+
+    $("#signUpForm").submit(function(event) {
+        event.preventDefault();
+    })
+
 
     $("#signOutBtn").click(function(event) {
         $("#loading").addClass("loadingShow");

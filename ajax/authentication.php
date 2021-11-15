@@ -37,6 +37,17 @@ switch ($actionType) {
             echo json_encode($response);
         }
 
+    case $ACTION_SIGN_UP: {
+            $email = isset($_POST["email"]) ? $_POST["email"] : "";
+            $password = isset($_POST["password"]) ? $_POST["password"] : "";
+            $avatar = isset($_FILES["avatar"]["name"]) ? $_POST["password"] : [];
+            // $province = isset($_POST["province"]) ? $_POST["province"] : "";
+            // $district = isset($_POST["district"]) ? $_POST["district"] : "";
+            // $ward = isset($_POST["ward"]) ? $_POST["ward"] : "";
+            $birthday = isset($_POST["birthday"]) ? $_POST["birthday"] : "";
+            $phone = isset($_POST["phone"]) ? $_POST["phone"] : "";
+        }
+
 
     default: {
         }

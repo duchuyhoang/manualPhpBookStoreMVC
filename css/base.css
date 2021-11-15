@@ -6,7 +6,9 @@
 html{
   scroll-behavior: smooth;
 }
-
+body{
+  overflow-x: hidden;
+}
 .border-box {
   box-sizing: border-box;
 }
@@ -130,8 +132,9 @@ ul.star li {
   display: flex;
   align-items: center;
   /* height: 100px; */
-  padding: 5px;
+  padding: 10px 5px 10px 5px;
   cursor: pointer;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .bookCategoryItemName {
@@ -187,7 +190,8 @@ ul.star li {
   width: 100%;
   background: rgba(255, 255, 255, 0.61) none repeat scroll 0 0;
   transition: all 0.5s;
-  display: block
+  display: block;
+  pointer-events: none;
 }
 
 .bookCategoryItemImgWrapper:hover::after {

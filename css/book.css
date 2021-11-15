@@ -1,5 +1,5 @@
 .bookWrapper {
-    display: flex;
+    display: flex!important;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -65,7 +65,13 @@
     left:0px;
 }
 
-.bookImg:hover .bookView{
+.bookWrapper:hover .bookView{
+    visibility: visible;
+    opacity: 1;
+    transform:scaleY(1);
+}
+
+.bookImg .bookView:hover{
     visibility: visible;
     opacity: 1;
     transform:scaleY(1);
@@ -80,6 +86,8 @@
     align-items: center;
     background-color: #f07c29;
 }
+
+
 
 .bookWrapper .bookDetail {
     display: flex;

@@ -129,85 +129,85 @@
 
 
                 <section id="productInfoTab" class="container">
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" type="button" role="tab" aria-controls="home" aria-selected="true">Review</button>
-            </li>
-            <!-- <li class="nav-item">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" type="button" role="tab" aria-controls="home" aria-selected="true">Review</button>
+                        </li>
+                        <!-- <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li> -->
-        </ul>
-        <div class="tab-content mb-5" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <p>
-                    The sporty Joust Duffle Bag can't be beat - not in the gym, not on the luggage carousel, not anywhere. Big enough to haul a basketball or soccer ball and some sneakers with plenty of room to spare, it's ideal for athletes with places to go.
+                    </ul>
+                    <div class="tab-content mb-5" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <p>
+                                The sporty Joust Duffle Bag can't be beat - not in the gym, not on the luggage carousel, not anywhere. Big enough to haul a basketball or soccer ball and some sneakers with plenty of room to spare, it's ideal for athletes with places to go.
 
-                    Dual top handles.
-                    Adjustable shoulder strap.
-                    Full-length zipper.
-                    L 29" x W 13" x H 11".
-                </p>
-            </div>
-            <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
-                <section class="reviewContainer">
-                    <h3>CUSTOMER REVIEWS</h3>
-                    <div class="d-flex flex-column reviewContentList">
-                        <div class="review">
-                            <img src="https://scontent-xsp1-3.xx.fbcdn.net/v/t31.18172-1/c0.60.240.240a/p240x240/27788301_747405972119527_849243654152381069_o.jpg?_nc_cat=107&ccb=1-5&_nc_sid=7206a8&_nc_ohc=JQjn5nHGeA0AX_RzCoR&_nc_ht=scontent-xsp1-3.xx&oh=ec13e31278a2c74c4b2da4c161120696&oe=61A78CD2" alt="" class="avatar">
-                            <div class="commentInfo">
-                                <div class="name">
-                                    Đức Huy Hoàng
-                                </div>
-                                <div class="date">
-                                    10/03/2000
-                                </div>
-                            </div>
-                            <div class="content">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo in voluptatem ea ad magnam voluptas odio quibusdam odit necessitatibus, ipsum neque perspiciatis dolorem architecto cupiditate blanditiis dolorum delectus? Possimus, illum.
-                            </div>
+                                Dual top handles.
+                                Adjustable shoulder strap.
+                                Full-length zipper.
+                                L 29" x W 13" x H 11".
+                            </p>
                         </div>
+                        <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                            <section class="reviewContainer">
+                                <h3>CUSTOMER REVIEWS</h3>
+                                <div class="d-flex flex-column reviewContentList">
+                                    <div class="review">
+                                        <img src="https://scontent-xsp1-3.xx.fbcdn.net/v/t31.18172-1/c0.60.240.240a/p240x240/27788301_747405972119527_849243654152381069_o.jpg?_nc_cat=107&ccb=1-5&_nc_sid=7206a8&_nc_ohc=JQjn5nHGeA0AX_RzCoR&_nc_ht=scontent-xsp1-3.xx&oh=ec13e31278a2c74c4b2da4c161120696&oe=61A78CD2" alt="" class="avatar">
+                                        <div class="commentInfo">
+                                            <div class="name">
+                                                Đức Huy Hoàng
+                                            </div>
+                                            <div class="date">
+                                                10/03/2000
+                                            </div>
+                                        </div>
+                                        <div class="content">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo in voluptatem ea ad magnam voluptas odio quibusdam odit necessitatibus, ipsum neque perspiciatis dolorem architecto cupiditate blanditiis dolorum delectus? Possimus, illum.
+                                        </div>
+                                    </div>
 
-                        <div class="review">
-                            <img src="https://scontent-xsp1-3.xx.fbcdn.net/v/t31.18172-1/c0.60.240.240a/p240x240/27788301_747405972119527_849243654152381069_o.jpg?_nc_cat=107&ccb=1-5&_nc_sid=7206a8&_nc_ohc=JQjn5nHGeA0AX_RzCoR&_nc_ht=scontent-xsp1-3.xx&oh=ec13e31278a2c74c4b2da4c161120696&oe=61A78CD2" alt="" class="avatar">
-                            <div class="commentInfo">
-                                <div class="name">
-                                    Đức Huy Hoàng
+                                    <div class="review">
+                                        <img src="https://scontent-xsp1-3.xx.fbcdn.net/v/t31.18172-1/c0.60.240.240a/p240x240/27788301_747405972119527_849243654152381069_o.jpg?_nc_cat=107&ccb=1-5&_nc_sid=7206a8&_nc_ohc=JQjn5nHGeA0AX_RzCoR&_nc_ht=scontent-xsp1-3.xx&oh=ec13e31278a2c74c4b2da4c161120696&oe=61A78CD2" alt="" class="avatar">
+                                        <div class="commentInfo">
+                                            <div class="name">
+                                                Đức Huy Hoàng
+                                            </div>
+                                            <div class="date">
+                                                10/03/2000
+                                            </div>
+                                        </div>
+                                        <div class="content">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo in voluptatem ea ad magnam voluptas odio quibusdam odit necessitatibus, ipsum neque perspiciatis dolorem architecto cupiditate blanditiis dolorum delectus? Possimus, illum.
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="date">
-                                    10/03/2000
+
+                                <div class="mt-5 w-50">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend mr-3">
+                                            <span class="input-group-text" id="">Your review
+                                                <span class="text-danger ml-1">*</span>
+                                            </span>
+                                        </div>
+                                        <textarea class="form-control" id="yourReview"></textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="content">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo in voluptatem ea ad magnam voluptas odio quibusdam odit necessitatibus, ipsum neque perspiciatis dolorem architecto cupiditate blanditiis dolorum delectus? Possimus, illum.
-                            </div>
+
+                                <button class="btn submitPreviewBtn mt-5 ml-3">Submit your review</button>
+                            </section>
                         </div>
 
                     </div>
 
-                    <div class="mt-5 w-50">
-                        <div class="input-group">
-                            <div class="input-group-prepend mr-3">
-                                <span class="input-group-text" id="">Your review
-                                    <span class="text-danger ml-1">*</span>
-                                </span>
-                            </div>
-                            <textarea class="form-control" id="yourReview"></textarea>
-                        </div>
-                    </div>
 
-                    <button class="btn submitPreviewBtn mt-5 ml-3">Submit your review</button>
                 </section>
-            </div>
-
-        </div>
 
 
-    </section>
-
-                
             </div>
 
         </div>
@@ -232,8 +232,6 @@
                                 <div class="actualPrice">$30.00</div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
 
@@ -283,7 +281,7 @@
 
             <div class="saleImageWrapper">
                 <a href="">
-                <img src="./img/sale.jpg" alt="">
+                    <img src="./img/sale.jpg" alt="">
                 </a>
             </div>
 
@@ -291,13 +289,6 @@
 
         </div>
     </div>
-
-
-    
-
-
-
-
 
 
 

@@ -19,6 +19,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap4.min.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./css/admin.css">
     <link rel="stylesheet" type="text/css" href="./css/base.css">
+    <!-- <link rel="stylesheet" type="text/css" href="./css/header.css"> -->
+    <link rel="stylesheet" type="text/css" href="./css/adminStatistical.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2" integrity="sha512-R/QOHLpV1Ggq22vfDAWYOaMd5RopHrJNMxi8/lJu8Oihwi4Ho4BRFeiMiCefn9rasajKjnx9/fTQ/xkWnkDACg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <title>Document</title>
 </head>
@@ -28,9 +33,13 @@ require dirname(__FILE__) . "/../../shared/actionsType.php";
 $tab = isset($_GET["tab"]) ? $_GET["tab"] : "";
 ?>
 
-<!-- <?php var_dump($ListCategory) ?> -->
 
 <body>
+
+<!-- <?php
+    require_once dirname(__FILE__) . "./../shared/" . 'Navbar.php';
+?> -->
+
 
     <section class="sidebar" id="sidebar">
         <div class="sidebarItem <?php echo $tab == "" || $tab == $ADD_PRODUCT ? "sidebarItemActive" : "" ?>">
@@ -59,13 +68,21 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "";
                 <i class="fas fa-user-edit fa-lg"></i>
             </a>
         </div>
-        <div class="sidebarItem" onClick="openTab(event,'manufacture')">
-            <i class="fas fa-industry fa-lg"></i>
+        <div class="sidebarItem <?php echo $tab == $STATISTICAL ? "sidebarItemActive" : "" ?>">
+            <a href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$STATISTICAL}" ?>'>
+                <i class="fas fa-chart-bar fa-lg"></i>
+            </a>
         </div>
 
-        <div class="sidebarItem" onClick="openTab(event,'orders')">
+        <!-- <div class="sidebarItem">
+            <a href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$STATISTICAL}" ?>'>
+            <i class="fas fa-chart-bar fa-lg"></i>
+            </a>
+        </div> -->
+
+        <!-- <div class="sidebarItem" onClick="openTab(event,'orders')">
             <i class="fas fa-file-invoice-dollar fa-lg"></i>
-        </div>
+        </div> -->
 
 
     </section>
@@ -79,19 +96,29 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "";
 
 
         <div id=<?php echo $EDIT_PRODUCT ?> class="<?php echo $tab == $EDIT_PRODUCT ? "active" : "" ?>">
-            edit product
+            <?php
+            $tab == $EDIT_PRODUCT ? require dirname(__FILE__) . "/AdminEditProduct.php" : "";
+            ?>
         </div>
         <div id=<?php echo $ADD_USER ?> class="<?php echo $tab == $ADD_USER ? "active" : "" ?>"></div>
         <div id=<?php echo $EDIT_USER ?> class="<?php echo $tab == $EDIT_USER ? "active" : "" ?>"></div>
         <div id="manufacture"></div>
         <div id="orders"></div>
+        <div id=<?php echo $STATISTICAL ?> class="<?php echo $tab == $STATISTICAL ? "active" : "" ?>">
+            <?php
+            $tab == $STATISTICAL ? require dirname(__FILE__) . "/AdminStatistical.php" : "";
+            ?>
+        </div>
+
+
+
+        <!-- <div id="statistical"></div> -->
 
     </section>
 
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/snackbarjs/1.1.0/snackbar.min.js"></script>
-
 <script>
     // function reset() {
     //     console.log("hello");

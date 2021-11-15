@@ -120,7 +120,7 @@
 
     <div id="New Arrival" class="tabcontent container" style="display:flex">
 
-      <div class="newArrivalSlide owl-carousel" id="newArrivalSlide">
+      <section class="newArrivalSlide owl-carousel" id="newArrivalSlide">
         <div class="bookWrapper">
           <div class="bookImg">
             <div class="bookView">
@@ -135,7 +135,13 @@
           </div>
           <div class="bookDetail">
             <div class="bookName">Harry Potter</div>
-            <p class="bookPrice">100$</p>
+            <div class="d-flex align-items-center">
+              <p class="bookPrice">100$</p>
+              <p class="bookPriceActual">100$</p>
+            </div>
+
+
+
           </div>
           <div class="tagContainer d-flex flex-column">
             <div class="saleTag sale">5%</div>
@@ -153,7 +159,7 @@
               </div>
 
             </div>
-            <img src="https://template.hasthemes.com/koparion/koparion/img/product/3.jpg" alt="book" />
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/2.jpg" alt="book" />
           </div>
           <div class="bookDetail">
             <div class="bookName">Harry Potter</div>
@@ -175,7 +181,29 @@
               </div>
 
             </div>
-            <img src="https://template.hasthemes.com/koparion/koparion/img/product/9.jpg" alt="book" />
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/11.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <p class="bookPrice">100$</p>
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
+        </div>
+
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/1.jpg" alt="book" />
           </div>
           <div class="bookDetail">
             <div class="bookName">Harry Potter</div>
@@ -209,20 +237,315 @@
           </div>
         </div>
 
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
 
-      </div>
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/3.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <p class="bookPrice">100$</p>
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
+        </div>
 
-
+      </section>
     </div>
 
     <div id="OnSale" class="tabcontent container">
-      <h3>Paris</h3>
-      <p>Paris is the capital of France.</p>
+      <section class="onSaleSlide owl-carousel" id="onSaleSlide">
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/5.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <div class="d-flex align-items-center">
+              <p class="bookPrice">100$</p>
+              <p class="bookPriceActual">100$</p>
+            </div>
+
+
+
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
+        </div>
+
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/2.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <p class="bookPrice">100$</p>
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
+        </div>
+
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/11.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <p class="bookPrice">100$</p>
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
+        </div>
+
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/1.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <p class="bookPrice">100$</p>
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
+        </div>
+
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/7.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <p class="bookPrice">100$</p>
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
+        </div>
+
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/3.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <p class="bookPrice">100$</p>
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
+        </div>
+
+      </section>
     </div>
 
     <div id="Product" class="tabcontent container">
-      <h3>Tokyo</h3>
-      <p>Tokyo is the capital of Japan.</p>
+      <section class="productSlide owl-carousel" id="productSlide">
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/5.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <div class="d-flex align-items-center">
+              <p class="bookPrice">100$</p>
+              <p class="bookPriceActual">100$</p>
+            </div>
+
+
+
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
+        </div>
+
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/2.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <p class="bookPrice">100$</p>
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
+        </div>
+
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/11.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <p class="bookPrice">100$</p>
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
+        </div>
+
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/1.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <p class="bookPrice">100$</p>
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
+        </div>
+
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/7.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <p class="bookPrice">100$</p>
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
+        </div>
+
+        <div class="bookWrapper">
+          <div class="bookImg">
+            <div class="bookView">
+              <div class="bookIconWrapper">
+                <a href="">
+                  <i class="fas fa-search fa-1x "></i>
+                </a>
+              </div>
+
+            </div>
+            <img src="https://template.hasthemes.com/koparion/koparion/img/product/3.jpg" alt="book" />
+          </div>
+          <div class="bookDetail">
+            <div class="bookName">Harry Potter</div>
+            <p class="bookPrice">100$</p>
+          </div>
+          <div class="tagContainer d-flex flex-column">
+            <div class="saleTag sale">5%</div>
+            <div class="saleTag new">NEW</div>
+          </div>
+        </div>
+
+      </section>
     </div>
 
     <div id="banner">
@@ -247,9 +570,9 @@
     <section id="bestSelling">
       <h5>Author best selling</h5>
       <div class="row">
-        <div class="col-lg-8 col-md-12">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-12">
           <div class="row">
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
               <div class="authorInfomation mt-2">
                 <div class="authorName">JK Rowling</div>
                 <div class="authorCategory">CATEGORIES:BOOKS , AUDIOBOOKS</div>
@@ -259,7 +582,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-md-6 col-sm-12 col-12">
               <div class="authorAvatar">
                 <img src="./img/defaultAuthor.jpg" />
               </div>
@@ -268,7 +591,174 @@
 
         </div>
         <!-- <div class="col-4"></div> -->
-        <div class="col-4"></div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+          <section id="authorSlide" class="owl-carousel">
+
+            <div class="d-flex flex-column">
+
+              <div class="bookWrapper authorBookWrapper" href="./product?id_product=1">
+                <div class="bookImg">
+                  <div class="bookView">
+                    <div class="bookIconWrapper">
+                      <a href="./product?id_product=1">
+                        <i class="fas fa-search fa-1x "></i>
+                      </a>
+                    </div>
+
+                  </div>
+                  <img src="https://template.hasthemes.com/koparion/koparion/img/product/5.jpg" alt="book" />
+                </div>
+                <div class="bookDetail">
+                  <div class="bookName">Harry Potter</div>
+                  <div class="d-flex align-items-center">
+                    <p class="bookPrice">100$</p>
+                    <p class="bookPriceActual">100$</p>
+                  </div>
+
+
+
+                </div>
+                <div class="tagContainer d-flex flex-column">
+                  <div class="saleTag sale">5%</div>
+                  <div class="saleTag new">NEW</div>
+                </div>
+              </div>
+
+              <div class="bookWrapper authorBookWrapper">
+                <div class="bookImg">
+                  <div class="bookView">
+                    <div class="bookIconWrapper">
+                      <a href="">
+                        <i class="fas fa-search fa-1x "></i>
+                      </a>
+                    </div>
+
+                  </div>
+                  <img src="https://template.hasthemes.com/koparion/koparion/img/product/1.jpg" alt="book" />
+                </div>
+                <div class="bookDetail">
+                  <div class="bookName">Harry Potter</div>
+                  <p class="bookPrice">100$</p>
+                </div>
+                <div class="tagContainer d-flex flex-column">
+                  <div class="saleTag sale">5%</div>
+                  <div class="saleTag new">NEW</div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="d-flex flex-column">
+
+              <div class="bookWrapper authorBookWrapper">
+                <div class="bookImg">
+                  <div class="bookView">
+                    <div class="bookIconWrapper">
+                      <a href="">
+                        <i class="fas fa-search fa-1x "></i>
+                      </a>
+                    </div>
+
+                  </div>
+                  <img src="https://template.hasthemes.com/koparion/koparion/img/product/11.jpg" alt="book" />
+                </div>
+                <div class="bookDetail">
+                  <div class="bookName">Harry Potter</div>
+                  <div class="d-flex align-items-center">
+                    <p class="bookPrice">100$</p>
+                    <p class="bookPriceActual">100$</p>
+                  </div>
+
+
+
+                </div>
+                <div class="tagContainer d-flex flex-column">
+                  <div class="saleTag sale">5%</div>
+                  <div class="saleTag new">NEW</div>
+                </div>
+              </div>
+
+              <div class="bookWrapper authorBookWrapper">
+                <div class="bookImg">
+                  <div class="bookView">
+                    <div class="bookIconWrapper">
+                      <a href="">
+                        <i class="fas fa-search fa-1x "></i>
+                      </a>
+                    </div>
+
+                  </div>
+                  <img src="https://template.hasthemes.com/koparion/koparion/img/product/7.jpg" alt="book" />
+                </div>
+                <div class="bookDetail">
+                  <div class="bookName">Harry Potter</div>
+                  <p class="bookPrice">100$</p>
+                </div>
+                <div class="tagContainer d-flex flex-column">
+                  <div class="saleTag sale">5%</div>
+                  <div class="saleTag new">NEW</div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="d-flex flex-column">
+
+              <div class="bookWrapper authorBookWrapper">
+                <div class="bookImg">
+                  <div class="bookView">
+                    <div class="bookIconWrapper">
+                      <a href="">
+                        <i class="fas fa-search fa-1x "></i>
+                      </a>
+                    </div>
+
+                  </div>
+                  <img src="https://template.hasthemes.com/koparion/koparion/img/product/3.jpg" alt="book" />
+                </div>
+                <div class="bookDetail">
+                  <div class="bookName">Harry Potter</div>
+                  <div class="d-flex align-items-center">
+                    <p class="bookPrice">100$</p>
+                    <p class="bookPriceActual">100$</p>
+                  </div>
+
+
+
+                </div>
+                <div class="tagContainer d-flex flex-column">
+                  <div class="saleTag sale">5%</div>
+                  <div class="saleTag new">NEW</div>
+                </div>
+              </div>
+
+              <div class="bookWrapper authorBookWrapper">
+                <div class="bookImg">
+                  <div class="bookView">
+                    <div class="bookIconWrapper">
+                      <a href="">
+                        <i class="fas fa-search fa-1x "></i>
+                      </a>
+                    </div>
+
+                  </div>
+                  <img src="https://cdn.chanhtuoi.com/uploads/2018/05/w400/nhung-cuon-sach-hay-6.jpg.webp" alt="book" />
+                </div>
+                <div class="bookDetail">
+                  <div class="bookName">Harry Potter</div>
+                  <p class="bookPrice">100$</p>
+                </div>
+                <div class="tagContainer d-flex flex-column">
+                  <div class="saleTag sale">5%</div>
+                  <div class="saleTag new">NEW</div>
+                </div>
+              </div>
+
+            </div>
+
+
+          </section>
+        </div>
 
       </div>
     </section>
@@ -296,16 +786,40 @@
   </section>
 
 
-  <section id="bookByCategory">
+  <section id="bookByCategory" class="mb-5">
 
     <div class="row">
-      <div class="col-8 ml-5 mr-5">
-        <div class="row">
+      <div class="col-lg-8 col-md-12 col-sm-12 ml-5 mr-5 pl-0 pr-0">
+        <div class="row no-wrap">
 
-          <div class="col-lg-4 col-sm-12 flex-lg-column flex-sm-row row">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-12 ml-lg-3 ml-md-2 flex-column row">
             <h4>Book</h4>
+
             <div class="bookCategoryItem">
-              <img class="bookCategoryItemImg" />
+              <div class="bookCategoryItemImgWrapper">
+                <a class="bookCategoryItemName" href="./product?id_product=1">
+                  <img class="bookCategoryItemImg" src="https://template.hasthemes.com/koparion/koparion/img/product/5.jpg" />
+                </a>
+              </div>
+              <div class="d-flex flex-column">
+                <?php generateRating(5) ?>
+
+                <div class="bookCategoryItemWrapper">
+                  <a class="bookCategoryItemName" href="./product?id_product=1">
+                    Hello world
+                  </a>
+                  <div class="bookCategoryItemPrice d-flex">
+                    <div class="currentPrice ml-1">$30.00</div>
+                    <div class="actualPrice">$30.00</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bookCategoryItem">
+              <div class="bookCategoryItemImgWrapper">
+                <img class="bookCategoryItemImg" src="https://template.hasthemes.com/koparion/koparion/img/product/1.jpg" />
+              </div>
               <div class="d-flex flex-column">
                 <?php generateRating(5) ?>
 
@@ -314,32 +828,164 @@
                     Hello world
                   </div>
                   <div class="bookCategoryItemPrice d-flex">
-                    <div class="currentPrice ml-1">30.00</div>
-                    <div class="actualPrice">30.00</div>
+                    <div class="currentPrice ml-1">$30.00</div>
+                    <div class="actualPrice">$30.00</div>
                   </div>
                 </div>
-
-
               </div>
             </div>
 
+            <div class="bookCategoryItem">
+              <div class="bookCategoryItemImgWrapper">
+                <img class="bookCategoryItemImg" src="https://salt.tikicdn.com/cache/w1200/ts/product/ee/a9/50/d23e2d4dc76e4870cab66b76d48f8801.jpg" />
+              </div>
+              <div class="d-flex flex-column">
+                <?php generateRating(5) ?>
+
+                <div class="bookCategoryItemWrapper">
+                  <div class="bookCategoryItemName">
+                    Hello world
+                  </div>
+                  <div class="bookCategoryItemPrice d-flex">
+                    <div class="currentPrice ml-1">$30.00</div>
+                    <div class="actualPrice">$30.00</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
           </div>
 
-
-          <div class="col-lg-4 col-sm-12 flex-lg-column flex-sm-row row">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-12 ml-lg-3 ml-md-2 flex-column row">
             <h4>Book</h4>
+
+            <div class="bookCategoryItem">
+              <div class="bookCategoryItemImgWrapper">
+                <img class="bookCategoryItemImg" src="https://salt.tikicdn.com/cache/400x400/ts/product/b7/b1/16/9e6bafeea8f51e96883cbe29ebe8f331.jpg" />
+              </div>
+              <div class="d-flex flex-column">
+                <?php generateRating(5) ?>
+
+                <div class="bookCategoryItemWrapper">
+                  <div class="bookCategoryItemName">
+                    Hello world
+                  </div>
+                  <div class="bookCategoryItemPrice d-flex">
+                    <div class="currentPrice ml-1">$30.00</div>
+                    <div class="actualPrice">$30.00</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bookCategoryItem">
+              <div class="bookCategoryItemImgWrapper">
+                <img class="bookCategoryItemImg" src=https://vn-live-05.slatic.net/p/e2e0f0b7b059903dace419667117a03c.jpg_720x720q80.jpg_.webp" />
+              </div>
+              <div class="d-flex flex-column">
+                <?php generateRating(5) ?>
+
+                <div class="bookCategoryItemWrapper">
+                  <div class="bookCategoryItemName">
+                    Hello world
+                  </div>
+                  <div class="bookCategoryItemPrice d-flex">
+                    <div class="currentPrice ml-1">$30.00</div>
+                    <div class="actualPrice">$30.00</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bookCategoryItem">
+              <div class="bookCategoryItemImgWrapper">
+                <img class="bookCategoryItemImg" src="https://template.hasthemes.com/koparion/koparion/img/product/22.jpg" />
+              </div>
+              <div class="d-flex flex-column">
+                <?php generateRating(5) ?>
+
+                <div class="bookCategoryItemWrapper">
+                  <div class="bookCategoryItemName">
+                    Hello world
+                  </div>
+                  <div class="bookCategoryItemPrice d-flex">
+                    <div class="currentPrice ml-1">$30.00</div>
+                    <div class="actualPrice">$30.00</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="col-lg-4 col-sm-12 flex-lg-column flex-sm-row row">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-12 ml-lg-3 ml-md-2 flex-column  row">
             <h4>Book</h4>
 
+            <div class="bookCategoryItem">
+              <div class="bookCategoryItemImgWrapper">
+                <img class="bookCategoryItemImg" src="https://template.hasthemes.com/koparion/koparion/img/product/27.jpg" />
+              </div>
+              <div class="d-flex flex-column">
+                <?php generateRating(5) ?>
+
+                <div class="bookCategoryItemWrapper">
+                  <div class="bookCategoryItemName">
+                    Hello world
+                  </div>
+                  <div class="bookCategoryItemPrice d-flex">
+                    <div class="currentPrice ml-1">$30.00</div>
+                    <div class="actualPrice">$30.00</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bookCategoryItem">
+              <div class="bookCategoryItemImgWrapper">
+                <img class="bookCategoryItemImg" src="https://template.hasthemes.com/koparion/koparion/img/product/28.jpg" />
+              </div>
+              <div class="d-flex flex-column">
+                <?php generateRating(5) ?>
+
+                <div class="bookCategoryItemWrapper">
+                  <div class="bookCategoryItemName">
+                    Hello world
+                  </div>
+                  <div class="bookCategoryItemPrice d-flex">
+                    <div class="currentPrice ml-1">$30.00</div>
+                    <div class="actualPrice">$30.00</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bookCategoryItem">
+              <div class="bookCategoryItemImgWrapper">
+                <img class="bookCategoryItemImg" src="https://template.hasthemes.com/koparion/koparion/img/product/29.jpg" />
+              </div>
+              <div class="d-flex flex-column">
+                <?php generateRating(5) ?>
+
+                <div class="bookCategoryItemWrapper">
+                  <div class="bookCategoryItemName">
+                    Hello world
+                  </div>
+                  <div class="bookCategoryItemPrice d-flex">
+                    <div class="currentPrice ml-1">$30.00</div>
+                    <div class="actualPrice">$30.00</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-
       </div>
 
-      <div class="col-2">
+
+
+
+      <div class="col-lg-2 col-md-12 col-sm-12">
         <form class="blockLetter">
           <h2>Sign up for send letter</h2>
           <p style="color:#fff">You can be always up to date with our company new!</p>
@@ -348,7 +994,7 @@
           <button class="btn mt-4" type="submit">Send email</button>
         </form>
       </div>
-
+    </div>
     </div>
 
 
@@ -432,6 +1078,49 @@
   ?>
 </body>
 <script src="https://cdn.boomcdn.com/libs/owl-carousel/2.3.4/owl.carousel.min.js" crossorigin="anonymous"></script>
+
+<script>
+  let owlCarouselTabOption = {
+    loop: false,
+    nav: true,
+    slideSpeed: 5000,
+    // autoplay: true,
+    // autoplayTimeout: 2000,
+    rewind: true,
+    autoplayHoverPause: true,
+    mouseDrag: true,
+    navText: ["<i class='fa fa-angle-left fa-2x newArrivalNavButton navLeftButton'></i>", "<i class='fa fa-angle-right navRightButton fa-2x newArrivalNavButton'></i>"],
+    // margin: 10,
+    responsiveClass: true,
+    items: 2,
+    responsive: {
+      0: {
+        items: 1,
+        nav: true
+      },
+      600: {
+        items: 2,
+        nav: true
+      },
+      768: {
+        items: 3,
+        nav: false
+      },
+      992: {
+        items: 4,
+        nav: true,
+        loop: false
+      },
+      1200: {
+        items: 5,
+        nav: true,
+        loop: false
+      }
+    }
+  }
+</script>
+
+
 <script>
   function changeSlideAnimatition(event) {
     var item = event.item.index - 2; // Position of the current item
@@ -441,7 +1130,6 @@
     // $(".owl-item")
     for (let i = 0; i < listOwlItem.length; i++) {
       if (listOwlItem[i].classList.length) {
-        console.log("dad");
         let element = listOwlItem[i].children[0];
         element.getElementsByClassName("slideHeader")[0].classList.remove("animate__animated", "animate__backInLeft");
         element.getElementsByClassName("slideHeader2")[0].classList.remove("animate__animated", "animate__backInRight");
@@ -465,6 +1153,10 @@
     owl.on('initialized.owl.carousel', changeSlideAnimatition);
     owl.owlCarousel({
       nav: true,
+      autoplay: true,
+      autoplayTimeout: 4000,
+      slideSpeed: 5000,
+      loop: false,
       navText: ["<i class='fa fa-angle-left fa-4x navButton'></i>", "<i class='fa fa-angle-right fa-4x navButton'></i>"],
       items: 1,
       rewind: true
@@ -491,34 +1183,47 @@
 <script>
   $(document).ready(function() {
     $("#newArrivalSlide").owlCarousel({
-      loop: true,
-      nav:true,
-      slideSpeed: 5000,
-      mouseDrag: true,
-      navText: ["<i class='fa fa-angle-left fa-2x newArrivalNavButton navLeftButton'></i>", "<i class='fa fa-angle-right navRightButton fa-2x newArrivalNavButton'></i>"],
-      // margin: 10,
-      responsiveClass: true,
-      items:2,
+      ...owlCarouselTabOption,
+      pagination: false,
+    });
+    $("#onSaleSlide").owlCarousel({
+      ...owlCarouselTabOption,
+      pagination: false,
+    });
+
+    $("#productSlide").owlCarousel({
+      ...owlCarouselTabOption,
+      pagination: false,
+    });
+
+  })
+</script>
+
+<script>
+  $(document).ready(function() {
+    $("#authorSlide").owlCarousel({
+      ...owlCarouselTabOption,
+      navText: ["<i class='fa fa-angle-left fa-2x authorSlideBtn navLeftButton'></i>", "<i class='fa fa-angle-right navRightButton fa-2x authorSlideBtn'></i>"],
       responsive: {
         0: {
           items: 1,
           nav: true
         },
         600: {
-          items: 2,
+          items: 1,
           nav: true
         },
         768: {
-          items: 3,
+          items: 1,
           nav: false
         },
         992: {
-          items: 4,
+          items: 1,
           nav: true,
           loop: false
         },
         1200: {
-          items: 5,
+          items: 2,
           nav: true,
           loop: false
         }

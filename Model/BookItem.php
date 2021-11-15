@@ -73,6 +73,26 @@ $this->quantity = $quantity;
 
 return $this;
 }
+
+/**
+ * Get the value of maxQuantity
+ */ 
+public function getMaxQuantity()
+{
+return $this->maxQuantity;
+}
+
+/**
+ * Set the value of maxQuantity
+ *
+ * @return  self
+ */ 
+public function setMaxQuantity($maxQuantity)
+{
+$this->maxQuantity = $maxQuantity;
+
+return $this;
+}
 }
 
 

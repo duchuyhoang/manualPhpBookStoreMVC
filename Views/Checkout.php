@@ -194,7 +194,6 @@
     let listCity = JSON.parse(JSON.stringify(<?php echo $listCityJson; ?>));
     let listDistrict = JSON.parse(JSON.stringify(<?php echo $listDistrict; ?>));
     let listWard = JSON.parse(JSON.stringify(<?php echo $listWard; ?>));
-    console.log(listWard);
 </script>
 <script>
     const selectizeSetting = {

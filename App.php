@@ -9,7 +9,7 @@ require_once "./Controller/AdminController.php";
 require_once "./Controller/ContactController.php";
 require_once "./Controller/CartPageController.php";
 require_once "./Controller/CheckoutController.php";
-
+require_once "./Controller/ProfileController.php";
 
 require_once "./shared/functions.php";
 require_once "./Model/Router.php";
@@ -24,15 +24,17 @@ class App
     private function initRouter()
     {
         include "./shared/constants.php";
+        array_push($this->routers, new Router("/", true, new HomeController()));
         array_push($this->routers, new Router("/home", true, new HomeController()));
         array_push($this->routers, new Router($NOT_FOUND_URL, true, new NotFoundPageController()));
         array_push($this->routers, new Router("/auth", true, new AuthController()));
-        array_push($this->routers, new Router("/sitemap", true, new SiteMapController()));
+        array_push($this->routers, new Router("/aboutUs", true, new SiteMapController()));
         array_push($this->routers, new Router("/product", true, new ProductInfoController()));
         array_push($this->routers, new Router("/admin", true, new AdminController()));
         array_push($this->routers, new Router("/contact", true, new ContactController()));
         array_push($this->routers, new Router("/myCart", true, new CartPageController()));
         array_push($this->routers, new Router("/checkout", true, new CheckoutController()));
+        array_push($this->routers, new Router("/myProfile", true, new ProfileController()));
 
     }
 
@@ -40,7 +42,7 @@ class App
     function __construct()
     {
         require_once "./shared/constants.php";
-        $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://';
+        // $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://';
         $this->initRouter();
         session_start();
         try {
@@ -58,7 +60,7 @@ class App
                 $currentController->showView();
             } else {
                 // echo "dada"
-                header('Location: ' . $protocol . $_SERVER['SERVER_NAME'] . "/banSach" . "" . $NOT_FOUND_URL);
+                header('Location: ' . getProtocol() . $_SERVER['SERVER_NAME'] . "/banSach" . "" . $NOT_FOUND_URL);
             }
         } catch (Exception) {
             // here for db exception

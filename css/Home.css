@@ -9,7 +9,7 @@
 .serviceHeader {
     color: #222;
     font-family: "Rufina", serif;
-    font-size: 16px;
+    font-size: 19px;
     font-weight: 500;
 }
 
@@ -266,7 +266,7 @@
     padding: 45px 25px 25px;
     position: relative;
     text-align: center;
-    margin-top: 70px;
+    margin-top: 30px;
 }
 
 .blockLetter h2 {
@@ -332,31 +332,62 @@
     z-index: -1;
 }
 
-#newArrivalSlide .owl-dot {
+#newArrivalSlide .owl-dot,
+#onSaleSlide .owl-dot,
+#productSlide .owl-dot {
     display: none;
 }
 
-#newArrivalSlide .owl-nav {
-    top: 30%;
+/* {
+    display: none;
+}
+ {
+    display: none;
+} */
+ .bookPriceActual {
+    color: #666;
+    font-size: 18px;
+    font-weight: 400;
+    margin-left: 5px;
+    text-decoration: line-through;
+    font-style: italic;
 }
 
-#newArrivalSlide .owl-nav.disabled {
+
+#newArrivalSlide .owl-nav,
+#onSaleSlide .owl-nav,
+#productSlide .owl-nav {
+    /* top: 30%; */
+}
+
+#newArrivalSlide .owl-nav.disabled,
+#onSaleSlide .owl-nav.disabled,
+#productSlide .owl-nav.disabled {
     display: flex;
 }
 
-#newArrivalSlide .newArrivalNavButton {
+#newArrivalSlide .newArrivalNavButton,
+#onSaleSlide .newArrivalNavButton,
+#productSlide .newArrivalNavButton {
     background: #f6f6f6 none repeat scroll 0 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px;
+    padding: 30px;
     height: 35px;
     width: 35px;
     border-radius: 5px;
     color: #666 !important;
 }
 
-#newArrivalSlide .owl-stage{
+#newArrivalSlide .newArrivalNavButton:hover,
+#onSaleSlide .newArrivalNavButton:hover,
+#productSlide .newArrivalNavButton:hover {
+    background-color: #f07c29;
+    color: #fff !important;
+}
+
+#newArrivalSlide .owl-stage {
     /* transition: all 1s ease 0s!important; */
 }
 
@@ -378,8 +409,55 @@
 
 }
 
-.owl-carousel:hover .navLeftButton{
+.owl-carousel:hover .navLeftButton {
     transform: translateX(0px);
     visibility: visible;
 
+}
+
+#newArrivalSlide .owl-nav {
+    top: 53%
+}
+
+#bookByCategory {
+    margin-top: 30px
+}
+
+.authorBookWrapper {
+    width: 220px;
+    height: 280px
+}
+
+#authorSlide .owl-stage {
+    display: flex;
+    width: 100% !important;
+}
+
+#authorSlide .owl-stage .owl-item {
+    width: auto !important;
+}
+
+#authorSlide .owl-stage .bookWrapper {
+    width: 220px;
+}
+
+#authorSlide .owl-nav{
+top:35%
+}
+
+.authorSlideBtn {
+    background: #f6f6f6 none repeat scroll 0 0;
+    display: flex!important;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    height: 35px;
+    width: 35px;
+    border-radius: 5px;
+    color: #666 !important;
+}
+
+.authorSlideBtn:hover {
+    background-color: #f07c29;
+    color: #fff !important;
 }
