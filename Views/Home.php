@@ -30,7 +30,10 @@
   <?php require_once dirname(__FILE__) . "./shared/" . 'Navbar.php'; ?>
   <?php require_once dirname(__FILE__) . "./shared/" . 'Rating.php'; ?>
   <?php require_once dirname(__FILE__) . "./shared/" . 'Loading.php'; ?>
+  <?php
+  // var_dump($listLatestBook);
 
+  ?>
 
   <!-- <?php require dirname(__FILE__) . "/../shared/" . 'constants.php' ?>
   <?php require dirname(__FILE__) . "/../shared/" . 'actionsType.php' ?> -->
@@ -121,35 +124,46 @@
     <div id="New Arrival" class="tabcontent container" style="display:flex">
 
       <section class="newArrivalSlide owl-carousel" id="newArrivalSlide">
-        <div class="bookWrapper">
-          <div class="bookImg">
-            <div class="bookView">
-              <div class="bookIconWrapper">
-                <a href="">
-                  <i class="fas fa-search fa-1x "></i>
-                </a>
-              </div>
+        <?php
+        foreach ($listLatestBook as $book) {
+          echo "
+<div class='bookWrapper'>
+<div class='bookImg'>
+  <div class='bookView'>
+    <div class='bookIconWrapper'>
+      <a href='./product?id_product={$book->getId_book()}'>
+        <i class='fas fa-search fa-1x '></i>
+      </a>
+    </div>
 
-            </div>
-            <img src="https://template.hasthemes.com/koparion/koparion/img/product/5.jpg" alt="book" />
-          </div>
-          <div class="bookDetail">
-            <div class="bookName">Harry Potter</div>
-            <div class="d-flex align-items-center">
-              <p class="bookPrice">100$</p>
-              <p class="bookPriceActual">100$</p>
-            </div>
+  </div>
+  <img src='{$book->getListImage()[0]->getUrl()}' alt='book' />
+</div>
+<div class='bookDetail'>
+  <div class='bookName'>Harry Potter</div>
+  <div class='d-flex align-items-center'>
+    <p class='bookPrice'>{$book->getPrice()}VND</p>
+    <p class='bookPriceActual'>100$</p>
+  </div>
 
 
 
-          </div>
-          <div class="tagContainer d-flex flex-column">
-            <div class="saleTag sale">5%</div>
-            <div class="saleTag new">NEW</div>
-          </div>
-        </div>
+</div>
+<div class='tagContainer d-flex flex-column'>
+  <div class='saleTag sale'>5%</div>
+  <div class='saleTag new'>NEW</div>
+</div>
+</div>
+";
+        }
 
-        <div class="bookWrapper">
+
+        ?>
+
+
+
+
+        <!-- <div class="bookWrapper">
           <div class="bookImg">
             <div class="bookView">
               <div class="bookIconWrapper">
@@ -257,7 +271,7 @@
             <div class="saleTag sale">5%</div>
             <div class="saleTag new">NEW</div>
           </div>
-        </div>
+        </div> -->
 
       </section>
     </div>

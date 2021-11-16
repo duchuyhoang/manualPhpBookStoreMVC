@@ -10,7 +10,7 @@ switch ($action){
 
 
 case $CART_ADD_PRODUCT:
-
+$a=1;
 
 }
 

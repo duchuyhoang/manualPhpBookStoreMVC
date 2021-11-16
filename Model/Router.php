@@ -7,7 +7,7 @@ class Router
     private $controller;
 
 
-    function __construct($url, $exact = true, $controller)
+    function __construct($url, $exact, $controller)
     {
         $this->url = $url;
         $this->controller = $controller;

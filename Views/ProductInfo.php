@@ -29,23 +29,26 @@
     <?php
     require_once dirname(__FILE__) . "./shared/" . 'Navbar.php';
     require_once dirname(__FILE__) . "./shared/" . 'Loading.php';
-    require_once dirname(__FILE__) . "./shared/" . 'Rating.php'
+    require_once dirname(__FILE__) . "./shared/" . 'Rating.php';
+    require_once dirname(__FILE__) . "./../shared/" . 'functions.php';
     ?>
     <div class="container mt-5 mb-3 d-flex" id="productInfo">
         <div class="col-lg-9 col-12">
             <div class="row flex-wrap">
 
-                <div id="productSlide" class="carousel slide col-lg-5 col-md-6 col-12" data-ride="carousel">
+                <div id="productSlide" class="carousel slide col-lg-5 col-md-6 col-12 mr-3" data-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="https://template.hasthemes.com/koparion/koparion/img/flex/5.jpg" alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="https://template.hasthemes.com/koparion/koparion/img/flex/1.jpg" alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="https://template.hasthemes.com/koparion/koparion/img/flex/2.jpg" alt="Third slide">
-                        </div>
+                        <?php
+                        foreach ($bookInfo->getListImage() as $key => $bookImage) {
+                            $class = className($key === 0, "active", "");
+                            echo "
+                            <div class='carousel-item {$class}'>
+<img class='d-block w-100' src='{$bookImage->getUrl()}' alt='First slide'>
+</div>
+                            ";
+                        }
+                        ?>
+
                         <a class="carousel-control-prev" href="#productSlide" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon slideIcon" aria-hidden="true">
                                 <i class="fa fa-chevron-left fa-3x"></i>
@@ -60,6 +63,21 @@
                         </a>
                     </div>
                     <ol class="carousel-indicators">
+
+
+                        <?php
+                        foreach ($bookInfo->getListImage() as $key => $bookImage) {
+                            $class = className($key === 0, "active", "");
+                            echo "
+<li data-target='#productSlide' data-slide-to='{$key}' class='{$class} indicatorWrapper'>
+                            <img src='{$bookImage->getUrl()}' class='indicatorImg' />
+                        </li>
+";
+                        }
+
+                        ?>
+
+                        <!-- 
                         <li data-target="#productSlide" data-slide-to="0" class="active indicatorWrapper">
                             <img src="https://template.hasthemes.com/koparion/koparion/img/flex/5.jpg" class="indicatorImg" />
                         </li>
@@ -72,18 +90,19 @@
                         </li>
                         <li data-target="#productSlide" data-slide-to="2" class="indicatorWrapper">
                             <img src="https://template.hasthemes.com/koparion/koparion/img/flex/5.jpg" class="indicatorImg" />
-                        </li>
+                        </li> -->
                     </ol>
                 </div>
 
                 <div id="bookInfo" class="col-lg-7 col-md-6 col-12">
                     <div class="d-flex flex-column">
                         <h1 class="bookName">
-                            Savvy Shoulder Tote
+                            <?php echo $bookInfo->getName() ?>
+                            <!-- Savvy Shoulder Tote -->
                         </h1>
                         <div class="bookStatusInfo d-flex pb-3">
                             <span>In Stock</span>
-                            <span class="orangeColor">100 remaining</span>
+                            <span class="orangeColor"><?php echo $bookInfo->getQuantity() ?> remaining</span>
                             <span>SKU</span>
                             <span>24-WB05</span>
                         </div>
@@ -97,16 +116,17 @@
 
                         <div class="bookPriceContainer d-flex">
                             <div class="bookPriceExpected">
-                                $34.00
+                                <?php echo $bookInfo->getPrice() - $bookInfo->getPrice() * $bookInfo->getSale()  ?> VNĐ
                             </div>
                             <div class="bookPriceActual ml-2">
-                                $40.00
+                                <!-- $40.00 -->
+                                <?php echo $bookInfo->getPrice(); ?> VNĐ
                             </div>
                         </div>
                         <div class="productAction">
                             <div class="d-flex">
-                                <input type="number" id="productQuantity" class="mr-2" placeholder="0" min="1" max="10" step="1" onkeypress="return event.charCode >= 48">
-                                <button id="addToCartBtn">ADD TO CART</button>
+                                <input type="number" id="productQuantity" class="mr-2" placeholder="0" min="1" max="<?php echo $bookInfo->getQuantity() ?>" step="1" onkeypress="return event.charCode >= 48">
+                                <button id="addToCartBtn" value="CART_ADD_PRODUCT">ADD TO CART</button>
                             </div>
                             <div class="d-flex mt-3">
                                 <div class="iconButton">
@@ -122,7 +142,10 @@
                             </div>
                         </div>
                         <p class="productDescription mt-lg-3">
-                            Powerwalking to the gym or strolling to the local coffeehouse, the Savvy Shoulder Tote lets you stash your essentials in sporty style! A top-loading compartment provides quick and easy access to larger items, while zippered pockets on the front and side hold cash, credit cards and phone.
+                            <?php
+                            $bookInfo->getDescription()
+                            ?>
+                            <!-- Powerwalking to the gym or strolling to the local coffeehouse, the Savvy Shoulder Tote lets you stash your essentials in sporty style! A top-loading compartment provides quick and easy access to larger items, while zippered pockets on the front and side hold cash, credit cards and phone. -->
                         </p>
                     </div>
                 </div>
@@ -294,5 +317,47 @@
 
     <?php require_once dirname(__FILE__) . "./shared/" . 'Footer.php'; ?>
 </body>
+
+
+<script>
+    let currentProduct = <?php echo $_GET["id_product"] ?>;
+    $("#addToCartBtn").click(() => {
+        $("#loading").addClass("loadingShow");
+        request = $.ajax({
+            url: "./ajax/cart.php",
+            type: "post",
+            data: {
+                submit: $("#addToCartBtn").attr("value"),
+                quantity: $("#productQuantity").val(),
+                id_product: currentProduct
+            },
+            processData: false,
+            contentType: false,
+        });
+
+        request.done(function(response, textStatus, jqXHR) {
+            $("#loading").removeClass("loadingShow");
+            $.snackbar({
+                content: "Add product success . Wait page reload and login",
+                timeout: 5000,
+                style: "customSnackbar snackbar-success"
+            });
+            
+            // window.location.reload();
+        });
+
+        request.fail(function(jqXHR, textStatus, errorThrown) {
+            $.snackbar({
+                content: "Add Add fail!!!",
+                timeout: 5000,
+                style: "customSnackbar snackbar-error"
+            });
+            $("#loading").removeClass("loadingShow");
+        });
+
+        
+    })
+</script>
+
 
 </html>

@@ -144,9 +144,9 @@ class BookDao extends DBConnector
     GROUP_CONCAT(distinct category.cat_name SEPARATOR '////') as categoryName,
     GROUP_CONCAT(distinct book_category.id_book_category SEPARATOR '////') as categoryId,
     GROUP_CONCAT(category.delFlag SEPARATOR '////') as categoryDelFlag,
-    (SELECT GROUP_CONCAT(book_image.delFlag) FROM book_image WHERE book_image.id_book=book.id_book) as bookImageDelFlag,
-    (SELECT GROUP_CONCAT(book_image.url) FROM book_image WHERE book_image.id_book=book.id_book) as bookImageUrl,
-    (SELECT GROUP_CONCAT(book_image.id_image) FROM book_image WHERE book_image.id_book=book.id_book) as bookImageId,
+    (SELECT GROUP_CONCAT(book_image.delFlag SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageDelFlag,
+    (SELECT GROUP_CONCAT(book_image.url SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageUrl,
+    (SELECT GROUP_CONCAT(book_image.id_image SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageId,
     manufacture.name as manufactureName,manufacture.delFlag as manufactureDelFlag,
     author.name as authorName,author.delFlag as authorDelFlag,author.maxim as authorMaxim,
 author.birthday as authorBirthday,author.address as authorAddress

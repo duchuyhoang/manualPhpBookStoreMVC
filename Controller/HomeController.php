@@ -47,14 +47,20 @@ class HomeController extends BaseController
         switch ($actionType) {
             case $ACTION_HOME_INITIAL: {
                     $listBooking = $this->HomeDao->getAll();
-                    $listLatestBook=$this->BookDao->getLatest();
-                    $this->view->load('Home', [$listBooking,$listLatestBook]);
+                    $listLatestBook = $this->BookDao->getLatestBook();
+                    $this->view->load('Home', [$listBooking, $listLatestBook]);
                     break;
                 }
 
             default: {
                     $listBooking = $this->HomeDao->getAll();
-                    $this->view->load('Home', [$listBooking]);
+                    $listLatestBook = $this->BookDao->getLatestBook();
+                    $a = [$listBooking, $listLatestBook];
+
+                    $this->view->load('Home', array(
+                        "listBook" => $listBooking,
+                        "listLatestBook" => $listLatestBook
+                    ));
                     break;
                 }
         }
@@ -74,11 +80,11 @@ class HomeController extends BaseController
                 }
 
             case $ACTION_LOGIN: {
-                var_dump($_POST);
-                $email=isset($_POST["email"]) ? $_POST["email"] : "";
-                $password=isset($_POST["password"]) ? $_POST["password"] :"";
-                
-                die();
+                    var_dump($_POST);
+                    $email = isset($_POST["email"]) ? $_POST["email"] : "";
+                    $password = isset($_POST["password"]) ? $_POST["password"] : "";
+
+                    die();
                 }
 
 

@@ -41,11 +41,12 @@
     position: relative;
 }
 .bookImg img{
-    height: 100%;
+    /* height: 100%; */
+    height: 300px !important;
     width: 100%;
 }
 
-
+ 
 
 
 .bookImg .bookView{

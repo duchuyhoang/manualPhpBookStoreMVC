@@ -73,3 +73,12 @@ function getProtocol(){
     $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://';
 return $protocol;
 }
+
+
+
+function className($test,$classList1,$classList2){
+
+
+return $test ? $classList1 : $classList2;
+
+}

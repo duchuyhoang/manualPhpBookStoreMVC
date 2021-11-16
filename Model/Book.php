@@ -59,7 +59,7 @@ class Book implements JsonSerializable
         $listCategory = array();
         // $this->category = new Category($id_category,$category_name,$category_delFlag);
 
-        if (!$list_id_category) {
+        if ($list_id_category) {
             $listBookCategoryId = explode("////", $list_id_category);
             $listBookCategoryName = explode("////", $list_category_name);
             $listBookCategoryDelflag = explode("////", $list_category_delFlag);
@@ -68,10 +68,11 @@ class Book implements JsonSerializable
             }
         }
 
-        if (!$list_book_image_id) {
-            $listBookImageId = explode("////", $list_book_image_id || "");
-            $listBookImageUrl = explode("////", $list_book_image_url || "");
-            $listBookImageDelFlag = explode("////", $list_book_image_delFlag || "");
+        if ($list_book_image_id) {
+            $listBookImageId = explode("////", $list_book_image_id ? $list_book_image_id : "");
+            $listBookImageUrl = explode("////", $list_book_image_url ? $list_book_image_url : "");
+
+            $listBookImageDelFlag = explode("////", $list_book_image_delFlag ? $list_book_image_delFlag : "");
             for ($i = 0; $i < count($listBookImageId); $i++) {
                 array_push($listImage, new BookImage($listBookImageId[$i], $listBookImageUrl[$i], $id_book, $listBookImageDelFlag[$i]));
             }
