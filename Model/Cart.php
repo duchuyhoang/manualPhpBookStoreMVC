@@ -7,9 +7,9 @@ class Cart
     private $createAt;
     private User|null $user;
 
-    public function __construct($id_cart,$listBook, $createAt, $user)
+    public function __construct($id_cart, $listBook, $createAt, $user)
     {
-        $this->id_cart=$id_cart;
+        $this->id_cart = $id_cart;
         $this->listBook = $listBook;
         $this->createAt = $createAt;
         $this->user = $user;
@@ -124,5 +124,25 @@ class Cart
         if ($index !== -1)
             array_splice($newListBook, $index, 1);
         $this->listBook = $newListBook;
+    }
+
+    /**
+     * Get the value of id_cart
+     */
+    public function getId_cart()
+    {
+        return $this->id_cart;
+    }
+
+    /**
+     * Set the value of id_cart
+     *
+     * @return  self
+     */
+    public function setId_cart($id_cart)
+    {
+        $this->id_cart = $id_cart;
+
+        return $this;
     }
 }
