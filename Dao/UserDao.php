@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__) . "/../db.php";
+// require_once dirname(__FILE__) . "/../db.php";
 require_once dirname(__FILE__) . "/../Model/User.php";
 require_once dirname(__FILE__) . "/../Model/Address.php";
 require_once dirname(__FILE__) . "/../DBConnector.php";
@@ -22,9 +22,9 @@ class UserDao extends DBConnector
     {
         require dirname(__FILE__) . "/../shared/constants.php";
         $query = "SELECT user.*,province.name as provinceName,district.name as districtName,ward.name as wardName 
-FROM thuvien.user INNER JOIN province ON user.id_province=province.id 
-INNER JOIN district ON user.id_district=district.id 
-INNER JOIN ward ON user.id_ward=ward.id WHERE email=? AND password=? AND delFlag={$DEL_FLAG_VALID} LIMIT 1";
+                    FROM thuvien.user INNER JOIN province ON user.id_province=province.id 
+                    INNER JOIN district ON user.id_district=district.id 
+                    INNER JOIN ward ON user.id_ward=ward.id WHERE email=? AND password=? AND delFlag={$DEL_FLAG_VALID} LIMIT 1";
         $stmt = parent::$db->prepare($query);
         $stmt->bindParam(1, $email);
         $stmt->bindParam(2, $password);

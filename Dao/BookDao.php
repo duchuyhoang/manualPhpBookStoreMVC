@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . "/../db.php";
+// require_once dirname(__FILE__) . "/../db.php";
 require_once dirname(__FILE__) . "/../Model/Book.php";
 require_once dirname(__FILE__) . "/../Model/Category.php";
 
@@ -43,7 +43,7 @@ class BookDao extends DBConnector
         Book_Image.bookImageId as bookImageId,
         manufacture.name as manufactureName,manufacture.delFlag as manufactureDelFlag,
         author.name as authorName,author.delFlag as authorDelFlag,author.maxim as authorMaxim,
-    author.birthday as authorBirthday,author.address as authorAddress
+        author.birthday as authorBirthday,author.address as authorAddress
         FROM 
              (
         SELECT 

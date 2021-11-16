@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__)."/../db.php";
+// require_once dirname(__FILE__)."/../db.php";
 require_once dirname(__FILE__) . "/../Model/District.php";
 require_once dirname(__FILE__) . "/BaseDao.php";
 require_once dirname(__FILE__) . "/../DBConnector.php";
