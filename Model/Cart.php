@@ -4,7 +4,7 @@ class Cart
 {
     private $listBook;
     private $createAt;
-    private $user;
+    private User|null $user;
 
     public function __construct($listBook, $createAt, $user)
     {
@@ -78,7 +78,16 @@ class Cart
 
     public function addProduct($book)
     {
-        $this->listBook = array($this->listBook, $book);
+        $bookExist = false;
+        foreach ($this->listBook as $_book) {
+            if ($_book->getId_book() === $book->getId_book()) {
+                $bookExist = true;
+                break;
+            }
+        }
+        if (!$bookExist) {
+            $this->listBook = array($this->listBook, $book);
+        }
     }
 
     public function deleteProduct($idBook)

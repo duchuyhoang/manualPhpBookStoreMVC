@@ -331,8 +331,8 @@
                 quantity: $("#productQuantity").val(),
                 id_product: currentProduct
             },
-            processData: false,
-            contentType: false,
+            // processData: false,
+            // contentType: false,
         });
 
         request.done(function(response, textStatus, jqXHR) {

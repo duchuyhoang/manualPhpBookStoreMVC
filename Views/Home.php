@@ -32,7 +32,7 @@
   <?php require_once dirname(__FILE__) . "./shared/" . 'Loading.php'; ?>
   <?php
   // var_dump($listLatestBook);
-
+  setlocale(LC_MONETARY, 'vi_VN');
   ?>
 
   <!-- <?php require dirname(__FILE__) . "/../shared/" . 'constants.php' ?>
@@ -126,6 +126,10 @@
       <section class="newArrivalSlide owl-carousel" id="newArrivalSlide">
         <?php
         foreach ($listLatestBook as $book) {
+
+          $firstImage = isset($book->getListImage()[0]) ? $book->getListImage()[0]->getUrl() : "";
+          $actualMoney = number_format($book->getPrice());
+          $bookPrice = number_format($book->getPrice() - $book->getPrice()*$book->getSale());
           echo "
 <div class='bookWrapper'>
 <div class='bookImg'>
@@ -137,13 +141,13 @@
     </div>
 
   </div>
-  <img src='{$book->getListImage()[0]->getUrl()}' alt='book' />
+  <img src='{$firstImage}' alt='book' />
 </div>
 <div class='bookDetail'>
-  <div class='bookName'>Harry Potter</div>
+  <div class='bookName'>{$book->getName()}</div>
   <div class='d-flex align-items-center'>
-    <p class='bookPrice'>{$book->getPrice()}VND</p>
-    <p class='bookPriceActual'>100$</p>
+    <p class='bookPrice'>{$bookPrice}VND</p>
+    <p class='bookPriceActual'>{$actualMoney}VND</p>
   </div>
 
 
@@ -1126,7 +1130,7 @@
         loop: false
       },
       1200: {
-        items: 5,
+        items: 4,
         nav: true,
         loop: false
       }
