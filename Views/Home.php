@@ -129,7 +129,8 @@
 
           $firstImage = isset($book->getListImage()[0]) ? $book->getListImage()[0]->getUrl() : "";
           $actualMoney = number_format($book->getPrice());
-          $bookPrice = number_format($book->getPrice() - $book->getPrice()*$book->getSale());
+          $bookPrice = number_format($book->getPrice() - $book->getPrice() * $book->getSale());
+          $isSale = $book->getSale() != 0;
           echo "
 <div class='bookWrapper'>
 <div class='bookImg'>
@@ -149,13 +150,13 @@
     <p class='bookPrice'>{$bookPrice}VND</p>
     <p class='bookPriceActual'>{$actualMoney}VND</p>
   </div>
+  </div>
+<div class='tagContainer d-flex flex-column'>" .
+
+            ($isSale ?  "<div class='saleTag sale'>" . $book->getSale() * 100  . "%</div>" : "").
 
 
-
-</div>
-<div class='tagContainer d-flex flex-column'>
-  <div class='saleTag sale'>5%</div>
-  <div class='saleTag new'>NEW</div>
+             "<div class='saleTag new'>NEW</div>
 </div>
 </div>
 ";
