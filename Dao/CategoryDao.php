@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . "/../db.php";
+// require_once dirname(__FILE__) . "/../db.php";
 require_once dirname(__FILE__) . "/../Model/Category.php";
 require_once dirname(__FILE__) . "/BaseDao.php";
 require_once dirname(__FILE__) . "/../DBConnector.php";

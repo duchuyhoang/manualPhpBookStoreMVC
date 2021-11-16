@@ -10,7 +10,7 @@ abstract class DBConnector
     public function __construct()
     {
         // if(!self::$db){
-        $servername = "localhost";
+        $servername = "171.241.46.90";
         $username = "root";
         $password = "huyhoang10032000@gmail.com";
         // try{
@@ -28,7 +28,8 @@ abstract class DBConnector
     public static function connectDB()
     {
         if (!self::$db) {
-            $servername = "127.0.0.1";
+        
+            $servername = "171.241.46.90";
             $username = "root";
             $password = "huyhoang10032000@gmail.com";
             // try{

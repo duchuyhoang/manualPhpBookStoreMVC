@@ -27,8 +27,8 @@ class App
         array_push($this->routers, new Router("/", true, new HomeController()));
         array_push($this->routers, new Router("/home", true, new HomeController()));
         array_push($this->routers, new Router($NOT_FOUND_URL, true, new NotFoundPageController()));
-        array_push($this->routers, new Router("/auth", true, new AuthController()));
-        array_push($this->routers, new Router("/aboutUs", true, new SiteMapController()));
+        // array_push($this->routers, new Router("/auth", true, new AuthController()));
+        array_push($this->routers, new Router("/sitemap", true, new SiteMapController()));
         array_push($this->routers, new Router("/product", true, new ProductInfoController()));
         array_push($this->routers, new Router("/admin", true, new AdminController()));
         array_push($this->routers, new Router("/contact", true, new ContactController()));

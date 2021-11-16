@@ -20,14 +20,5 @@ class CartPageController extends BaseController{
     public function handlePost()
     {
     }
-
-
-
-
 }
-
-
-
-
-
 ?>
