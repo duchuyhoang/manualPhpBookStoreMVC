@@ -2,18 +2,18 @@
 
 class Cart
 {
+    private $id_cart;
     private $listBook;
     private $createAt;
     private User|null $user;
 
-    public function __construct($listBook, $createAt, $user)
+    public function __construct($id_cart,$listBook, $createAt, $user)
     {
+        $this->id_cart=$id_cart;
         $this->listBook = $listBook;
         $this->createAt = $createAt;
         $this->user = $user;
     }
-
-
 
 
     /**
@@ -79,14 +79,36 @@ class Cart
     public function addProduct($book)
     {
         $bookExist = false;
-        foreach ($this->listBook as $_book) {
-            if ($_book->getId_book() === $book->getId_book()) {
+        $selectedExistBook = null;
+        $index = -1;
+
+        foreach ($this->listBook as $_index => $_book) {
+
+            if ($_book->getBook()->getId_book() === $book->getBook()->getId_book()) {
                 $bookExist = true;
+                $selectedExistBook = $_book;
+                $index = $_index;
                 break;
             }
         }
         if (!$bookExist) {
-            $this->listBook = array($this->listBook, $book);
+            $this->listBook = array_merge($this->listBook, [$book]);
+            // if()
+        } else {
+            $a = $selectedExistBook->getMaxQuantity()
+                >= $selectedExistBook->getQuantity() + $book->getQuantity();
+
+            if (
+                $selectedExistBook->getMaxQuantity()
+                >= $selectedExistBook->getQuantity() + $book->getQuantity()
+            ) {
+                $qq = $selectedExistBook->getBook()->getQuantity() + $book->getBook()->getQuantity();
+
+                $selectedExistBook->setQuantity(intval($selectedExistBook->getQuantity()) + intval($book->getQuantity()));
+                $newListBook = $this->listBook;
+                $newListBook[$index] = $selectedExistBook;
+                $this->listBook = $newListBook;
+            }
         }
     }
 

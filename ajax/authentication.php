@@ -4,8 +4,10 @@ require_once dirname(__FILE__) . "/../shared/constants.php";
 require_once dirname(__FILE__) . "/../shared/actionsType.php";
 require_once dirname(__FILE__) . "/../shared/functions.php";
 require_once dirname(__FILE__) . "/../Dao/UserDao.php";
-session_start();
+require_once dirname(__FILE__) . "/../Model/Cart.php";
 
+session_start();
+// session_destroy();
 $actionType = isset($_POST["submit"]) ? $_POST["submit"] : null;
 error_reporting(E_ALL ^ E_NOTICE);
 switch ($actionType) {
@@ -18,8 +20,14 @@ switch ($actionType) {
                 $_SESSION[$CURRENT_USER_INFO] = $result;
                 $break = 1;
                 if ($result == null) throw new Exception("Login failed");
-                else
+                else {
+                    if (isset($_SESSION["cart"])) {
+                        $currentCart = $_SESSION["cart"];
+                        $currentCart->setUser($result);
+                    }
                     echo json_encode($result);
+                }
+
                 break;
             } catch (Exception $e) {
                 $error = new stdClass();
@@ -52,10 +60,10 @@ switch ($actionType) {
 
             // $length = count($_FILES["avatar"]);
             $a = count($avatar);
-            
+
 
             try {
-            $_avatar = count($avatar) > 0  ? uploadFile($avatar, [$_FILES["avatar"]["tmp_name"]], [$_FILES["avatar"]["error"]])[0] : null;
+                $_avatar = count($avatar) > 0  ? uploadFile($avatar, [$_FILES["avatar"]["tmp_name"]], [$_FILES["avatar"]["error"]])[0] : null;
                 $userDao = new UserDao();
                 $newUserId = $userDao->signUp(
                     User::newSignupUser(

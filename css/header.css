@@ -377,7 +377,8 @@ overflow-y:auto
 
 #myCart .cartItem .cartItemImg {
     max-width: 30%;
-    max-height: 100px;
+    height: 100px;
+    margin-right: 10px;
 }
 
 #myCart .cartItem .cartItemContent {

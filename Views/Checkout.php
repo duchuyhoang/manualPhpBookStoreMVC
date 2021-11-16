@@ -31,6 +31,18 @@
     require_once dirname(__FILE__) . "./shared/" . 'Navbar.php';
     ?>
     <?php require_once dirname(__FILE__) . "./shared/" . 'Loading.php'; ?>
+    <?php require dirname(__FILE__) . "/../shared/" . 'constants.php' ?>
+
+    <?php
+    session_start();
+    if (!isset($_SESSION[$CURRENT_USER_INFO])) {
+        header('Location: ' . getProtocol() . $_SERVER['SERVER_NAME'] . "/banSach" . "" . "/home");
+        die();
+    }
+
+
+    ?>
+
 
     <section id="checkoutContainer" class="container mt-5 mb-3">
         <h3>Checkout</h3>

@@ -1,5 +1,9 @@
 <?php require dirname(__FILE__) . "/../../shared/" . 'constants.php' ?>
 <?php require dirname(__FILE__) . "/../../shared/" . 'actionsType.php' ?>
+<?php require dirname(__FILE__) . "/../../Model/" . 'Cart.php' ?>
+<?php require dirname(__FILE__) . "/../../Model/" . 'BookItem.php' ?>
+<?php session_start() ?>
+
 <?php $url = isset($_GET["url"]) ? $_GET["url"] : "";
 // $_SESSION[$CURRENT_USER_INFO]=null;
 
@@ -57,54 +61,53 @@
     <div class="col-4 d-flex justify-content-center align-items-center">
         <div class="cartContainer position-relative">
             <i class="fas fa-shopping-cart cart fa-2x"></i>
-            <div class="productCount">0</div>
+            <div class="productCount">
+                <?php
+                echo isset($_SESSION["cart"]) ? count($_SESSION["cart"]->getListBook()) : "0";
+                ?></div>
             <div>
                 <div class="productMenu">
                     <div class="d-flex justify-content-center flex-column align-items-center" id="myCart">My cart
+                        <section class='cartItemContainer'>
+
+                            <?php
+
+                            $currentCart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : null;
+
+                            if ($currentCart) {
+                                foreach ($currentCart->getListBook() as $bookItem) {
+                                    $avatar = count($bookItem->getBook()->getListImage()) > 0 ? $bookItem->getBook()->getListImage()[0]->getUrl() : "";
+                                    echo "
+                                    <div class='cartItem'>
+        <a href='./product?id_product={$bookItem->getBook()->getId_book()}' class='cartItemImg'>
+            <img src='{$avatar}' alt='' width='100%' height='100%'>
+        </a>
+        <div class='cartItemContent'>
+            <p>
+                <a href='./product?id_product={$bookItem->getBook()->getId_book()}'>
+                    {$bookItem->getBook()->getName()}
+                </a>
+
+            </p>
+            <p>{$bookItem->getQuantity()}x {$bookItem->getPrice()}VNĐ</p>
+        </div>
+        <div class='cartItemDelete'>
+            <i class='fas fa-times'></i>
+        </div>
+    </div>
+                                    ";
+                                }
+                            } else {
+                            }
 
 
-                        <section class="cartItemContainer">
-                            <div class="cartItem">
-                                <a href="./productInfo?id_product=1" class="cartItemImg">
-                                    <img src="https://template.hasthemes.com/koparion/koparion/img/product/1.jpg" alt="" width="100%" height="100%">
-                                </a>
-                                <div class="cartItemContent">
-                                    <p>
-                                        <a href="./productInfo?id_product=1">
-                                            Harry potter
-                                        </a>
 
-                                    </p>
-                                    <p>1x 60$</p>
-                                </div>
-                                <div class="cartItemDelete">
-                                    <i class="fas fa-times"></i>
-                                </div>
-                            </div>
-                            <div class="cartItem">
-                                <a href="./productInfo?id_product=1" class="cartItemImg">
-                                    <img src="https://template.hasthemes.com/koparion/koparion/img/product/22.jpg" alt="" width="100%" height="100%">
-                                </a>
-                                <div class="cartItemContent">
-                                    <p>
-                                        <a href="./productInfo?id_product=1">
-                                            Harry potter
-                                        </a>
-
-                                    </p>
-                                    <p>1x 60$</p>
-                                </div>
-                                <div class="cartItemDelete">
-                                    <i class="fas fa-times"></i>
-                                </div>
-                            </div>
-
+                            ?>
                         </section>
 
-                        <div class="cartItemTotal">
-                            <h5>Total</h5>
-                            <p>$12.00</p>
-                        </div>
+
+
+
                         <a href="./myCart" class="cartBtn">
                             View cart
                         </a>
@@ -397,7 +400,7 @@
                 timeout: 5000,
                 style: "customSnackbar snackbar-success"
             });
-            
+
             // window.location.reload();
         });
         request.fail(function(jqXHR, textStatus, errorThrown) {

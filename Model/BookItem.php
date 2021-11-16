@@ -1,20 +1,18 @@
-
-
-
-
 <?php
-
 
 class BookItem implements JsonSerializable{
 
 private $book;
 private $quantity;
 private $maxQuantity;
+private $price;
 
-public function __construct($book,$quantity,$maxQuantity){
+public function __construct($book,$quantity,$maxQuantity,$price){
     $this->book = $book;
     $this->quantity = $quantity;
     $this->maxQuantity=$maxQuantity;
+    if($price) $this->price=$price;
+    else $this->price=$book->getPrice()-$book->getPrice()*$book->getSale();
 }
 
 
@@ -90,6 +88,26 @@ return $this->maxQuantity;
 public function setMaxQuantity($maxQuantity)
 {
 $this->maxQuantity = $maxQuantity;
+
+return $this;
+}
+
+/**
+ * Get the value of price
+ */ 
+public function getPrice()
+{
+return $this->price;
+}
+
+/**
+ * Set the value of price
+ *
+ * @return  self
+ */ 
+public function setPrice($price)
+{
+$this->price = $price;
 
 return $this;
 }

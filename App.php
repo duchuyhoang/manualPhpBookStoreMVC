@@ -44,7 +44,7 @@ class App
         require_once "./shared/constants.php";
         // $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://';
         $this->initRouter();
-        session_start();
+        // session_start();
         try {
             $url = isset($_GET["url"]) ? $_GET["url"] : null;
             $currentController = null;

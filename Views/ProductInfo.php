@@ -31,6 +31,7 @@
     require_once dirname(__FILE__) . "./shared/" . 'Loading.php';
     require_once dirname(__FILE__) . "./shared/" . 'Rating.php';
     require_once dirname(__FILE__) . "./../shared/" . 'functions.php';
+    
     ?>
     <div class="container mt-5 mb-3 d-flex" id="productInfo">
         <div class="col-lg-9 col-12">
@@ -116,11 +117,20 @@
 
                         <div class="bookPriceContainer d-flex">
                             <div class="bookPriceExpected">
-                                <?php echo $bookInfo->getPrice() - $bookInfo->getPrice() * $bookInfo->getSale()  ?> VNĐ
+                                <?php
+                                 echo
+                                // $bookInfo->getSale()!=0
+                                // ?
+                                number_format($bookInfo->getPrice() - $bookInfo->getPrice() * $bookInfo->getSale())."VNĐ"   
+                                // :""
+                                ?>
+                                
                             </div>
                             <div class="bookPriceActual ml-2">
                                 <!-- $40.00 -->
-                                <?php echo $bookInfo->getPrice(); ?> VNĐ
+                                <?php
+                               echo $bookInfo->getSale()!=0 ?
+                                 number_format($bookInfo->getPrice())."VNĐ" :"" ?> 
                             </div>
                         </div>
                         <div class="productAction">
