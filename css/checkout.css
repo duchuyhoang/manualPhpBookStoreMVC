@@ -114,3 +114,41 @@ th {
 .checkoutButton:hover{
     background: #e61719 none repeat scroll 0 0;
 }
+.checkoutDifferentContainer{
+    display: flex;
+    margin-top:30px;
+}
+
+.checkoutDifferentContainer .title{
+    color: #333;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+.checkoutDifferentContainer .text{
+
+}
+.checkoutDifferentContainer .product{
+
+}
+
+.checkoutDifferentContainer table{
+width: 100%;
+margin-bottom: 50px;
+}
+.checkoutDifferentContainer table th{
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 1em;
+}
+
+.checkoutDifferentContainer .product .productImg{
+    height:50px;
+    width: 50px;
+}
+.checkoutDifferentContainer .product td{
+    text-align: center;
+    padding:10px 0px;
+    border-bottom: 1px solid #e6e6e6;
+}
+.checkoutDifferentContainer .product td p{
+    margin-block-end:0;
+}

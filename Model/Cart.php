@@ -16,6 +16,7 @@ class Cart
     }
 
 
+
     /**
      * Get the value of listBook
      */
@@ -120,6 +121,48 @@ class Cart
             array_splice($newListBook, $index, 1);
         $this->listBook = $newListBook;
     }
+
+    public function changeProduct($idBook, $quantity)
+    {
+        $listBook = $this->listBook;
+        $index = -1;
+        for ($i = 0; $i < count($listBook); $i++) {
+            if ($listBook[$i]->getBook()->getId_book() == $idBook) {
+                $index = $i;
+                break;
+            }
+        }
+        if ($index === -1) return;
+        else {
+
+            if ($quantity == 0) {
+                array_splice($listBook, $index, 1);}
+            else {
+                $listBook[$i]->setQuantity($quantity);
+            }
+            $this->listBook = $listBook;
+        }
+    }
+
+    public function updateProductMaxQuantity($idBook, $maxQuantity)
+    {
+        $listBook = $this->listBook;
+        $index = -1;
+        for ($i = 0; $i < count($listBook); $i++) {
+            if ($listBook[$i]->getBook()->getId_book() == $idBook) {
+                $index = $i;
+                break;
+            }
+        }
+        if ($index === -1) return;
+
+        else {
+            $listBook[$i]->setMaxQuantity($maxQuantity);
+            $this->listBook = $listBook;
+        }
+    }
+
+
 
     /**
      * Get the value of id_cart

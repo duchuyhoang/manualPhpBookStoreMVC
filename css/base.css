@@ -225,6 +225,11 @@ ul.star li {
   cursor: pointer;
 }
 
+.blackButton a{
+  color: #fff!important;
+  text-decoration: none!important;
+}
+
 .blackButton:hover {
   background: #f07c29;
 

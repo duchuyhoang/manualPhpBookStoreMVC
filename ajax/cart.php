@@ -2,6 +2,8 @@
 require_once dirname(__FILE__) . "/../Model/Cart.php";
 require_once dirname(__FILE__) . "/../Model/BookItem.php";
 require_once dirname(__FILE__) . "/../Model/Book.php";
+require_once dirname(__FILE__) . "/../Model/User.php";
+
 session_start();
 // $_SESSION["cart"]=null;
 // die();
@@ -43,16 +45,48 @@ switch ($action) {
 
             $result = new stdClass();
             $result->message = "Success";
+
             echo json_encode($result);
         } catch (Exception $e) {
             $a = 1;
 
             // if($e->code===1000)
         }
-
-
-
         break;
+
+case $RESOVE_CONFLICT_CART:
+try{
+    $newList=isset($_POST['newList']) ? $_POST['newList'] : [];
+    $currentCart=isset($_SESSION["cart"]) ? $_SESSION["cart"]:null;
+    if(!$currentCart)
+    throw new Exception("Cart required",1000);
+
+for($i=0;$i<count($newList);$i++){
+    $currentCart->changeProduct($newList[$i]["id"],$newList[$i]["quantity"]);
+    $currentCart->updateProductMaxQuantity($newList[$i]["id"],$newList[$i]["maxQuantity"]);
+}
+
+$_SESSION["cart"]=$currentCart;
+
+$response=new stdClass();
+$response->message="Success";
+echo json_encode($response);
+}
+catch(Exception $e){
+    http_response_code(400);
+    $response=new stdClass();
+    $response->message="Something wrong";
+    die(json_encode($response));
+}
+
+
+
+
+
+
+    break;
+
+
 }
 
 // php>

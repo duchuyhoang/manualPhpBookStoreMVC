@@ -5,6 +5,7 @@ require_once dirname(__FILE__) . "/../Dao/DistrictDao.php";
 require_once dirname(__FILE__) . "/../Dao/WardDao.php";
 require_once dirname(__FILE__) . "/../Dao/BookDao.php";
 require_once dirname(__FILE__) . "/../Model/Cart.php";
+require_once dirname(__FILE__) . "/../Model/BookItem.php";
 
 class CheckoutController extends BaseController
 {
@@ -35,15 +36,17 @@ class CheckoutController extends BaseController
             if ($currentCart) {
                 $listBook = $this->bookDao->getAll();
                 $listSelectedBook = $currentCart->getListBook();
+
                 foreach ($listSelectedBook as $bookItem) {
                     $id = $bookItem->getBook()->getId_book();
-                    $selectedBook = array_filter($listBook, function ($book) use ($id) {
-                        return $book->getId_book() === $id;
-                    });
+                    $selectedBook = array_values(array_filter($listBook, function ($book) use ($id) {
+                        return $book->getId_book() == $id;
+                    }));
+
                     if (count($selectedBook) > 0) {
                         if ($selectedBook[0]->getQuantity() < $bookItem->getQuantity()) {
                             $different[] = array(
-                                "book" => $selectedBook,
+                                "book" => $selectedBook[0],
                                 "bookItem" => $bookItem
                             );
                         }

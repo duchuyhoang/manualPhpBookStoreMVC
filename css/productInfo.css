@@ -4,6 +4,7 @@
 
 .carousel-inner {
     width: 318px;
+    background-color: #000000;
 }
 
 .carousel-item img {
@@ -54,6 +55,9 @@ transform: translateX(-50px);
     text-transform: capitalize;
     font-family: 'Rufina', serif;
     font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .bookStatusInfo {
