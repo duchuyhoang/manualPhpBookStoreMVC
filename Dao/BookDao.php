@@ -20,16 +20,56 @@ class BookDao extends DBConnector
 
     public function getAll()
     {
-        $query = "SELECT * FROM category";
-        // $stmt=$conn;
-        $stmt = parent::$db->query($query);
-        $list_books = $stmt->fetchAll();
-        $list = array();
-        foreach ($list_books as $book) {
-            array_push($list, $book);
+
+        $query = "SELECT DISTINCT  book.*,
+        GROUP_CONCAT(distinct category.cat_name SEPARATOR '////') as categoryName,
+        GROUP_CONCAT(distinct book_category.id_book_category SEPARATOR '////') as categoryId,
+        GROUP_CONCAT(category.delFlag SEPARATOR '////') as categoryDelFlag,
+        (SELECT GROUP_CONCAT(book_image.delFlag SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageDelFlag,
+        (SELECT GROUP_CONCAT(book_image.url SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageUrl,
+        (SELECT GROUP_CONCAT(book_image.id_image SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageId,
+        manufacture.name as manufactureName,manufacture.delFlag as manufactureDelFlag,
+        author.name as authorName,author.delFlag as authorDelFlag,author.maxim as authorMaxim,
+    author.birthday as authorBirthday,author.address as authorAddress
+        FROM book
+        LEFT JOIN book_category ON book.id_book=book_category.id_book
+        LEFT JOIN category ON category.id_category=book_category.id_book_category
+        LEFT JOIN manufacture ON manufacture.id_manufacture=book.id_book_manufacture
+        LEFT JOIN author ON author.id_author=book.id_author
+        WHERE book.status=1 GROUP BY book.id_book;";
+        $stmt = parent::$db->prepare($query);
+        $stmt->execute();
+        $listQueries = $stmt->fetchAll();
+        $listBook = array();
+        foreach ($listQueries as $query) {
+            $listBook[] = new Book(
+                $query["id_book"],
+                $query["name"],
+                $query["price"],
+                $query["quantity"],
+                $query["status"],
+                $query["description"],
+                $query["categoryId"],
+                $query["categoryName"],
+                $query["categoryDelFlag"],
+                $query["id_book_manufacture"],
+                $query["manufactureName"],
+                $query["manufactureDelFlag"],
+                $query["id_author"],
+                $query["authorName"],
+                $query["authorMaxim"],
+                $query["authorAddress"],
+                $query["authorDelFlag"],
+                $query["authorBirthday"],
+                $query["bookImageId"],
+                $query["bookImageUrl"],
+                $query["bookImageDelFlag"],
+                $query["createAt"],
+                $query["sale"],
+
+            );
         }
-        $this->listBook = $list;
-        return $list;
+        return $listBook;
     }
 
     public function getById(int $id)
@@ -135,7 +175,6 @@ class BookDao extends DBConnector
         $query = "INSERT INTO book_image(id_book,url) VALUES " . implode(',', $questionMark);
         $stmt = parent::$db->prepare($query);
         $stmt->execute($insertData);
-       
     }
 
     public function getLatestBook()

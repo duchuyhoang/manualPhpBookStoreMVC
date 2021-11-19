@@ -22,6 +22,7 @@
 
 <body>
     <?php require_once dirname(__FILE__) . "./shared/" . 'Navbar.php'; ?>
+
     <div class="container mt-5">
         <h2 class="myAccountHeader">My Account</h2>
 

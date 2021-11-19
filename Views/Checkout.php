@@ -31,17 +31,15 @@
     require_once dirname(__FILE__) . "./shared/" . 'Navbar.php';
     ?>
     <?php require_once dirname(__FILE__) . "./shared/" . 'Loading.php'; ?>
-    <?php require dirname(__FILE__) . "/../shared/" . 'constants.php' ?>
+    <?php require_once dirname(__FILE__) . "/../shared/" . 'constants.php'; ?>
+    <?php require dirname(__FILE__) . "/../shared/" . 'actionsType.php' ?>
 
     <?php
-    session_start();
-    if (!isset($_SESSION[$CURRENT_USER_INFO])) {
-        header('Location: ' . getProtocol() . $_SERVER['SERVER_NAME'] . "/banSach" . "" . "/home");
-        die();
-    }
-
+var_dump($different);
 
     ?>
+
+
 
 
     <section id="checkoutContainer" class="container mt-5 mb-3">
@@ -51,25 +49,25 @@
             <div class="col-lg-6 col-12 pt-4">
                 <h3>BILLING DETAILS</h3>
 
-                <form action="" id="billingForm">
+                <form action="" id="billingForm" method="POST">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="receiverFirstName">Receiver first name<span class="text-danger ml-1">*</span></label>
-                                <input type="text" class="baseInput clearBgColor" id="receiverFirstName" placeholder="">
+                                <input type="text" class="baseInput clearBgColor" id="receiverFirstName" placeholder="" autocomplete="nope">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="receiverLastName">Receiver last name<span class="text-danger ml-1">*</span></label>
-                                <input type="text" class="baseInput clearBgColor" id="receiverLastName" placeholder="">
+                                <input type="text" class="baseInput clearBgColor" id="receiverLastName" placeholder="" autocomplete="nope">
                             </div>
                         </div>
 
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="receiverEmail">Receiver email<span class="text-danger ml-1">*</span></label>
-                                <input type="email" class="baseInput clearBgColor" id="receiverEmail" placeholder="">
+                                <input type="email" class="baseInput clearBgColor" id="receiverEmail" placeholder="" autocomplete="nope">
                             </div>
                         </div>
 
@@ -180,7 +178,7 @@
                     </tbody>
                 </table>
                 <section class="checkoutButtonContainer">
-                    <button class="checkoutButton">Place order</button>
+                    <button class="checkoutButton" value="<?php echo $CHECKOUT_CART ?>" id="checkoutBtn">Place order</button>
                 </section>
             </div>
         </div>
@@ -214,6 +212,12 @@
         showAddOptionOnCreate: false
     }
     let $receiverCitySelect, $receiverDistrictSelect, $receiverWardSelect = null;
+
+    // setInterval(()=>{
+    //     console.log()
+    // },2000)
+
+
     $(document).ready(function() {
         $receiverCitySelect = $("#receiverCity").selectize({
             selectizeSetting,
@@ -239,6 +243,9 @@
             }
         })
 
+        // setInterval(()=>{{}})
+
+
         $receiverDistrictSelect = $("#receiverDistrict").selectize({
             selectizeSetting,
             onChange: (value) => {
@@ -261,9 +268,6 @@
                                 value: ward.id_ward
                             })
                     })
-
-
-
                 }
             }
         })
@@ -272,6 +276,43 @@
         $receiverWardSelect = $("#receiverWard").selectize({
             selectizeSetting,
         })
+
+
+    })
+
+
+    $("#checkoutBtn").click(function(event) {
+        event.preventDefault();
+
+        request = $.ajax({
+            url: "./ajax/checkout.php",
+            type: "post",
+            data: {
+                submit: $("#checkoutBtn").attr("value"),
+                receiverFirstName: $("#receiverFirstName").val(),
+                receiverLastName: $("#receiverLastName").val(),
+                receiverEmail: $("#receiverEmail").val(),
+                receiverCity: $receiverCitySelect[0].selectize.getValue(),
+                receiverDistrict: $receiverDistrictSelect[0].selectize.getValue(),
+                receiverWard: $receiverWardSelect[0].selectize.getValue(),
+                receiverAddressNote: $("#receiverAddressNote").val(),
+                receiverPhone: $("#receiverPhone").val(),
+                receiverPostcode: $("#receiverPostcode").val(),
+                receiverOrderNote: $("#receiverOrderNote").val()
+            },
+            // processData: false,
+            // contentType: false,
+        });
+
+        request.done(function(response, textStatus, jqXHR) {
+
+        });
+
+
+        request.fail(function(jqXHR, textStatus, errorThrown) {
+            $("#loading").removeClass("loadingShow");
+        });
+
 
 
     })

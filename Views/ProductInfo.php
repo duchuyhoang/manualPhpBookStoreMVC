@@ -352,7 +352,7 @@
                 timeout: 5000,
                 style: "customSnackbar snackbar-success"
             });
-            
+            window.location="./myCart";
             // window.location.reload();
         });
 

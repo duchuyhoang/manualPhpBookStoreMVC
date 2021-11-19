@@ -25,7 +25,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <title>Document</title>
 </head>
-
+<!-- w8OClcF9GrEpha1j3q3CbDDnYIhuHw4xELq3V6j6HqN8X46NFtbWCRlMRdEe -->
 <body>
   <?php require_once dirname(__FILE__) . "./shared/" . 'Navbar.php'; ?>
   <?php require_once dirname(__FILE__) . "./shared/" . 'Rating.php'; ?>
@@ -153,10 +153,10 @@
   </div>
 <div class='tagContainer d-flex flex-column'>" .
 
-            ($isSale ?  "<div class='saleTag sale'>" . $book->getSale() * 100  . "%</div>" : "").
+            ($isSale ?  "<div class='saleTag sale'>" . $book->getSale() * 100  . "%</div>" : "") .
 
 
-             "<div class='saleTag new'>NEW</div>
+            "<div class='saleTag new'>NEW</div>
 </div>
 </div>
 ";

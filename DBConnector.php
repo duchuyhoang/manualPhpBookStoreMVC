@@ -7,6 +7,8 @@ abstract class DBConnector
 
     // protected $db;
     protected static $db;
+    protected static $pdo;
+
     public function __construct()
     {
         // if(!self::$db){
@@ -19,6 +21,7 @@ abstract class DBConnector
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $conn->setAttribute(PDO::FETCH_ASSOC, PDO::ERRMODE_EXCEPTION);
         $this->db = $conn;
+        // $this->pdo=$conn
         // }
         //   catch(PDOException $e){
         //   var_dump($e);

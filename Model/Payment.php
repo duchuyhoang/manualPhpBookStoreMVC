@@ -2,39 +2,39 @@
 
 class Payment
 {
-    public static $Money = 0;
-    public static $Card = 1;
-    private $type;
+    // public static $Money = 0;
+    // public static $Card = 1;
+    // public static $MoneyName = "Money";
+    // public static $CardName = "Card";
+
+    private $id_payment;
     private $name;
-    function __construct($type, $name)
+    function __construct($id_payment, $name)
     {
-        $this->type = $type;
+        $this->id_payment = $id_payment;
         $this->name = $name;
     }
 
-    /**
-     * Get the value of type
-     */ 
-    public function getType()
-    {
-        return $this->type;
-    }
+    // public static function detectPaymentType($type)
+    // {
 
-    /**
-     * Set the value of type
-     *
-     * @return  self
-     */ 
-    public function setType($type)
-    {
-        $this->type = $type;
+    //     switch (intval($type)) {
+    //         case Payment::$Money:
+    //             return new self(Payment::$Money, Payment::$MoneyName);
+    //             break;
 
-        return $this;
-    }
+    //         case Payment::$Card:
+    //             return new self(Payment::$Card, Payment::$CardName);
+    //             break;
+
+    //         default:
+    //             return new self(Payment::$Money, Payment::$MoneyName);
+    //     }
+    // }
 
     /**
      * Get the value of name
-     */ 
+     */
     public function getName()
     {
         return $this->name;
@@ -44,10 +44,30 @@ class Payment
      * Set the value of name
      *
      * @return  self
-     */ 
+     */
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of id_payment
+     */ 
+    public function getId_payment()
+    {
+        return $this->id_payment;
+    }
+
+    /**
+     * Set the value of id_payment
+     *
+     * @return  self
+     */ 
+    public function setId_payment($id_payment)
+    {
+        $this->id_payment = $id_payment;
 
         return $this;
     }

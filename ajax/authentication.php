@@ -41,6 +41,7 @@ switch ($actionType) {
 
     case $SIGN_OUT: {
             $_SESSION[$CURRENT_USER_INFO] = NULL;
+            $_SESSION["cart"] = NULL;
             $response = new stdClass();
             $response->message = "Sign out success";
             echo json_encode($response);

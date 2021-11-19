@@ -3,7 +3,6 @@ require_once "BaseController.php";
 require_once dirname(__FILE__) . "/../Dao/CityDao.php";
 require_once dirname(__FILE__) . "/../Dao/DistrictDao.php";
 require_once dirname(__FILE__) . "/../Dao/WardDao.php";
-
 require_once dirname(__FILE__) . "/../Model/User.php";
 
 class ProfileController extends BaseController
@@ -21,8 +20,6 @@ class ProfileController extends BaseController
             $this->wardDao = new WardDao();
 
             $this->initialActions();
-
-          
         } catch (PDOException $e) {
         }
     }
@@ -42,8 +39,14 @@ class ProfileController extends BaseController
     {
         require dirname(__FILE__) . "/../shared/constants.php";
         require_once dirname(__FILE__) . "/../shared/functions.php";
+        require_once dirname(__FILE__) . "/../Model/Cart.php";
+        require_once dirname(__FILE__) . "/../Model/BookItem.php";
+
+        session_start();
+
         $protocol = getProtocol();
         $currentUser = isset($_SESSION[$CURRENT_USER_INFO]) ? $_SESSION[$CURRENT_USER_INFO] : NULL;
+
         if ($currentUser === null || !($currentUser instanceof User)) {
             header('Location: ' . $protocol . $_SERVER['SERVER_NAME'] . "/banSach" . "" . $HOME);
             return;
@@ -63,9 +66,8 @@ class ProfileController extends BaseController
     }
 
 
-    
+
     public function handlePost()
     {
-
     }
 }

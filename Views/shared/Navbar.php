@@ -1,7 +1,7 @@
 <?php require dirname(__FILE__) . "/../../shared/" . 'constants.php' ?>
 <?php require dirname(__FILE__) . "/../../shared/" . 'actionsType.php' ?>
-<?php require dirname(__FILE__) . "/../../Model/" . 'Cart.php' ?>
-<?php require dirname(__FILE__) . "/../../Model/" . 'BookItem.php' ?>
+<?php require_once dirname(__FILE__) . "/../../Model/" . 'Cart.php' ?>
+<?php require_once dirname(__FILE__) . "/../../Model/" . 'BookItem.php' ?>
 <?php session_start() ?>
 
 <?php $url = isset($_GET["url"]) ? $_GET["url"] : "";

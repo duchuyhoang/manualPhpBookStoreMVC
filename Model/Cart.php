@@ -95,15 +95,10 @@ class Cart
             $this->listBook = array_merge($this->listBook, [$book]);
             // if()
         } else {
-            $a = $selectedExistBook->getMaxQuantity()
-                >= $selectedExistBook->getQuantity() + $book->getQuantity();
-
             if (
                 $selectedExistBook->getMaxQuantity()
                 >= $selectedExistBook->getQuantity() + $book->getQuantity()
             ) {
-                $qq = $selectedExistBook->getBook()->getQuantity() + $book->getBook()->getQuantity();
-
                 $selectedExistBook->setQuantity(intval($selectedExistBook->getQuantity()) + intval($book->getQuantity()));
                 $newListBook = $this->listBook;
                 $newListBook[$index] = $selectedExistBook;

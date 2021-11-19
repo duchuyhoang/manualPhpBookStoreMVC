@@ -3,37 +3,17 @@
 class OrderType{
     public static $Online = 0;
     public static $Offline = 1;
-    private $type;
+    private $id_order_type;
     private $name;
-    function __construct($type, $name)
+
+
+    function __construct($id_order_type, $name)
     {
-        $this->type = $type;
+        $this->id_order_type = $id_order_type;
         $this->name = $name;
     }
 
-    /**
-     * Get the value of type
-     */ 
-    public function getType()
-    {
-        return $this->type;
-    }
 
-    /**
-     * Set the value of type
-     *
-     * @return  self
-     */ 
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of name
-     */ 
     public function getName()
     {
         return $this->name;
@@ -50,8 +30,24 @@ class OrderType{
 
         return $this;
     }
+
+    /**
+     * Get the value of id_order_type
+     */ 
+    public function getId_order_type()
+    {
+        return $this->id_order_type;
+    }
+
+    /**
+     * Set the value of id_order_type
+     *
+     * @return  self
+     */ 
+    public function setId_order_type($id_order_type)
+    {
+        $this->id_order_type = $id_order_type;
+
+        return $this;
+    }
 }
-
-
-
-?>
