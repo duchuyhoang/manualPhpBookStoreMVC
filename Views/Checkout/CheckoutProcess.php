@@ -1,3 +1,6 @@
+<?php
+$totalPrice = intval(0);
+?>
 <section id="checkoutContainer" class="container mt-5 mb-3">
     <h3>Checkout</h3>
 
@@ -89,6 +92,32 @@
                                 <textarea name="" id="receiverOrderNote" class="w-100"></textarea>
                             </div>
                         </div>
+                        <div class="col-6 ">
+                            <div class="form-group">
+                                <label for="receiverOrderType">Receiver order type</label>
+                                <select class="select baseInput rounded" id="receiverOrderType">
+                                    <?php
+                                    foreach ($listOrderType as $orderType) {
+                                        echo "<option value='{$orderType->getId_order_type()}'>{$orderType->getName()}</option>";
+                                    }
+                                    ?>
+                                    <select>
+                            </div>
+                        </div>
+
+                        <div class="col-6 pr-0">
+                            <div class="form-group">
+                                <label for="receiverPaymentType">Receiver payment type</label>
+                                <select class="select baseInput rounded" id="receiverPaymentType">
+                                    <?php
+                                    foreach ($listPaymentType as $paymentType) {
+                                        echo "<option value='{$paymentType->getId_payment()}'>{$paymentType->getName()}</option>";
+                                    }
+                                    ?>
+                                    <select>
+                            </div>
+                        </div>
+
 
                     </div>
 
@@ -112,23 +141,26 @@
                 </thead>
                 <tbody>
 
-<?php
-foreach($currentCart->getListBook() as $bookItem){
-$price=number_format(($bookItem->getBook()->getPrice())-($bookItem->getBook()->getPrice()*$bookItem->getBook()->getSale()));
-echo "<tr>
+                    <?php
+                    foreach ($currentCart->getListBook() as $bookItem) {
+                        $price = number_format((($bookItem->getBook()->getPrice()) - ($bookItem->getBook()->getPrice() * $bookItem->getBook()->getSale())) * $bookItem->getQuantity());
+                        $totalPrice += intval(
+                            (($bookItem->getBook()->getPrice()) - ($bookItem->getBook()->getPrice() * $bookItem->getBook()->getSale())) * $bookItem->getQuantity()
+                        );
+
+                        echo "<tr>
 <th scope='row' class='itemName'>{$bookItem->getBook()->getName()} × {$bookItem->getQuantity()}</th>
 <td>{$price} VNĐ</td>
 </tr>";
+                    } ?>
 
-}?>
-
-                    <tr>
+                    <!-- <tr>
                         <th scope="col" class="tableHeader">CART SUBTOTAL</th>
                         <th scope="col" class="tableHeader">£215.00</th>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <th scope="col" class="orderName">Order total</th>
-                        <th scope="col" class="orderValue">£215.00</th>
+                        <th scope="col" class="orderValue"><?php echo number_format($totalPrice) ?><span class="ml-1" style="color:#ec4445!important">VNĐ</span></th>
                     </tr>
                 </tbody>
             </table>

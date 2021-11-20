@@ -14,7 +14,7 @@ class PaymentTypeDao extends DBConnector implements BaseDao
 
     public function getById($id)
     {
-        $query = `SELECT * FROM payment_type WHERE delFlag=0 AND id_payment_type=? LIMIT 1`;
+        $query = "SELECT * FROM payment_type WHERE delFlag=0 AND id_payment_type=? LIMIT 1";
 
         $stmt = parent::$db->prepare($query);
         $stmt->bindParam(1, $id);
@@ -24,7 +24,7 @@ class PaymentTypeDao extends DBConnector implements BaseDao
         $selectedPayment = null;
 
         if ($payment) {
-            $selectedPayment = new Payment($payment->id_payment_type, $payment->payment_name);
+            $selectedPayment = new Payment($payment["id_payment_type"], $payment["payment_name"]);
         }
 
 
@@ -32,7 +32,7 @@ class PaymentTypeDao extends DBConnector implements BaseDao
     }
     public function getAll()
     {
-        $query = `SELECT * FROM payment_type WHERE delFlag=0`;
+        $query = "SELECT * FROM payment_type WHERE delFlag=0";
 
         $stmt = parent::$db->prepare($query);
         $stmt->execute();
@@ -40,7 +40,7 @@ class PaymentTypeDao extends DBConnector implements BaseDao
         $payments = $stmt->fetchAll();
         $listPayment = [];
         foreach ($payments as $payment) {
-            $listPayment[] = new Payment($payment->id_payment_type, $payment->payment_name);
+            $listPayment[] = new Payment($payment["id_payment_type"], $payment["payment_name"]);
         }
 
         return $listPayment;

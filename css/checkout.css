@@ -86,7 +86,7 @@ th {
 }
 
 .table .orderValue {
-    color: #ec4445;
+    color: #ec4445!important;
     font-size: 20px;
     font-weight: 400;
 }

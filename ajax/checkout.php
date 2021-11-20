@@ -12,6 +12,8 @@ require_once dirname(__FILE__) . "/../Model/Payment.php";
 require_once dirname(__FILE__) . "/../Dao/CartDao.php";
 require_once dirname(__FILE__) . "/../Dao/OrderDao.php";
 require_once dirname(__FILE__) . "/../Dao/PaymentTypeDao.php";
+require_once dirname(__FILE__) . "/../Dao/OrderTypeDao.php";
+require_once dirname(__FILE__) . "/../PDOTransaction.php";
 
 
 session_start();
@@ -21,6 +23,8 @@ switch ($actionType) {
 
 
     case $CHECKOUT_CART: {
+            $transactionDb = new PDOTransaction();
+            // $transactionDb->rollbackTrasaction();
             try {
                 $receiverFirstName = $_POST["receiverFirstName"];
                 $receiverLastName = $_POST["receiverLastName"];
@@ -47,6 +51,7 @@ switch ($actionType) {
                 }
 
                 $cartDao = new CartDao();
+                // $transactionDb->
                 $addCartStatus = $cartDao->insertNewCart($currentCart);
                 if (!$addCartStatus)
                     throw new Exception('Add cart failed', 1002);
@@ -65,11 +70,10 @@ switch ($actionType) {
                     throw new Exception('Order type required', 1004);
 
 
-
-                $orderDao->insertNewOrder(new Order(
+                $isInsertSucceed = $orderDao->insertNewOrder(new Order(
                     generateRandomString(30),
                     $currentCart,
-                    new Address($receiverCity, "", $receiverDistrict, "", $receiverWard, $receiverAddressNote),
+                    new Address($receiverCity, "", $receiverDistrict, "", $receiverWard, "", $receiverAddressNote),
                     new DateTime(),
                     $ORDER_STATUS_PENDING,
                     $receiverLastName . " " . $receiverFirstName,
@@ -82,12 +86,24 @@ switch ($actionType) {
                     $receiverOrderNote
                 ));
 
-                $response = new stdClass();
-                // $response =
-            } catch (Exception $e) {
+                if (!$isInsertSucceed)
+                    throw new Exception('Update product or order failed', 1005);
 
-                if ($e->code === 1000) {
-                }
+                $transactionDb->commitTrasaction();
+
+                $response = new stdClass();
+                $response->message = "Success";
+                $_SESSION["cart"] = null;
+                echo json_encode($response);
+            } catch (Exception $e) {
+                $transactionDb->rollbackTrasaction();
+                $message = $e->getMessage();
+
+
+                http_response_code(400);
+                $response = new stdClass();
+                $response->message = $e->getMessage() ? $e->getMessage() : "Something wrong";
+                echo json_encode($response);
             }
 
 

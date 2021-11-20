@@ -4,6 +4,8 @@ require_once dirname(__FILE__) . "/../Dao/CityDao.php";
 require_once dirname(__FILE__) . "/../Dao/DistrictDao.php";
 require_once dirname(__FILE__) . "/../Dao/WardDao.php";
 require_once dirname(__FILE__) . "/../Dao/BookDao.php";
+require_once dirname(__FILE__) . "/../Dao/OrderTypeDao.php";
+require_once dirname(__FILE__) . "/../Dao/PaymentTypeDao.php";
 require_once dirname(__FILE__) . "/../Model/Cart.php";
 require_once dirname(__FILE__) . "/../Model/BookItem.php";
 
@@ -13,26 +15,34 @@ class CheckoutController extends BaseController
     private DistrictDao $districtDao;
     private WardDao $wardDao;
     private BookDao $bookDao;
+    private OrderTypeDao $orderTypeDao;
+    private PaymentTypeDao $paymentTypeDao;
+
     public function showView()
     {
         require dirname(__FILE__) . "/../shared/" . 'constants.php';
         try {
             session_start();
-            if (!isset($_SESSION[$CURRENT_USER_INFO])) {
+            $currentCart = isset($_SESSION["cart"]) ? ($_SESSION["cart"] instanceof Cart ? $_SESSION["cart"] : null) : null;
+            if (!isset($_SESSION[$CURRENT_USER_INFO])||!$currentCart) {
                 header('Location: ' . getProtocol() . $_SERVER['SERVER_NAME'] . "/banSach" . "" . "/home");
                 die();
             }
-
-            $currentCart = isset($_SESSION["cart"]) ? ($_SESSION["cart"] instanceof Cart ? $_SESSION["cart"] : null) : null;
 
             $this->view = new View();
             $this->cityDao = new CityDao();
             $this->districtDao = new DistrictDao();
             $this->wardDao = new WardDao();
             $this->bookDao = new BookDao();
-
+            $this->orderTypeDao = new OrderTypeDao();
+            $this->paymentTypeDao = new PaymentTypeDao();
 
             $different = [];
+
+
+
+
+
             if ($currentCart) {
                 $listBook = $this->bookDao->getAll();
                 $listSelectedBook = $currentCart->getListBook();
@@ -57,6 +67,10 @@ class CheckoutController extends BaseController
             $listCityReturn = $this->cityDao->getAllCity();
             $listDistrict = $this->districtDao->getAll();
             $listWard = $this->wardDao->getAll();
+            $listOrderType = $this->orderTypeDao->getAll();
+            $listPaymentType = $this->paymentTypeDao->getAll();
+
+
 
             $this->view->load('Checkout', array(
                 "listCity" => $listCityReturn["listCity"],
@@ -64,7 +78,9 @@ class CheckoutController extends BaseController
                 "listDistrict" => $listDistrict,
                 "listWard" => $listWard,
                 "different" => $different,
-                "currentCart" => $currentCart
+                "currentCart" => $currentCart,
+                "listOrderType" => $listOrderType,
+                "listPaymentType" => $listPaymentType
             ));
             $this->view->show();
         } catch (PDOException $e) {

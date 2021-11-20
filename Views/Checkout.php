@@ -36,20 +36,15 @@
     <?php
     if (count($different) > 0) {
         require_once dirname(__FILE__) . "/Checkout/CheckoutDifferent.php";
-    } 
-    else if(count($currentCart->getListBook())===0){
+    } else if (count($currentCart->getListBook()) === 0) {
         require_once dirname(__FILE__) . "/Checkout/CheckoutNoProduct.php";
-    }
-    
-    else
+    } else
         require_once dirname(__FILE__) . "/Checkout/CheckoutProcess.php";
     ?>
     <?php require_once dirname(__FILE__) . "./shared/" . 'Footer.php'; ?>
 
 
 </body>
-
-
 
 
 
@@ -65,11 +60,6 @@
         showAddOptionOnCreate: false
     }
     let $receiverCitySelect, $receiverDistrictSelect, $receiverWardSelect = null;
-
-    // setInterval(()=>{
-    //     console.log()
-    // },2000)
-
 
     $(document).ready(function() {
         $receiverCitySelect = $("#receiverCity").selectize({
@@ -136,6 +126,7 @@
 
     $("#checkoutBtn").click(function(event) {
         event.preventDefault();
+        // $("#loading").addClass("loadingShow");
 
         request = $.ajax({
             url: "./ajax/checkout.php",
@@ -151,7 +142,9 @@
                 receiverAddressNote: $("#receiverAddressNote").val(),
                 receiverPhone: $("#receiverPhone").val(),
                 receiverPostcode: $("#receiverPostcode").val(),
-                receiverOrderNote: $("#receiverOrderNote").val()
+                receiverOrderNote: $("#receiverOrderNote").val(),
+                receiverOrderType: $("#receiverOrderType").val(),
+                receiverPayment: $("#receiverPaymentType").val()
             },
             // processData: false,
             // contentType: false,
@@ -176,7 +169,7 @@
                     return array(
                         "id" => $diff['book']->getId_book(),
                         "quantity" => $diff['book']->getQuantity(),
-                        "maxQuantity"=>$diff['book']->getQuantity(),
+                        "maxQuantity" => $diff['book']->getQuantity(),
                         "currentQuantity" => $diff['bookItem']->getQuantity(),
                         "name" => $diff['book']->getName(),
                         "avatar" => $diff['book']->getListImage()[0]->getUrl()

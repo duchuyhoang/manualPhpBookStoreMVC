@@ -13,7 +13,7 @@ class OrderTypeDao extends DBConnector implements BaseDao{
 
     public function getById($id)
     {
-        $query = `SELECT * FROM order_type WHERE delFlag=0 AND id_order_type=? LIMIT 1`;
+        $query = "SELECT * FROM order_type WHERE delFlag=0 AND id_order_type=? LIMIT 1";
 
         $stmt = parent::$db->prepare($query);
         $stmt->bindParam(1, $id);
@@ -23,7 +23,7 @@ class OrderTypeDao extends DBConnector implements BaseDao{
         $selectedOrder = null;
 
         if ($order) {
-            $selectedOrder = new OrderType($order->id_order_type, $order->name_order_type);
+            $selectedOrder = new OrderType($order["id_order_type"], $order["name_order_type"]);
         }
         return $selectedOrder;
     }
@@ -31,7 +31,7 @@ class OrderTypeDao extends DBConnector implements BaseDao{
 
     public function getAll()
     {
-        $query = `SELECT * FROM order_type WHERE delFlag=0`;
+        $query = "SELECT * FROM order_type WHERE delFlag=0";
 
         $stmt = parent::$db->prepare($query);
         $stmt->execute();
@@ -39,7 +39,7 @@ class OrderTypeDao extends DBConnector implements BaseDao{
         $orders = $stmt->fetchAll();
         $listOrderTypes = [];
         foreach ($orders as $order) {
-            $listOrderTypes[] = new OrderType($order->id_order_type, $order->name_order_type);
+            $listOrderTypes[] = new OrderType($order["id_order_type"], $order["name_order_type"]);
         }
 
         return $listOrderTypes;

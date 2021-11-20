@@ -74,7 +74,7 @@ class BookDao extends DBConnector
 
     public function getById(int $id)
     {
-        $query = "SELECT DISTINCT  book.*,
+        $query = "SELECT DISTINCT book.*,
         GROUP_CONCAT(distinct category.cat_name SEPARATOR '////') as categoryName,
         GROUP_CONCAT(distinct book_category.id_book_category SEPARATOR '////') as categoryId,
         GROUP_CONCAT(category.delFlag SEPARATOR '////') as categoryDelFlag,

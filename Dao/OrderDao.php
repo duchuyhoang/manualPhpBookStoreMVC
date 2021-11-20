@@ -15,11 +15,9 @@ class OrderDao extends DBConnector
     public function insertNewOrder(Order $order)
     {
         try {
-            parent::$db->beginTransaction();
-            $query = "INSERT INTO order(id_order,id_user,id_cart,status,createAt,id_order_province,id_order_district,
-    id_order_ward,receiver_name,receiver_phone,receiver_email,receiver_postcode,paymentType,note,addressNote,orderType
-    VALUES(?,?,?,0,now(),?,?,?,?,?,?,?,?,?,?,?)
-    ";
+
+            $query = "INSERT INTO orders(id_order,id_user,id_cart,status,createAt,id_order_province,id_order_district,id_order_ward,receiver_name,receiver_phone,receiver_email,receiver_postcode,paymentType,note,addressNote,orderType) VALUES(?,?,?,0,now(),?,?,?,?,?,?,?,?,?,?,?)";
+
             $stmt = parent::$db->prepare($query);
             $stmt->bindParam(1, $order->getId_order());
             $stmt->bindParam(2, $order->getOwner()->getId());
@@ -31,35 +29,41 @@ class OrderDao extends DBConnector
             $stmt->bindParam(8, $order->getReceiverPhone());
             $stmt->bindParam(9, $order->getReceiverEmail());
             $stmt->bindParam(10, $order->getReceiverPostCode());
-            $stmt->bindParam(11, $order->getPayment()->getId_payment);
+            $stmt->bindParam(11, $order->getPayment()->getId_payment());
             $stmt->bindParam(12, $order->getNote());
             $stmt->bindParam(13, $order->getAddress()->getMoreInfo());
             $stmt->bindParam(14, $order->getOrderType()->getId_order_type());
 
             $stmt->execute();
 
-            // for ($i = 0; $i < count($listBookCategory); $i++) {
-            //     $questionMark[] = '(' . placeholders('?', 2) . ')';
-            //     $insertData = array_merge($insertData, array($listBookCategory[$i]->getId_book_category(), $listBookCategory[$i]->getId_book()));
-            // }
 
-            $questionMark[] = '(' . placeholders('?', 2) . ')';
+            $listBookItem = $order->getCart()->getListBook();
+            $updateProductQuery = "CALL buyProduct(?,?,@result);";
+            $isUpdateProductSucceed = true;
+            foreach ($listBookItem as $bookItem) {
+                $stmt = parent::$db->prepare($updateProductQuery);
+                $stmt->bindParam(1, $bookItem->getBook()->getId_book());
+                $stmt->bindParam(2, $bookItem->getQuantity());
+                // $stmt->bindParam(3,$res,PDO::PARAM_STR|PDO::PARAM_INPUT_OUTPUT);
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $stmt->execute();
+                $stmt->closeCursor();
 
+                $rs = parent::$db->query("select @result as result")->fetch(PDO::FETCH_ASSOC);
+                if (!$rs["result"]) {
+                    $isUpdateProductSucceed = false;
+                    break;
+                }
+            }
 
-
-
-
-
+            if (!$isUpdateProductSucceed) {
+                throw new Exception("Buy product failed", 2000);
+            }
+            return true;
         } catch (PDOException $e) {
-            parent::$db->rollBack();
-
+            return false;
+        } catch (Exception $e) {
+            return false;
         }
-
-
-
-        // parent::$db->comm
-
-        // $stmt = parent::$db->query($query);
-
     }
 }
