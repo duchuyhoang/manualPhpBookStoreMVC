@@ -55,11 +55,11 @@ class AdminController extends BaseController
             case $ADD_PRODUCT: {
                     $listAuthor = $this->authorDao->getAllAuthor();
                     $listManufacture = $this->manufactureDao->getAllManufacture();
-                    $listCategory=$this->categoryDao->getAllCategory();
+                    $listCategory = $this->categoryDao->getAllCategory();
                     $listData['ListAuthor'] = $listAuthor;
                     $listData['ListManufacture'] = $listManufacture;
                     $listData['ListCategory'] = $listCategory;
-                    
+
                     break;
                 }
 
@@ -68,15 +68,23 @@ class AdminController extends BaseController
                     break;
                 }
 
+            case $STATISTICAL: {
+
+
+
+                    break;
+                }
+
+
+
 
             default: {
                     $listAuthor = $this->authorDao->getAllAuthor();
                     $listManufacture = $this->manufactureDao->getAllManufacture();
-                    $listCategory=$this->categoryDao->getAllCategory();
+                    $listCategory = $this->categoryDao->getAllCategory();
                     $listData['ListAuthor'] = $listAuthor;
                     $listData['ListManufacture'] = $listManufacture;
                     $listData['ListCategory'] = $listCategory;
-                    
                 }
         }
 
@@ -85,7 +93,6 @@ class AdminController extends BaseController
     }
     public function handlePost()
     {
-$a=1;
-
+        $a = 1;
     }
 }

@@ -74,7 +74,8 @@ switch ($actionType) {
                     generateRandomString(30),
                     $currentCart,
                     new Address($receiverCity, "", $receiverDistrict, "", $receiverWard, "", $receiverAddressNote),
-                    new DateTime(),
+                    new DateTime('now',new DateTimeZone("Asia/Bangkok")),
+                    // date("Y-m-d h:i:s"),
                     $ORDER_STATUS_PENDING,
                     $receiverLastName . " " . $receiverFirstName,
                     $receiverPhone,
@@ -87,22 +88,20 @@ switch ($actionType) {
                 ));
 
                 if (!$isInsertSucceed)
-                    throw new Exception('Update product or order failed', 1005);
+                    throw new Exception('Add product to order failed', 1005);
 
                 $transactionDb->commitTrasaction();
 
                 $response = new stdClass();
                 $response->message = "Success";
-                $_SESSION["cart"] = null;
+                $_SESSION["cart"] = NULL;
                 echo json_encode($response);
             } catch (Exception $e) {
                 $transactionDb->rollbackTrasaction();
                 $message = $e->getMessage();
-
-
                 http_response_code(400);
                 $response = new stdClass();
-                $response->message = $e->getMessage() ? $e->getMessage() : "Something wrong";
+                $response->message = $message;
                 echo json_encode($response);
             }
 

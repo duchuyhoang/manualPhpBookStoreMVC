@@ -151,12 +151,26 @@
         });
 
         request.done(function(response, textStatus, jqXHR) {
-
+            $("#loading").removeClass("loadingShow");
+            $.snackbar({
+                content: "Add order success!!!",
+                timeout: 5000,
+                style: "customSnackbar snackbar-success"
+            });
+            // window.location="./home";
         });
 
 
         request.fail(function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            const response = JSON.parse(jqXHR.responseText)
+            console.log(textStatus);
             $("#loading").removeClass("loadingShow");
+            $.snackbar({
+                content: response.message || "Something wrong",
+                timeout: 5000,
+                style: "customSnackbar snackbar-error"
+            });
         });
 
 

@@ -33,6 +33,7 @@
     require_once dirname(__FILE__) . "./../shared/" . 'functions.php';
     
     ?>
+    
     <div class="container mt-5 mb-3 d-flex" id="productInfo">
         <div class="col-lg-9 col-12">
             <div class="row flex-wrap">
