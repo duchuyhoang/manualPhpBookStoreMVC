@@ -104,6 +104,14 @@ switch ($actionType) {
                 $response->message = $message;
                 echo json_encode($response);
             }
+            catch(PDOException $e) {
+                $transactionDb->rollbackTrasaction();
+                $message = $e->getMessage();
+                http_response_code(400);
+                $response = new stdClass();
+                $response->message = $message;
+                echo json_encode($response);
+            }
 
 
 

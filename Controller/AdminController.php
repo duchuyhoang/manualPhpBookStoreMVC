@@ -3,8 +3,9 @@ require_once "BaseController.php";
 require_once dirname(__FILE__) . "/../Dao/ManufactureDao.php";
 require_once dirname(__FILE__) . "/../Dao/CategoryDao.php";
 require_once dirname(__FILE__) . "/../Dao/AuthorDao.php";
+require_once dirname(__FILE__) . "/../Dao/StatistcalDao.php";
 
-
+// 
 class AdminController extends BaseController
 {
     private $view;
@@ -12,7 +13,7 @@ class AdminController extends BaseController
     private AuthorDao $authorDao;
     private ManufactureDao $manufactureDao;
     private CategoryDao $categoryDao;
-
+    private StatistcalDao $statistcalDao;
     public function showView()
     {
         try {
@@ -21,7 +22,6 @@ class AdminController extends BaseController
             $this->authorDao = new AuthorDao();
             $this->manufactureDao = new ManufactureDao();
             $this->categoryDao = new CategoryDao();
-
             // $this->BookDao = new BookDao();
             // $this->view->load('Home',);
             // $this->view->show();
@@ -46,9 +46,8 @@ class AdminController extends BaseController
     protected function handleGet()
     {
         require dirname(__FILE__) . "/../shared/constants.php";
-
-
         $tab = isset($_GET["tab"]) ? $_GET["tab"] : "";
+
         $listData = array();
         switch ($tab) {
 
@@ -69,8 +68,9 @@ class AdminController extends BaseController
                 }
 
             case $STATISTICAL: {
+                    $this->statistcalDao = new StatistcalDao();
 
-
+                    $listData['StatiscalBookByMonth'] = $this->statistcalDao->statistcalBookByThisMonth();
 
                     break;
                 }
