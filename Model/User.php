@@ -59,7 +59,7 @@ class User
 
 
 
-    public static function newSignupUser($name, $birthday,$avatar,$delFlag,$email,$phone,$permission)
+    public static function newSignupUser($name, $birthday, $avatar, $delFlag, $email, $phone, $permission)
     {
         $user = new self();
         // $user->setId($id);
@@ -73,7 +73,19 @@ class User
         return $user;
     }
 
+    public static function newEditUser($name, $phone, $delFlag, $avatar, $birthday, $permission, $id_user)
+    {
 
+        $user = new self();
+        $user->setId($id_user);        
+        $user->setName($name);
+        $user->setPhone($phone);
+        $user->setDelFlag($delFlag);
+        $user->setAvatar($avatar);
+        $user->setBirthday($birthday);
+        $user->setPermission($permission);
+        return $user;
+    }
 
 
     /**

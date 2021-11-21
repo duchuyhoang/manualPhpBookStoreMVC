@@ -194,7 +194,7 @@ author.birthday as authorBirthday,author.address as authorAddress
     LEFT JOIN category ON category.id_category=book_category.id_book_category
     LEFT JOIN manufacture ON manufacture.id_manufacture=book.id_book_manufacture
     LEFT JOIN author ON author.id_author=book.id_author
-    WHERE book.status=1 GROUP BY book.id_book ORDER BY book.createAT DESC LIMIT 10;
+    WHERE book.status=1 GROUP BY book.id_book ORDER BY book.createAt DESC LIMIT 10;
     ";
         $stmt = parent::$db->prepare($query);
         $stmt->execute();
@@ -229,5 +229,164 @@ author.birthday as authorBirthday,author.address as authorAddress
             );
         }
         return $listBook;
+    }
+
+    public function getProductByKeyword($keyword)
+    {
+
+        $query = "SELECT DISTINCT  book.*,
+        GROUP_CONCAT(distinct category.cat_name SEPARATOR '////') as categoryName,
+        GROUP_CONCAT(distinct book_category.id_book_category SEPARATOR '////') as categoryId,
+        GROUP_CONCAT(category.delFlag SEPARATOR '////') as categoryDelFlag,
+        (SELECT GROUP_CONCAT(book_image.delFlag SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageDelFlag,
+        (SELECT GROUP_CONCAT(book_image.url SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageUrl,
+        (SELECT GROUP_CONCAT(book_image.id_image SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageId,
+        manufacture.name as manufactureName,manufacture.delFlag as manufactureDelFlag,
+        author.name as authorName,author.delFlag as authorDelFlag,author.maxim as authorMaxim,
+    author.birthday as authorBirthday,author.address as authorAddress
+        FROM book
+        LEFT JOIN book_category ON book.id_book=book_category.id_book
+        LEFT JOIN category ON category.id_category=book_category.id_book_category
+        LEFT JOIN manufacture ON manufacture.id_manufacture=book.id_book_manufacture
+        LEFT JOIN author ON author.id_author=book.id_author
+        WHERE book.status=1 
+        AND book.name LIKE CONCAT('%',?,'%') OR manufacture.name LIKE CONCAT('%',?,'%') OR author.name like CONCAT('%',?,'%')
+        GROUP BY book.id_book;";
+
+        $stmt = parent::$db->prepare($query);
+
+        $stmt->bindParam(1, $keyword);
+        $stmt->bindParam(2, $keyword);
+        $stmt->bindParam(3, $keyword);
+
+        $stmt->execute();
+        $listQueries = $stmt->fetchAll();
+        $listBook = array();
+        foreach ($listQueries as $query) {
+            $listBook[] = new Book(
+                $query["id_book"],
+                $query["name"],
+                $query["price"],
+                $query["quantity"],
+                $query["status"],
+                $query["description"],
+                $query["categoryId"],
+                $query["categoryName"],
+                $query["categoryDelFlag"],
+                $query["id_book_manufacture"],
+                $query["manufactureName"],
+                $query["manufactureDelFlag"],
+                $query["id_author"],
+                $query["authorName"],
+                $query["authorMaxim"],
+                $query["authorAddress"],
+                $query["authorDelFlag"],
+                $query["authorBirthday"],
+                $query["bookImageId"],
+                $query["bookImageUrl"],
+                $query["bookImageDelFlag"],
+                $query["createAt"],
+                $query["sale"],
+
+            );
+        }
+        return $listBook;
+
+    }
+
+
+
+    public function getBookByListId($listBookId)
+    {
+        try {
+            $placeholderString = "";
+            if (count($listBookId) > 0) {
+                $placeholderString .= "AND ";
+                for ($i = 0; $i < count($listBookId); $i++) {
+                    if ($i < count($listBookId) - 1)
+                        $placeholderString .= " book.id_book=? OR";
+                    else
+                        $placeholderString .= " book.id_book=?";
+                }
+            }
+            $query = "SELECT DISTINCT book.*,
+    GROUP_CONCAT(distinct category.cat_name SEPARATOR '////') as categoryName,
+    GROUP_CONCAT(distinct book_category.id_book_category SEPARATOR '////') as categoryId,
+    GROUP_CONCAT(category.delFlag SEPARATOR '////') as categoryDelFlag,
+    (SELECT GROUP_CONCAT(book_image.delFlag SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageDelFlag,
+    (SELECT GROUP_CONCAT(book_image.url SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageUrl,
+    (SELECT GROUP_CONCAT(book_image.id_image SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageId,
+    manufacture.name as manufactureName,manufacture.delFlag as manufactureDelFlag,
+    author.name as authorName,author.delFlag as authorDelFlag,author.maxim as authorMaxim,
+author.birthday as authorBirthday,author.address as authorAddress
+    FROM book
+    LEFT JOIN book_category ON book.id_book=book_category.id_book
+    LEFT JOIN category ON category.id_category=book_category.id_book_category
+    LEFT JOIN manufacture ON manufacture.id_manufacture=book.id_book_manufacture
+    LEFT JOIN author ON author.id_author=book.id_author
+    WHERE book.status=1 {$placeholderString} GROUP BY book.id_book;";
+
+
+
+            $stmt = parent::$db->prepare($query);
+            $stmt->execute($listBookId);
+            $listQueries = $stmt->fetchAll();
+            $listBook = array();
+            foreach ($listQueries as $query) {
+                $listBook[] = new Book(
+                    $query["id_book"],
+                    $query["name"],
+                    $query["price"],
+                    $query["quantity"],
+                    $query["status"],
+                    $query["description"],
+                    $query["categoryId"],
+                    $query["categoryName"],
+                    $query["categoryDelFlag"],
+                    $query["id_book_manufacture"],
+                    $query["manufactureName"],
+                    $query["manufactureDelFlag"],
+                    $query["id_author"],
+                    $query["authorName"],
+                    $query["authorMaxim"],
+                    $query["authorAddress"],
+                    $query["authorDelFlag"],
+                    $query["authorBirthday"],
+                    $query["bookImageId"],
+                    $query["bookImageUrl"],
+                    $query["bookImageDelFlag"],
+                    $query["createAt"],
+                    $query["sale"],
+
+                );
+            }
+            return $listBook;
+        } catch (PDOException $e) {
+        }
+    }
+
+
+
+
+    public function editProduct(Book $book)
+    {
+
+        $query = "UPDATE `book`
+        SET `name`= `?,`quantity`=?,`price`=?,`description`=?,`id_book_manufacture`=?,`id_author`=?,`status`=?,`sale`=?
+        VALUES
+        (?,?,?,?,?,?,?,?) WHERE id_book=?";
+
+        $stmt = parent::$db->prepare($query);
+        $stmt->bindParam(1, $book->getName());
+        $stmt->bindParam(2, $book->getQuantity());
+        $stmt->bindParam(3, $book->getPrice());
+        $stmt->bindParam(4, $book->getDescription());
+        $stmt->bindParam(5, $book->getManufacture()->getId_manufacture());
+        $stmt->bindParam(6, $book->getAuthor()->getId_author());
+        $stmt->bindParam(7, $book->getStatus());
+        $stmt->bindParam(8, $book->getSale());
+        $stmt->bindParam(9, $book->getId_book());
+
+        $stmt->execute();
     }
 }

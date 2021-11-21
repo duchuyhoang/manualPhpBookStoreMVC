@@ -1,4 +1,5 @@
 <?php
+require_once dirname(__FILE__) . "/BookItem.php";
 
 class Cart
 {
@@ -13,6 +14,26 @@ class Cart
         $this->listBook = $listBook;
         $this->createAt = $createAt;
         $this->user = $user;
+    }
+
+    public static function newCartFromDb($id_cart, $listQueryBookInfo, $listBookInfo, $createAt, $user)
+    {
+        $cart = new self("", [], "", null);
+
+        $cart->setId_cart($id_cart);
+
+        $listBookItem = [];
+        $listBookItemId = explode('////', $listQueryBookInfo["listCartItemIdBook"]);
+        $listBookItemPrice = explode('////', $listQueryBookInfo["listCartItemPrice"]);
+        $listBookItemQuantity = explode('////', $listQueryBookInfo["listCartItemQuantity"]);
+
+        for ($i = 0; $i < count($listBookItemId); $i++) {
+            $listBookItem[]=new BookItem($listBookInfo[$i],$listBookItemQuantity[$i],10000000,$listBookItemQuantity[$i]);
+        }
+        $cart->setListBook($listBookItem);
+        $cart->setCreateAt($createAt);
+        $cart->setUser($user);
+        return $cart;
     }
 
 
@@ -136,8 +157,8 @@ class Cart
         else {
 
             if ($quantity == 0) {
-                array_splice($listBook, $index, 1);}
-            else {
+                array_splice($listBook, $index, 1);
+            } else {
                 $listBook[$i]->setQuantity($quantity);
             }
             $this->listBook = $listBook;

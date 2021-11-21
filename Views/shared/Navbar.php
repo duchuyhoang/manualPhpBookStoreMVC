@@ -436,17 +436,9 @@ $("#signUpForm").submit(function(event) {
             style: "customSnackbar snackbar-success"
         });
 
-        request.done(function(response, textStatus, jqXHR) {
-            $("#loading").removeClass("loadingShow");
-            $.snackbar({
-                content: "Sign up success.Wait page reload and login",
-                timeout: 5000,
-                style: "customSnackbar snackbar-success"
-            });
+    })
 
-            // window.location.reload();
-        });
-        request.fail(function(jqXHR, textStatus, errorThrown) {
+    request.fail(function(jqXHR, textStatus, errorThrown) {
             $.snackbar({
                 content: "Sign up fail!!!",
                 timeout: 5000,
@@ -456,22 +448,20 @@ $("#signUpForm").submit(function(event) {
             $("#signupModal").modal('hide');
         });
 
-    })
 
-
-    $("#signOutBtn").click(function(event) {
-        $("#loading").addClass("loadingShow");
-        $("#backDrop").addClass("loadingShow");
-        request = $.ajax({
-            url: "./ajax/authentication.php",
-            type: "post",
-            data: {
-                submit: $("#signOutBtn").attr('value')
-            },
-        });
-        $("#loading").removeClass("loadingShow");
-        $("#signupModal").modal('hide');
-    });
+    // $("#signOutBtn").click(function(event) {
+    //     $("#loading").addClass("loadingShow");
+    //     $("#backDrop").addClass("loadingShow");
+    //     request = $.ajax({
+    //         url: "./ajax/authentication.php",
+    //         type: "post",
+    //         data: {
+    //             submit: $("#signOutBtn").attr('value')
+    //         },
+    //     });
+    //     $("#loading").removeClass("loadingShow");
+    //     $("#signupModal").modal('hide');
+    // });
 
 })
 
@@ -492,7 +482,8 @@ $("#signOutBtn").click(function(event) {
         window.location.reload();
     });
     request.fail(function(jqXHR, textStatus, errorThrown) {
-
+        $("#loading").removeClass("loadingShow");
+        $("#signupModal").modal('hide');
     });
 
 })

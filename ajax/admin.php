@@ -11,7 +11,7 @@ require_once dirname(__FILE__) . "/../Dao/BookCategoryDao.php";
 
 require_once dirname(__FILE__) . "/../shared/functions.php";
 $actionType = isset($_POST["submit"]) ? $_POST["submit"] : null;
-error_reporting(E_ALL ^ E_NOTICE); 
+error_reporting(E_ALL ^ E_NOTICE);
 
 
 switch ($actionType) {
@@ -77,14 +77,65 @@ switch ($actionType) {
         } catch (PDOException $e) {
             http_response_code(400);
             // header('HTTP/1.1 400 Bad Request');
-            $response=new stdClass();
-            $response->message ="Error";
-            $response->status=400;
-             die(json_encode($response));
+            $response = new stdClass();
+            $response->message = "Error";
+            $response->status = 400;
+            die(json_encode($response));
+        }
+
+    case $EDIT_PRODUCT:
+        try {
+
+            $newBook = new Book(
+                $_POST["idBook"],
+                $_POST["newBookName"],
+                $_POST["newBookPrice"],
+                $_POST["newBookQuantity"],
+                $_POST["newBookStatus"],
+                $_POST["newBookDescription"],
+                "",
+                "",
+                "",
+                $_POST["newBookManufacture"],
+                "",
+                0,
+                $_POST["newBookAuthor"],
+                "",
+                "",
+                "",
+                0,
+                date("Y-m-d"),
+                "",
+                "",
+                "",
+                "",
+                date("Y-m-d h:i:s"),
+                $_POST["newBookSale"]
+            );
+            $bookDao = new BookDao();
+
+            $bookDao->editProduct($newBook);
+            $response = new stdClass();
+            $response->message = "Edit product success";
+            echo json_encode($response);
+        } catch (PDOException $e) {
+            http_response_code(400);
+            // header('HTTP/1.1 400 Bad Request');
+            $response = new stdClass();
+            $response->message = "Update product failed";
+            $response->status = 400;
+            die(json_encode($response));
         }
 
 
+
         break;
+
+
+
+
+
+
 
 
     default: {

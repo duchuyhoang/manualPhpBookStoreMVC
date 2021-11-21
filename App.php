@@ -65,6 +65,10 @@ class App
         } catch (Exception) {
             // here for db exception
         }
+        catch (PDOException $e) {
+
+            // here for db exception
+        }
 
         //        foreach($this->controllers as $controller){
         // if(preg_match($this->controller->getUrl())){

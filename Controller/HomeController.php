@@ -8,6 +8,7 @@ require_once dirname(__FILE__) . "/../Dao/BookDao.php";
 require_once dirname(__FILE__) . "/../Dao/OrderDao.php";
 
 
+
 class HomeController extends BaseController
 {
 
@@ -23,11 +24,12 @@ class HomeController extends BaseController
             $this->HomeDao = new HomeDao();
             $this->BookDao = new BookDao();
 
+            // $rs = $this->BookDao->getProductByKeyword("đi");
+
+
+
             // $this->view->load('Home',);
             // $this->view->show();
-
-            $orderDao = new OrderDao();
-            $listOrderLabel = $orderDao->getAllOrderLabel();
 
             $this->initialActions();
         } catch (PDOException $e) {
