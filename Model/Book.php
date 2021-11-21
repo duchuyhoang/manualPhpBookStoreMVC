@@ -59,12 +59,14 @@ class Book implements JsonSerializable
         $listCategory = array();
         // $this->category = new Category($id_category,$category_name,$category_delFlag);
 
+
+
         if ($list_id_category) {
             $listBookCategoryId = explode("////", $list_id_category);
             $listBookCategoryName = explode("////", $list_category_name);
             $listBookCategoryDelflag = explode("////", $list_category_delFlag);
             for ($i = 0; $i < count($listBookCategoryId); $i++) {
-                array_push($listCategory, new Category($listBookCategoryId[$i] || "", $listBookCategoryName[$i] || "", $listBookCategoryDelflag[$i] || 0));
+                array_push($listCategory, new Category($listBookCategoryId[$i], $listBookCategoryName[$i], $listBookCategoryDelflag[$i]));
             }
         }
 
