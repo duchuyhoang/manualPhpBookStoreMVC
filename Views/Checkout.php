@@ -157,7 +157,7 @@
                 timeout: 5000,
                 style: "customSnackbar snackbar-success"
             });
-            // window.location="./home";
+            window.location="./home";
         });
 
 

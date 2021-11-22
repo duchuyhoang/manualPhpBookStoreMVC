@@ -13,6 +13,10 @@ require_once dirname(__FILE__) . "/../shared/functions.php";
 $actionType = isset($_POST["submit"]) ? $_POST["submit"] : null;
 error_reporting(E_ALL ^ E_NOTICE);
 
+
+
+
+
 switch ($actionType) {
     case $ADD_NEW_PRODUCT:
         try {
@@ -150,7 +154,9 @@ switch ($actionType) {
             $response->message = 'default';
 
         }
-        catch(PDOException $e){}
+        catch(PDOException $e){
+            
+        }
         break;
         }
 }

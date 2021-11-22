@@ -41,7 +41,31 @@ class BookDao extends DBConnector
         $list_books = $stmt->fetchAll();
         $list = array();
         foreach ($list_books as $book) {
-            array_push($list, $book);
+            array_push($list, new Book(
+                $book["id_book"],
+                $book["name"],
+                $book["price"],
+                $book["quantity"],
+                $book["status"],
+                $book["description"],
+                $book["categoryId"],
+                $book["categoryName"],
+                $book["categoryDelFlag"],
+                $book["id_book_manufacture"],
+                $book["manufactureName"],
+                $book["manufactureDelFlag"],
+                $book["id_author"],
+                $book["authorName"],
+                $book["authorMaxim"],
+                $book["authorAddress"],
+                $book["authorDelFlag"],
+                $book["authorBirthday"],
+                $book["bookImageId"],
+                $book["bookImageUrl"],
+                $book["bookImageDelFlag"],
+                $book["createAt"],
+                $book["sale"],
+            ));
         }
         return $list;
     }
@@ -265,7 +289,6 @@ author.birthday as authorBirthday,author.address as authorAddress
             );
         }
         return $listBook;
-
     }
 
 
@@ -345,10 +368,8 @@ author.birthday as authorBirthday,author.address as authorAddress
     public function editProduct(Book $book)
     {
 
-        $query = "UPDATE `book`
-        SET `name`= `?,`quantity`=?,`price`=?,`description`=?,`id_book_manufacture`=?,`id_author`=?,`status`=?,`sale`=?
-        VALUES
-        (?,?,?,?,?,?,?,?) WHERE id_book=?";
+        $query = "UPDATE book
+        SET name= ?,quantity=?,price=?,description=?,id_book_manufacture=?,id_author=?,status=?,sale=? WHERE id_book=?";
 
         $stmt = parent::$db->prepare($query);
         $stmt->bindParam(1, $book->getName());
