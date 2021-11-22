@@ -49,20 +49,21 @@
     require_once dirname(__FILE__) . "./../shared/" . 'functions.php';
     ?>
 
-    <!-- <?php
-echo '<pre>';
-print_r($data['listBook']);
-echo '</pre>';
-?> -->
+    <?php
+// echo '<pre>';
+// print_r($data['listBook']);
+// echo '</pre>';
+?>
 
     <div class="container">
         <div class="row">
             <?php
         foreach ($data['listBook'] as $book) {
-          $firstImage = explode('////',$book['bookImageUrl'])[0];
-          $actualMoney = number_format($book['price']);
-          $bookPrice = number_format($book['price'] - $book['price'] * $book['sale']);
-          $isSale = $book['sale'] !== "0";
+            // echo print_r($book->getListImage());
+          $firstImage = isset($book->getListImage()[0]) ? $book->getListImage()[0]->getUrl() : "";;
+          $actualMoney = number_format($book->getPrice());
+          $bookPrice = number_format($book->getPrice() - $book->getPrice() * $book->getSale());
+          $isSale = $book->getSale() !== "0";
           echo "
           <div class='col-3'>
           
@@ -70,7 +71,7 @@ echo '</pre>';
             <div class='bookImg'>
             <div class='bookView'>
                 <div class='bookIconWrapper'>
-                <a href='./product?id_product={$book["id_book"]}'>
+                <a href='./product?id_product={$book->getId_book()}'>
                     <i class='fas fa-search fa-1x '></i>
                 </a>
                 </div>
@@ -79,7 +80,7 @@ echo '</pre>';
             <img src='{$firstImage}' alt='book' />
             </div>
             <div class='bookDetail'>
-            <div class='bookName'>{$book["name"]}</div>
+            <div class='bookName'>{$book->getName()}</div>
             <div class='d-flex align-items-center'>
                 <p class='bookPrice'>{$bookPrice}VND</p>".
                 ($isSale ? "<p class='bookPriceActual'>{$actualMoney}VND</p>" : "").
