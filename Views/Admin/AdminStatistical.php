@@ -1,3 +1,8 @@
+<?php
+// $StatiscalBookByMonth
+?>
+
+
 <div id=<?php echo $STATISTICAL ?> class="<?php echo $tab == "" || $tab == $STATISTICAL ? "active" : "" ?>">
     <h3>Statistical</h3>
 
@@ -27,7 +32,7 @@
                     </div>
                     <div class="contentWrapper ml-lg-3 ml-md-3">
                         <p>Sold/month</p>
-                        <p>100</p>
+                        <p id="soldThisMonth">100</p>
                     </div>
                 </div>
             </div>
@@ -39,7 +44,7 @@
                     </div>
                     <div class="contentWrapper ml-lg-3 ml-md-3">
                         <p>Profit</p>
-                        <p>100.000.000.000VNĐ</p>
+                        <p id="profitByMonth">100.000.000.000VNĐ</p>
                     </div>
                 </div>
 
@@ -100,13 +105,45 @@
 
 
 <script>
+    let statiscalBookByMonth = <?php echo json_encode($StatiscalBookByMonth); ?>;
+    const getMonth = (date) => {
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        return monthNames[date.getMonth()];
+    }
+    console.log(statiscalBookByMonth);
+
+
+    const soldByMonthChartLabels = [
+        getMonth(new Date(new Date().getFullYear(), new Date().getMonth() - 5, 1)),
+        getMonth(new Date(new Date().getFullYear(), new Date().getMonth() - 4, 1)),
+        getMonth(new Date(new Date().getFullYear(), new Date().getMonth() - 3, 1)),
+        getMonth(new Date(new Date().getFullYear(), new Date().getMonth() - 2, 1)),
+        getMonth(new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1)),
+        getMonth(new Date(new Date().getFullYear(), new Date().getMonth(), 1)),
+    ]
+    let soldThisMonth = 0;
+    const soldByMonthChartData = [0, 0, 0, 0, 0, 0];
+    for (let i = 0; i < statiscalBookByMonth.length; i++) {
+        if (
+            new Date(statiscalBookByMonth[i].statistcalDate.date).getMonth() + 1 === new Date().getMonth()) {
+            soldThisMonth += statiscalBookByMonth[i].totalQuantity
+        }
+        soldByMonthChartData[new Date(statiscalBookByMonth[i].statistcalDate.date).getMonth() + 1 - soldByMonthChartLabels.length] +=
+            statiscalBookByMonth[i].totalQuantity;
+    }
+
+   $("#soldThisMonth").html(soldThisMonth);
+
+
     const ctx = $("#soldByMonthChart");
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Jan', 'Feb', 'March', 'Apr', 'May', 'Jun'],
+            labels: soldByMonthChartLabels,
             datasets: [{
-                data: [121133111, 193131133, 121133113, 200000000, 150000000, 360000000],
+                data: soldByMonthChartData,
                 backgroundColor: [
                     '#f07c29',
                     '#f07c29',
@@ -242,14 +279,42 @@
 
 
 <script>
+    var formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
+
+    let profit = 0;
+    const labels = [
+        getMonth(new Date(new Date().getFullYear(), new Date().getMonth() - 5, 1)),
+        getMonth(new Date(new Date().getFullYear(), new Date().getMonth() - 4, 1)),
+        getMonth(new Date(new Date().getFullYear(), new Date().getMonth() - 3, 1)),
+        getMonth(new Date(new Date().getFullYear(), new Date().getMonth() - 2, 1)),
+        getMonth(new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1)),
+        getMonth(new Date(new Date().getFullYear(), new Date().getMonth(), 1)),
+    ]
+    const data = [0, 0, 0, 0, 0, 0];
+    for (let i = 0; i < statiscalBookByMonth.length; i++) {
+        if (
+            new Date(statiscalBookByMonth[i].statistcalDate.date).getMonth() + 1 === new Date().getMonth()) {
+            profit += statiscalBookByMonth[i].totalPrice
+        }
+        data[new Date(statiscalBookByMonth[i].statistcalDate.date).getMonth() + 1 - labels.length] +=
+            statiscalBookByMonth[i].totalPrice;
+    }
+
+    $("#profitByMonth").html(formatter.format((profit)));
+
+
+
     const growthChartCtx = $("#growthChartByMonth");
     const growthChart = new Chart(growthChartCtx, {
         type: 'line',
         data: {
-            labels: ['Jan', 'Feb', 'March', 'Apr', 'May', 'Jun'],
+            labels: labels,
             datasets: [{
                 // label: 'My First Dataset',
-                data: [65, 59, 80, 81, 56, 5500],
+                data: data,
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0.1
