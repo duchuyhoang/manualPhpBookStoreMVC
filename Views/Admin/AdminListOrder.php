@@ -123,8 +123,6 @@ const selectizeSetting = {
 
 
 function openTab(event, id) {
-    console.log("đâ");
-
     $("#adminContent").children("div").each(function(index, element) {
         element.classList.remove("active");
     })

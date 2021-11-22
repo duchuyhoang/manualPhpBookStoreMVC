@@ -99,15 +99,16 @@ class OrderDao extends DBConnector
         SELECT user.*,province.name as userProvinceName,
         district.name as userDistrictName,ward.name as userWardName
         FROM user 
-        INNER JOIN province ON province.id=user.id_province
-        INNER JOIN district ON district.id=user.id_district
-        INNER JOIN ward ON ward.id=user.id_ward
+        LEFT JOIN province ON province.id=user.id_province
+        LEFT JOIN district ON district.id=user.id_district
+        LEFT JOIN ward ON ward.id=user.id_ward
         ) as userInfo
         ON orders.id_user= userInfo.id_user ORDER BY orders.createAt DESC;";
         $stmt = parent::$db->query($query);
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $list_query_order_label = $stmt->fetchAll();
         $listOrderLabel = [];
+
         foreach ($list_query_order_label as $query_order_label) {
             $listOrderLabel[] = new OrderLabel(
                 $query_order_label["id_order"],
