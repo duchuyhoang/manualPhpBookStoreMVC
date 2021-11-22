@@ -1,6 +1,6 @@
 <?php
 
-class Author
+class Author implements JsonSerializable
 {
     private String|int $id_author;
     private String|null $maxim;
@@ -18,6 +18,17 @@ class Author
         $this->delFlag = $delFlag;
         $this->address = $address;
         $this->name=$name;
+    }
+    public function jsonSerialize()
+    {
+        return [
+            'id_author' => $this->id_author,
+            'maxim' => $this->maxim,
+            'birthday' => $this->birthday,
+            'delFlag' => $this->delFlag,
+            'address' => $this->address,
+            'name' =>  $this->name,            
+        ];
     }
 
     /**

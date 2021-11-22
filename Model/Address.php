@@ -1,6 +1,6 @@
 <?php
 
-class Address
+class Address implements JsonSerializable
 {
     private $id_province;
     private $province_name;
@@ -20,7 +20,18 @@ class Address
         $this->ward_name = $ward_name;
         $this->moreInfo = $moreInfo;
     }
-
+    public function jsonSerialize()
+    {
+        return [
+            "id_province" => $this->id_province,
+            "province_name" => $this->province_name,
+            "id_district" => $this->id_district,
+            "district_name" => $this->district_name,
+            "id_ward" => $this->id_ward,
+            "ward_name" => $this->ward_name,
+            "moreInfo" => $this->moreInfo,
+        ];
+    }
     /**
      * Get the value of id_province
      */ 

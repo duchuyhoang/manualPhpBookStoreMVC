@@ -41,6 +41,12 @@
     <link rel="stylesheet" type="text/css" href="./css/base.css">
     <!-- <link rel="stylesheet" type="text/css" href="./css/header.css"> -->
     <link rel="stylesheet" type="text/css" href="./css/adminStatistical.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js">
+    </script>
 
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"
@@ -55,8 +61,11 @@
 <?php
 require dirname(__FILE__) . "/../../shared/constants.php";
 require dirname(__FILE__) . "/../../shared/actionsType.php";
+require dirname(__FILE__) . "/../shared/Loading.php";
+
 $tab = isset($_GET["tab"]) ? $_GET["tab"] : "";
 ?>
+
 
 
 <body>
@@ -68,7 +77,16 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "";
 
     <section class="sidebar" id="sidebar">
         <div
-            class="sidebarItem <?php echo $tab == "" || $tab == $ADD_PRODUCT ? "sidebarItemActive" : "" ?>">
+            class="sidebarItem <?php echo $tab == "" || $tab == $LIST_PRODUCT ? "sidebarItemActive" : "" ?>">
+            <!-- onclick="openTab(event,'<?php echo $LIST_PRODUCT ?>')" -->
+
+            <a
+                href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$LIST_PRODUCT}" ?>'>
+                <i class="fas fa-list"></i>
+            </a>
+        </div>
+        <div
+            class="sidebarItem <?php echo $tab == $ADD_PRODUCT ? "sidebarItemActive" : "" ?>">
             <!-- onclick="openTab(event,'<?php echo $ADD_PRODUCT ?>')" -->
 
             <a
@@ -76,12 +94,13 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "";
                 <i class="fas fa-plus fa-lg"></i>
             </a>
         </div>
+
         <div
-            class="sidebarItem <?php echo $tab == $EDIT_PRODUCT ? "sidebarItemActive" : "" ?>">
-            <!-- onClick="openTab(event,'<?php echo $EDIT_PRODUCT ?>')" -->
+            class="sidebarItem <?php echo $tab == $LIST_ODER ? "sidebarItemActive" : "" ?>">
+            <!-- onClick="openTab(event,'<?php echo $LIST_ODER ?>')" -->
             <a
-                href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$EDIT_PRODUCT}" ?>'>
-                <i class="fas fa-edit fa-lg"></i>
+                href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$LIST_ODER}" ?>'>
+                <i class="fas fa-shopping-cart"></i>
             </a>
         </div>
         <div
@@ -126,14 +145,23 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "";
 
     <section id="adminContent">
 
-        <?php require dirname(__FILE__) . "/AdminAddProduct.php" ?>
+        <div id=<?php echo $LIST_PRODUCT ?>
+            class="<?php echo  $tab== '' || $tab == $LIST_PRODUCT ? "active" : "" ?>">
+            <?php
+                $tab== '' || $tab == $LIST_PRODUCT ? require dirname(__FILE__) . "/AdminListProduct.php" : "";
+            ?>
         </div>
 
-
-        <div id=<?php echo $EDIT_PRODUCT ?>
-            class="<?php echo $tab == $EDIT_PRODUCT ? "active" : "" ?>">
+        <div id=<?php echo $LIST_ODER ?>
+            class="<?php echo $tab == $LIST_ODER ? "active" : "" ?>">
             <?php
-            $tab == $EDIT_PRODUCT ? require dirname(__FILE__) . "/AdminEditProduct.php" : "";
+            $tab == $LIST_ODER ? require dirname(__FILE__) . "/AdminListOrder.php" : "";
+            ?>
+        </div>
+        <div id=<?php echo $ADD_PRODUCT ?>
+            class="<?php echo $tab == $ADD_PRODUCT ? "active" : "" ?>">
+            <?php
+            $tab == $ADD_PRODUCT ? require dirname(__FILE__) . "/AdminAddProduct.php" : "";
             ?>
         </div>
         <div id=<?php echo $ADD_USER ?>

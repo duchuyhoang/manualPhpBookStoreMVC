@@ -12,6 +12,8 @@ class AdminController extends BaseController
     private AuthorDao $authorDao;
     private ManufactureDao $manufactureDao;
     private CategoryDao $categoryDao;
+    private BookDao $bookDao;
+    private OrderDao $orderDao;
 
     public function showView()
     {
@@ -21,6 +23,8 @@ class AdminController extends BaseController
             $this->authorDao = new AuthorDao();
             $this->manufactureDao = new ManufactureDao();
             $this->categoryDao = new CategoryDao();
+            $this->bookDao = new BookDao();
+            $this->orderDao = new OrderDao();
 
             // $this->BookDao = new BookDao();
             // $this->view->load('Home',);
@@ -40,9 +44,7 @@ class AdminController extends BaseController
             $this->handleGet();
         }
     }
-
-
-
+    
     protected function handleGet()
     {
         require dirname(__FILE__) . "/../shared/constants.php";
@@ -59,32 +61,29 @@ class AdminController extends BaseController
                     $listData['ListAuthor'] = $listAuthor;
                     $listData['ListManufacture'] = $listManufacture;
                     $listData['ListCategory'] = $listCategory;
-
                     break;
                 }
 
-            case $EDIT_PRODUCT: {
+            case $LIST_ODER: {
+                    $listOrder = $this->orderDao->getAllOrderLabel();
+                    
+                    $listData['listOrder'] = $listOrder;
 
                     break;
                 }
 
             case $STATISTICAL: {
-
-
-
                     break;
                 }
-
-
-
-
             default: {
                     $listAuthor = $this->authorDao->getAllAuthor();
                     $listManufacture = $this->manufactureDao->getAllManufacture();
-                    $listCategory = $this->categoryDao->getAllCategory();
+                    $listCategory=$this->categoryDao->getAllCategory();
+                    $listAllBook=$this->bookDao->getAll();
                     $listData['ListAuthor'] = $listAuthor;
                     $listData['ListManufacture'] = $listManufacture;
                     $listData['ListCategory'] = $listCategory;
+                    $listData['listAllBook'] = $listAllBook;
                 }
         }
 

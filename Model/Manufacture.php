@@ -1,5 +1,5 @@
 <?php
-class Manufacture{
+class Manufacture implements JsonSerializable{
     private String|int $id_manufacture;
     private String $name;
     private int $delFlag;
@@ -11,6 +11,15 @@ class Manufacture{
         $this->delFlag = $delFlag;
     }
 
+    public function jsonSerialize()
+    {
+        return [
+            'id_manufacture' => $this->id_manufacture,
+            'name' => $this->name,
+            'delFlag' => $this->delFlag,
+
+        ];
+    }
     /**
      * Get the value of id_manufacture
      */ 

@@ -97,6 +97,10 @@ class Book implements JsonSerializable
             'description' => $this->description,
             'price' =>  $this->price,
             'sale' =>  $this->sale,
+            'author' => $this->author,
+            'category' => $this->category,
+            'manufacture' => $this->manufacture,
+            'listImage' => $this->listImage,
         ];
     }
     /**

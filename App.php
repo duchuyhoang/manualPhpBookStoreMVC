@@ -10,6 +10,7 @@ require_once "./Controller/ContactController.php";
 require_once "./Controller/CartPageController.php";
 require_once "./Controller/CheckoutController.php";
 require_once "./Controller/ProfileController.php";
+require_once "./Controller/ShopController.php";
 
 require_once "./shared/functions.php";
 require_once "./Model/Router.php";
@@ -29,6 +30,7 @@ class App
         array_push($this->routers, new Router($NOT_FOUND_URL, true, new NotFoundPageController()));
         // array_push($this->routers, new Router("/auth", true, new AuthController()));
         array_push($this->routers, new Router("/sitemap", true, new SiteMapController()));
+        array_push($this->routers, new Router("/shop", true, new ShopController()));
         array_push($this->routers, new Router("/product", true, new ProductInfoController()));
         array_push($this->routers, new Router("/admin", true, new AdminController()));
         array_push($this->routers, new Router("/contact", true, new ContactController()));

@@ -1,6 +1,6 @@
 <?php
 
-class Payment
+class Payment implements JsonSerializable
 {
     // public static $Money = 0;
     // public static $Card = 1;
@@ -31,7 +31,13 @@ class Payment
     //             return new self(Payment::$Money, Payment::$MoneyName);
     //     }
     // }
-
+        public function jsonSerialize()
+        {
+            [
+                "id_payment" => $this->id_payment,
+                "name" => $this->name,
+            ];
+        }
     /**
      * Get the value of name
      */

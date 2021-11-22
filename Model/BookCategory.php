@@ -1,7 +1,7 @@
 <?php
 
 
-class BookCategory{
+class BookCategory implements JsonSerializable{
 
     private String|int $id;
     private String|int $id_book_category;
@@ -16,7 +16,15 @@ public function __construct($id,$id_book_category,$id_book,$delFlag){
     $this->delFlag=$delFlag;
 }
 
-
+    public function jsonSerialize()
+    {
+        return [
+            "id" => $this->id,
+            "id_book_category" => $this->id_book_category,
+            "id_book" => $this->id_book,
+            "delFlag" => $this->delFlag,
+        ];
+    }
     /**
      * Get the value of id
      */ 

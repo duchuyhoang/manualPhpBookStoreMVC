@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__FILE__) . "./Address.php";
-class User
+class User implements JsonSerializable
 {
     private $id_user;
     private String $name;
@@ -34,6 +34,20 @@ class User
     // function __construct($name, $birthday, $avatar, $delFlag, $email, $phone, $permission){
 
     // }
+    public function jsonSerialize()
+    {
+        return [
+            "id_user" => $this->id_user,
+            "name" => $this->name,
+            "delFlag" => $this->delFlag,
+            "birthday" => $this->birthday,
+            "address" => $this->address,
+            "phone" => $this->phone,
+            "email" => $this->email,
+            "avatar" => $this->avatar,
+            "permission" => $this->permission,
+        ];
+    }
 
     public static function newNormalUser($id, $name, $birthday, $self_describe, $avatar, $delFlag, $email, $address, $phone, $permission)
     {

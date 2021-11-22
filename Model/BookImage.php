@@ -1,20 +1,29 @@
 <?php
 
 
-class BookImage{
+class BookImage implements JsonSerializable{
     private String|int $id_image;
     private String|null $url;
     private String|int $id_book;
     private String|int $delFlag;
 
 
-public function __construct($id_image,$url,$id_book,$delFlag){
-$this->id_image=$id_image;
-$this->url=$url;
-$this->id_book=$id_book;
-$this->delFlag=$delFlag;
-}
+    public function __construct($id_image,$url,$id_book,$delFlag){
+        $this->id_image=$id_image;
+        $this->url=$url;
+        $this->id_book=$id_book;
+        $this->delFlag=$delFlag;
+    }
 
+    public function jsonSerialize()
+    {
+        return [
+            'id_image' => $this->id_image,
+            'url' => $this->url,
+            'id_book' => $this->id_book,
+            'delFlag' => $this->delFlag,
+        ];
+    }
     /**
      * Get the value of id_image
      */ 

@@ -439,14 +439,14 @@ $("#signUpForm").submit(function(event) {
     })
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
-            $.snackbar({
-                content: "Sign up fail!!!",
-                timeout: 5000,
-                style: "customSnackbar snackbar-error"
-            });
-            $("#loading").removeClass("loadingShow");
-            $("#signupModal").modal('hide');
+        $.snackbar({
+            content: "Sign up fail!!!",
+            timeout: 5000,
+            style: "customSnackbar snackbar-error"
         });
+        $("#loading").removeClass("loadingShow");
+        $("#signupModal").modal('hide');
+    });
 
 
     // $("#signOutBtn").click(function(event) {
@@ -487,6 +487,8 @@ $("#signOutBtn").click(function(event) {
     });
 
 })
+
+$("#")
 
 if (
     "IntersectionObserver" in window &&

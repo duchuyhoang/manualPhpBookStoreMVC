@@ -1,6 +1,6 @@
 <?php
 
-class OrderType{
+class OrderType implements JsonSerializable{
     public static $Online = 0;
     public static $Offline = 1;
     private $id_order_type;
@@ -13,6 +13,13 @@ class OrderType{
         $this->name = $name;
     }
 
+    public function jsonSerialize()
+    {
+        return [
+            "id_order_type" => $this->id_order_type,
+            "name" => $this->name,
+        ];
+    }
 
     public function getName()
     {

@@ -2,7 +2,7 @@
 require_once dirname(__FILE__) . "/User.php";
 require_once dirname(__FILE__) . "/Address.php";
 
-class OrderLabel
+class OrderLabel implements JsonSerializable
 {
     private $id_order;
     private String $id_cart;
@@ -45,7 +45,22 @@ class OrderLabel
 
 
 
-
+    public function jsonSerialize()
+    {
+        return [
+            "id_order" => $this->id_order,
+            "id_cart" => $this->id_cart,
+            "orderUser" => $this->orderUser,
+            "createAt" => $this->createAt,
+            "address" => $this->address,
+            "status" => $this->status,
+            "receiverName" => $this->receiverName,
+            "receiverPhone" => $this->receiverPhone,
+            "payment" => $this->payment,
+            "receiverEmail" => $this->receiverEmail,
+            "orderType" => $this->orderType,
+        ];
+    }
     /**
      * Get the value of id_order
      */

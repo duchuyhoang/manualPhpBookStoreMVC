@@ -1,6 +1,6 @@
 <?php
 
-class Category{
+class Category implements JsonSerializable{
     private String|int $id_category;
     private String $cat_name;
     private int $delFlag;
@@ -11,8 +11,14 @@ class Category{
         $this->delFlag = $delFlag;
     }
     
-
-
+    public function jsonSerialize()
+    {
+        return [
+            'id_category' => $this->id_category,
+            'cat_name' => $this->cat_name,
+            'delFlag' => $this->delFlag,
+        ];
+    }
 
     /**
      * Get the value of id_category

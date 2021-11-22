@@ -13,10 +13,7 @@ require_once dirname(__FILE__) . "/../shared/functions.php";
 $actionType = isset($_POST["submit"]) ? $_POST["submit"] : null;
 error_reporting(E_ALL ^ E_NOTICE);
 
-
 switch ($actionType) {
-
-
     case $ADD_NEW_PRODUCT:
         try {
             $newBook = new Book(
@@ -82,16 +79,35 @@ switch ($actionType) {
             $response->status = 400;
             die(json_encode($response));
         }
+        
+        break;
+        
+    case $GET_PRODUCT:
+        try{
+            $params_book = (int)$_POST['idBook'];
+            $currentBook = new BookDao();
+            $currentBook = $currentBook->getById((int)$_POST['idBook']);
+            $response = new stdClass();
+            $response->message = "OK";
+            $response->data = $currentBook;
+            echo json_encode($response);
+        }
+        catch(PDOException $e){
+            http_response_code(400);
+            $response=new stdClass();
+            $response->message ="Error";
+            die(json_encode($response));
+        }
+        break;
 
     case $EDIT_PRODUCT:
         try {
-
             $newBook = new Book(
                 $_POST["idBook"],
                 $_POST["newBookName"],
                 $_POST["newBookPrice"],
                 $_POST["newBookQuantity"],
-                $_POST["newBookStatus"],
+                1,
                 $_POST["newBookDescription"],
                 "",
                 "",
@@ -108,9 +124,8 @@ switch ($actionType) {
                 "",
                 "",
                 "",
-                "",
                 date("Y-m-d h:i:s"),
-                $_POST["newBookSale"]
+                0
             );
             $bookDao = new BookDao();
 
@@ -126,18 +141,16 @@ switch ($actionType) {
             $response->status = 400;
             die(json_encode($response));
         }
-
-
-
         break;
 
-
-
-
-
-
-
-
     default: {
+        try{
+            $response = new stdClass();
+
+            $response->message = 'default';
+
+        }
+        catch(PDOException $e){}
+        break;
         }
 }
