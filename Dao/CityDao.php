@@ -3,9 +3,10 @@
 require_once dirname(__FILE__) . "/../Model/City.php";
 require_once dirname(__FILE__) . "/BaseDao.php";
 require_once dirname(__FILE__) . "/../DBConnector.php";
+require_once dirname(__FILE__) . "/../Implement/CityImplement.php";
 
 
-class CityDao extends DBConnector{
+class CityDao extends DBConnector implements CityImplement{
     public function __construct(){
         DBConnector::connectDB();           
     }

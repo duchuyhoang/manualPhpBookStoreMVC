@@ -2,9 +2,10 @@
 
 require_once dirname(__FILE__) . "/BaseDao.php";
 require_once dirname(__FILE__) . "/../DBConnector.php";
+require_once dirname(__FILE__) . "/../Implement/BookCategoryImplement.php";
 
 
-class BookCategoryDao extends DBConnector{
+class BookCategoryDao extends DBConnector implements BookCategoryImplement{
     public function __construct()
     {
         // parent::__construct();

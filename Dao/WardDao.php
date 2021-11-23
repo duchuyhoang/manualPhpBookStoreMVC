@@ -4,9 +4,10 @@
 require_once dirname(__FILE__) . "/../Model/Ward.php";
 require_once dirname(__FILE__) . "/BaseDao.php";
 require_once dirname(__FILE__) . "/../DBConnector.php";
+require_once dirname(__FILE__) . "/../Implement/WardImplement.php";
 
 
-class WardDao extends DBConnector{
+class WardDao extends DBConnector implements WardImplement{
 
     public function __construct()
     {

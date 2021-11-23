@@ -3,12 +3,13 @@
 require_once dirname(__FILE__) . "/../Model/User.php";
 require_once dirname(__FILE__) . "/../Model/Address.php";
 require_once dirname(__FILE__) . "/../DBConnector.php";
+require_once dirname(__FILE__) . "/../Implement/UserImplement.php";
 
 require_once dirname(__FILE__) . "/BaseDao.php";
 
 
 
-class UserDao extends DBConnector
+class UserDao extends DBConnector implements UserImplement
 {
 
     private $currentUser = null;

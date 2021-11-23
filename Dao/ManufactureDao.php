@@ -4,9 +4,10 @@
 require_once dirname(__FILE__) . "/../Model/Manufacture.php";
 require_once dirname(__FILE__) . "/BaseDao.php";
 require_once dirname(__FILE__) . "/../DBConnector.php";
+require_once dirname(__FILE__) . "/../Implement/ManufactureImplement.php";
 
 
-class ManufactureDao extends DBConnector
+class ManufactureDao extends DBConnector implements ManufactureImplement
 {
     public function __construct()
     {

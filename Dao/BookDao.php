@@ -6,8 +6,9 @@ require_once dirname(__FILE__) . "/../Model/Category.php";
 
 require_once dirname(__FILE__) . "/BaseDao.php";
 require_once dirname(__FILE__) . "/../DBConnector.php";
+require_once dirname(__FILE__) . "/../Implement/BookImplement.php";
 
-class BookDao extends DBConnector
+class BookDao extends DBConnector implements BookImplement
 {
     private $listBook;
 

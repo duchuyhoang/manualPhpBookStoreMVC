@@ -2,8 +2,9 @@
 require_once dirname(__FILE__) . "/../Model/Author.php";
 require_once dirname(__FILE__) . "/BaseDao.php";
 require_once dirname(__FILE__) . "/../DBConnector.php";
+require_once dirname(__FILE__) . "/../Implement/AuthorImplement.php";
 
-class AuthorDao extends DBConnector
+class AuthorDao extends DBConnector implements AuthorImplement
 {
     public function __construct()
     {

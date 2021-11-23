@@ -3,9 +3,10 @@ require_once dirname(__FILE__) . "/../Model/Cart.php";
 require_once dirname(__FILE__) . "/../Model/BookItem.php";
 require_once dirname(__FILE__) . "/../Model/Book.php";
 require_once dirname(__FILE__) . "/../DBConnector.php";
+require_once dirname(__FILE__) . "/../Implement/CartImplement.php";
 
 
-class CartDao extends DBConnector
+class CartDao extends DBConnector implements CartImplement
 {
 
     public function __construct()

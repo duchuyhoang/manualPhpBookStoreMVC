@@ -5,12 +5,13 @@ require_once dirname(__FILE__) . "/../Model/User.php";
 require_once dirname(__FILE__) . "/../Model/Payment.php";
 require_once dirname(__FILE__) . "/../Model/Cart.php";
 require_once dirname(__FILE__) . "/../Model/OrderType.php";
+require_once dirname(__FILE__) . "/../Implement/OrderImplement.php";
 
 require_once dirname(__FILE__) . "/./BookDao.php";
 
 
 
-class OrderDao extends DBConnector
+class OrderDao extends DBConnector implements OrderImplement
 {
 
     private BookDao $bookDao;
