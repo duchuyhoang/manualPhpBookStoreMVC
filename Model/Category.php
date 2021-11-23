@@ -3,7 +3,7 @@
 class Category implements JsonSerializable{
     private String|int $id_category;
     private String $cat_name;
-    private int $delFlag;
+    private int|string $delFlag;
 
     public function __construct($id_category,$cat_name,$delFlag){
         $this->id_category = $id_category;
