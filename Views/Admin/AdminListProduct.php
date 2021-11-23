@@ -163,8 +163,6 @@
 
 
     function openTab(event, id) {
-        console.log("đâ");
-
         $("#adminContent").children("div").each(function(index, element) {
             element.classList.remove("active");
         })
@@ -209,7 +207,7 @@
         $("#loading").addClass("loadingShow");
 
         $dataTable = <?php echo json_encode($listAllBook); ?>;
-        console.log($dataTable);
+
 
         $dataTable = $dataTable.map((data) => {
             return {
@@ -219,12 +217,12 @@
             }
         })
         // 
-       const datatable= $('#table').DataTable({
+        const datatable = $('#table').DataTable({
             data: $dataTable,
             columns: [{
                     "render": function(data, type,
                         JsonResultRow) {
-                        return `<img style="width: 100px; height: 150px;" src="${JsonResultRow.listImage ? JsonResultRow.listImage[0].url : ""}">`;
+                        return `<img style="width: 100px; height: 150px;" src="${JsonResultRow?.listImage?.length>0 ? JsonResultRow?.listImage[0].url : ""}">`;
                     }
                 },
                 {
