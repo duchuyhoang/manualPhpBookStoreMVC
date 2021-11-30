@@ -68,6 +68,7 @@ class HomeController extends BaseController
                         "listBook" => $listBooking,
                         "listLatestBook" => $listLatestBook
                     ));
+                    
                     break;
                 }
         }

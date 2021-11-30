@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . "/BookItem.php";
 
-class Cart
+class Cart implements JsonSerializable
 {
     private $id_cart;
     private $listBook;
@@ -15,6 +15,20 @@ class Cart
         $this->createAt = $createAt;
         $this->user = $user;
     }
+
+
+public function jsonSerialize(){
+
+return array(
+    "id_cart"=>$this->id_cart,
+    "listBook"=>$this->listBook,
+    "createAt"=>$this->createAt,
+    "user"=>$this->user,
+
+);
+
+
+}
 
     public static function newCartFromDb($id_cart, $listQueryBookInfo, $listBookInfo, $createAt, $user)
     {

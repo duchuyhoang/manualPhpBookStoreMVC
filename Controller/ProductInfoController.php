@@ -26,13 +26,11 @@ class ProductInfoController extends BaseController
 
     public function initialActions()
     {
-$a=$_SERVER['REQUEST_METHOD'];
-        $b=1;
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $this->handlePost();
         } else if ($_SERVER['REQUEST_METHOD'] === "GET") {
             $this->handleGet();
-            $a=1;
+            $a = 1;
         }
     }
 
@@ -45,7 +43,7 @@ $a=$_SERVER['REQUEST_METHOD'];
         if ($id_product) {
             $bookInfo = $this->BookDao->getById($id_product);
 
-            $this->view->load("ProductInfo",array("bookInfo"=>$bookInfo));
+            $this->view->load("ProductInfo", array("bookInfo" => $bookInfo));
             $this->view->show();
         } else {
             header('Location: ' . $protocol . $_SERVER['SERVER_NAME'] . "/banSach" . "" . "/home");

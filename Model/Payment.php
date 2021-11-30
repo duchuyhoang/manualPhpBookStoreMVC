@@ -33,7 +33,7 @@ class Payment implements JsonSerializable
     // }
         public function jsonSerialize()
         {
-            [
+           return  [
                 "id_payment" => $this->id_payment,
                 "name" => $this->name,
             ];

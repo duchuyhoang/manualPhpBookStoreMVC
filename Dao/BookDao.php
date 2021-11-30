@@ -22,12 +22,12 @@ class BookDao extends DBConnector implements BookImplement
     public function getAll()
     {
         $query = "SELECT DISTINCT  book.*,
-            GROUP_CONCAT(distinct category.cat_name SEPARATOR '////') as categoryName,
-            GROUP_CONCAT(distinct book_category.id_book_category SEPARATOR '////') as categoryId,
-            GROUP_CONCAT(category.delFlag SEPARATOR '////') as categoryDelFlag,
-            (SELECT GROUP_CONCAT(book_image.delFlag SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageDelFlag,
-            (SELECT GROUP_CONCAT(book_image.url SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageUrl,
-            (SELECT GROUP_CONCAT(book_image.id_image SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageId,
+             GROUP_CONCAT(DISTINCT IF(book_category.delFlag=0,category.cat_name,NULL) SEPARATOR '////') as categoryName,
+        GROUP_CONCAT(DISTINCT IF(book_category.delFlag=0,book_category.id_book_category,NULL) SEPARATOR '////') as categoryId,
+        GROUP_CONCAT(IF(book_category.delFlag=0,category.delFlag,NULL) SEPARATOR '////') as categoryDelFlag,
+        (SELECT GROUP_CONCAT(IF(book_image.delFlag=0,book_image.delFlag,NULL) SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageDelFlag,
+            (SELECT GROUP_CONCAT(IF(book_image.delFlag=0,book_image.url,NULL) SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageUrl,
+            (SELECT GROUP_CONCAT(IF(book_image.delFlag=0,book_image.id_image,NULL) SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageId,
             manufacture.name as manufactureName,manufacture.delFlag as manufactureDelFlag,
             author.name as authorName,author.delFlag as authorDelFlag,author.maxim as authorMaxim,
         author.birthday as authorBirthday,author.address as authorAddress
@@ -74,9 +74,9 @@ class BookDao extends DBConnector implements BookImplement
     public function getById(int $id)
     {
         $query = "SELECT DISTINCT book.*,
-        GROUP_CONCAT(distinct category.cat_name SEPARATOR '////') as categoryName,
-        GROUP_CONCAT(distinct book_category.id_book_category SEPARATOR '////') as categoryId,
-        GROUP_CONCAT(category.delFlag SEPARATOR '////') as categoryDelFlag,
+        GROUP_CONCAT(DISTINCT IF(book_category.delFlag=0,category.cat_name,NULL) SEPARATOR '////') as categoryName,
+        GROUP_CONCAT(DISTINCT IF(book_category.delFlag=0,book_category.id_book_category,NULL) SEPARATOR '////') as categoryId,
+        GROUP_CONCAT(IF(book_category.delFlag=0,category.delFlag,NULL) SEPARATOR '////') as categoryDelFlag,
         Book_Image.bookImageDelFlag as bookImageDelFlag,
         Book_Image.bookImageUrl as bookImageUrl,
         Book_Image.bookImageId as bookImageId,
@@ -86,10 +86,12 @@ class BookDao extends DBConnector implements BookImplement
         FROM 
              (
         SELECT 
-        GROUP_CONCAT(book_image.delFlag SEPARATOR '////') as bookImageDelFlag,
-        GROUP_CONCAT( book_image.url SEPARATOR '////') as bookImageUrl,
-        GROUP_CONCAT( book_image.id_image SEPARATOR '////') as bookImageId
+
+        (SELECT GROUP_CONCAT(IF(book_image.delFlag=0,book_image.delFlag,NULL) SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageDelFlag,
+            (SELECT GROUP_CONCAT(IF(book_image.delFlag=0,book_image.url,NULL) SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageUrl,
+            (SELECT GROUP_CONCAT(IF(book_image.delFlag=0,book_image.id_image,NULL) SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageId
         FROM book_image LEFT JOIN book ON book_image.id_book=book.id_book WHERE book_image.id_book=?
+        UNION (SELECT NULL AS bookImageDelFlag,NULL AS bookImageUrl,NULL AS bookImageId)
         ) as Book_Image
         ,book
     
@@ -176,15 +178,30 @@ class BookDao extends DBConnector implements BookImplement
         $stmt->execute($insertData);
     }
 
+
+    public function deleteBookImages($id_book)
+    {
+
+        $query = "UPDATE `book_image` SET delFlag=1 WHERE id_book=?;";
+
+        $stmt = parent::$db->prepare($query);
+        $stmt->bindParam(1, $id_book);
+        $stmt->execute();
+    }
+
+
+
+
+
     public function getLatestBook()
     {
         $query = "SELECT DISTINCT  book.*,
-    GROUP_CONCAT(distinct category.cat_name SEPARATOR '////') as categoryName,
-    GROUP_CONCAT(distinct book_category.id_book_category SEPARATOR '////') as categoryId,
-    GROUP_CONCAT(category.delFlag SEPARATOR '////') as categoryDelFlag,
-    (SELECT GROUP_CONCAT(book_image.delFlag SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageDelFlag,
-    (SELECT GROUP_CONCAT(book_image.url SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageUrl,
-    (SELECT GROUP_CONCAT(book_image.id_image SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageId,
+     GROUP_CONCAT(DISTINCT IF(book_category.delFlag=0,category.cat_name,NULL) SEPARATOR '////') as categoryName,
+        GROUP_CONCAT(DISTINCT IF(book_category.delFlag=0,book_category.id_book_category,NULL) SEPARATOR '////') as categoryId,
+        GROUP_CONCAT(IF(book_category.delFlag=0,category.delFlag,NULL) SEPARATOR '////') as categoryDelFlag,
+        (SELECT GROUP_CONCAT(IF(book_image.delFlag=0,book_image.delFlag,NULL) SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageDelFlag,
+            (SELECT GROUP_CONCAT(IF(book_image.delFlag=0,book_image.url,NULL) SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageUrl,
+            (SELECT GROUP_CONCAT(IF(book_image.delFlag=0,book_image.id_image,NULL) SEPARATOR '////') FROM book_image WHERE book_image.id_book=book.id_book) as bookImageId,
     manufacture.name as manufactureName,manufacture.delFlag as manufactureDelFlag,
     author.name as authorName,author.delFlag as authorDelFlag,author.maxim as authorMaxim,
 author.birthday as authorBirthday,author.address as authorAddress
@@ -360,6 +377,7 @@ author.birthday as authorBirthday,author.address as authorAddress
             }
             return $listBook;
         } catch (PDOException $e) {
+
         }
     }
 
@@ -382,6 +400,16 @@ author.birthday as authorBirthday,author.address as authorAddress
         $stmt->bindParam(7, $book->getStatus());
         $stmt->bindParam(8, $book->getSale());
         $stmt->bindParam(9, $book->getId_book());
+
+        $stmt->execute();
+    }
+
+    public function deleteBook(Book $book)
+    {
+
+        $query = "UPDATE book SET status=0 WHERE id_book=?";
+        $stmt = parent::$db->prepare($query);
+        $stmt->bindParam(1, $book->getId_book());
 
         $stmt->execute();
     }

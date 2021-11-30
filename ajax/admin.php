@@ -7,6 +7,8 @@ require_once dirname(__FILE__) . "/../Model/BookCategory.php";
 
 
 require_once dirname(__FILE__) . "/../Dao/BookDao.php";
+require_once dirname(__FILE__) . "/../Dao/OrderDao.php";
+
 require_once dirname(__FILE__) . "/../Dao/BookCategoryDao.php";
 
 require_once dirname(__FILE__) . "/../shared/functions.php";
@@ -18,6 +20,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 
 
 switch ($actionType) {
+
     case $ADD_NEW_PRODUCT:
         try {
             $newBook = new Book(
@@ -83,11 +86,11 @@ switch ($actionType) {
             $response->status = 400;
             die(json_encode($response));
         }
-        
+
         break;
-        
+
     case $GET_PRODUCT:
-        try{
+        try {
             $params_book = (int)$_POST['idBook'];
             $currentBook = new BookDao();
             $currentBook = $currentBook->getById((int)$_POST['idBook']);
@@ -95,17 +98,17 @@ switch ($actionType) {
             $response->message = "OK";
             $response->data = $currentBook;
             echo json_encode($response);
-        }
-        catch(PDOException $e){
+        } catch (PDOException $e) {
             http_response_code(400);
-            $response=new stdClass();
-            $response->message ="Error";
+            $response = new stdClass();
+            $response->message = "Error";
             die(json_encode($response));
         }
         break;
 
     case $EDIT_PRODUCT:
         try {
+
             $newBook = new Book(
                 $_POST["idBook"],
                 $_POST["newBookName"],
@@ -132,8 +135,51 @@ switch ($actionType) {
                 0
             );
             $bookDao = new BookDao();
+            $bookCategoryDao = new BookCategoryDao();
+            $selectedBook = $bookDao->getById($_POST["idBook"]);
+
+            $bookCategoryDao->editBookCategory($selectedBook, $_POST["newBookCategory"] ? explode(",", $_POST["newBookCategory"]) : []);
 
             $bookDao->editProduct($newBook);
+            // $list = [];
+            $_listBookImage = array();
+            $listImageId = $_POST["productImageListId"] ? explode(",", $_POST["productImageListId"]) : [];
+            $listOldBookImage = $selectedBook->getListImage();
+
+            $listOldImageId = array_intersect($listImageId, array_map(function ($bookImage) {
+                return $bookImage->getId_image();
+            }, $listOldBookImage));;
+
+
+            for ($i = 0; $i < count($listOldImageId); $i++) {
+                $selectedBookImage = null;
+                for ($j = 0; $j < count($listOldBookImage); $j++) {
+                    if ($listOldImageId[$i] == $listOldBookImage[$j]->getId_image()) {
+                        $selectedBookImage = $listOldBookImage[$j];
+                        break;
+                    }
+                }
+                if ($selectedBookImage) {
+                    $_listBookImage[] = $selectedBookImage;
+                }
+            }
+
+
+            if (count($_FILES) > 0) {
+                $list = uploadFile($_FILES["newImageList"]["name"], $_FILES["newImageList"]["tmp_name"], $_FILES["newImageList"]["error"]);
+                for ($i = 0; $i < count($list); $i++)
+                    $_listBookImage[] = new BookImage("", $list[$i], $selectedBook->getId_book(), 0);
+                // $bookDao->insertBookImages($newBook->getId_book(), $listBookImage);
+            }
+
+            $a = 1;
+
+            $bookDao->deleteBookImages($selectedBook->getId_book());
+            $bookDao->insertBookImages($selectedBook->getId_book(), $_listBookImage);
+
+            // $listOldImage=$selectedBook->
+
+
             $response = new stdClass();
             $response->message = "Edit product success";
             echo json_encode($response);
@@ -144,19 +190,57 @@ switch ($actionType) {
             $response->message = "Update product failed";
             $response->status = 400;
             die(json_encode($response));
+        } catch (Exception $e) {
         }
         break;
+
+    case $DELETE_PRODUCT:
+        try {
+
+            $bookDao = new BookDao();
+
+            $selectedBook = $bookDao->getById($_POST["idBook"]);
+
+            $bookDao->deleteBook($selectedBook);
+
+            if (!$selectedBook)
+                throw new Exception("This book is not exist", 1000);
+        } catch (PDOException $e) {
+        } catch (Exception $e) {
+        }
+
+    case $GET_ORDER:
+        try {
+            $idOrder = $_POST["id_order"];
+            $orderDao = new OrderDao();
+            $selectedOrder = $orderDao->getOrderDetail($_POST["id_order"]);
+            if (!$selectedOrder) throw new Exception("Order not exist");
+
+            $response = new stdClass();
+            $response->message = "Success";
+            $response->data = $selectedOrder;
+
+            echo json_encode($response);
+        } catch (PDOException $e) {
+        } catch (Exception $e) {
+            http_response_code(400);
+            $response = new stdClass();
+            $response->message = $e->getMessage();
+            die(json_encode($response));
+        }
+
+
+
+
+
 
     default: {
-        try{
-            $response = new stdClass();
+            try {
+                $response = new stdClass();
 
-            $response->message = 'default';
-
-        }
-        catch(PDOException $e){
-            
-        }
-        break;
+                $response->message = 'default';
+            } catch (PDOException $e) {
+            }
+            break;
         }
 }

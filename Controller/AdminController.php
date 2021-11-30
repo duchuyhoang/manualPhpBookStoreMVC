@@ -3,6 +3,8 @@ require_once "BaseController.php";
 require_once dirname(__FILE__) . "/../Dao/ManufactureDao.php";
 require_once dirname(__FILE__) . "/../Dao/CategoryDao.php";
 require_once dirname(__FILE__) . "/../Dao/AuthorDao.php";
+require_once dirname(__FILE__) . "/../Dao/OrderDao.php";
+
 require_once dirname(__FILE__) . "/../Dao/StatistcalDao.php";
 
 // 
@@ -20,14 +22,20 @@ class AdminController extends BaseController
     public function showView()
     {
         try {
-            // require_once dirname(__FILE__) . "/../shared/constant.php";
+            session_start();
+            require dirname(__FILE__) . "/../shared/constants.php";
             $this->view = new View();
             $this->authorDao = new AuthorDao();
             $this->manufactureDao = new ManufactureDao();
             $this->categoryDao = new CategoryDao();
             $this->bookDao = new BookDao();
             $this->orderDao = new OrderDao();
+            $currentUser = isset($_SESSION[$CURRENT_USER_INFO]) ? $_SESSION[$CURRENT_USER_INFO] : null;
 
+            if ($currentUser === null || !($currentUser instanceof User)||$currentUser->getPermission()!=$PERMISSION_ADMIN) {
+                header('Location: ' . getProtocol() . $_SERVER['SERVER_NAME'] . "/banSach" . "" . $HOME);
+                return;
+            }
             // $this->BookDao = new BookDao();
             // $this->view->load('Home',);
             // $this->view->show();
@@ -46,7 +54,7 @@ class AdminController extends BaseController
             $this->handleGet();
         }
     }
-    
+
     protected function handleGet()
     {
         require dirname(__FILE__) . "/../shared/constants.php";
@@ -54,6 +62,21 @@ class AdminController extends BaseController
 
         $listData = array();
         switch ($tab) {
+
+            case $LIST_PRODUCT: {
+
+                    $listAuthor = $this->authorDao->getAllAuthor();
+                    $listManufacture = $this->manufactureDao->getAllManufacture();
+                    $listCategory = $this->categoryDao->getAllCategory();
+                    $listAllBook = $this->bookDao->getAll();
+                    $listData['ListAuthor'] = $listAuthor;
+                    $listData['ListManufacture'] = $listManufacture;
+                    $listData['ListCategory'] = $listCategory;
+                    $listData['listAllBook'] = $listAllBook;
+                    
+                }
+
+
 
             case $ADD_PRODUCT: {
                     $listAuthor = $this->authorDao->getAllAuthor();
@@ -67,7 +90,7 @@ class AdminController extends BaseController
 
             case $LIST_ODER: {
                     $listOrder = $this->orderDao->getAllOrderLabel();
-                    
+
                     $listData['listOrder'] = $listOrder;
 
                     break;
@@ -83,12 +106,13 @@ class AdminController extends BaseController
             default: {
                     $listAuthor = $this->authorDao->getAllAuthor();
                     $listManufacture = $this->manufactureDao->getAllManufacture();
-                    $listCategory=$this->categoryDao->getAllCategory();
-                    $listAllBook=$this->bookDao->getAll();
+                    $listCategory = $this->categoryDao->getAllCategory();
+                    $listAllBook = $this->bookDao->getAll();
                     $listData['ListAuthor'] = $listAuthor;
                     $listData['ListManufacture'] = $listManufacture;
                     $listData['ListCategory'] = $listCategory;
                     $listData['listAllBook'] = $listAllBook;
+
                 }
         }
 
@@ -97,6 +121,5 @@ class AdminController extends BaseController
     }
     public function handlePost()
     {
-        $a = 1;
     }
 }

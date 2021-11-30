@@ -1,5 +1,4 @@
 <?php
-
 class BookItem implements JsonSerializable{
 
 private $book;
@@ -22,7 +21,7 @@ public function jsonSerialize()
             'id_book' => $this->book->getId_book(),
             'name' => $this->book->getName(),
             'boughtQuantity' => $this->quantity,
-            'description' => $this->description,
+            // 'description' => $this->description,
             'sale'=>$this->book->getSale(),
             'price' =>  $this->book->getPrice(),
             'listImage' =>  $this->book->getListImage(),

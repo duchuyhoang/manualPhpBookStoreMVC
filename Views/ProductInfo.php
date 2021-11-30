@@ -31,9 +31,9 @@
     require_once dirname(__FILE__) . "./shared/" . 'Loading.php';
     require_once dirname(__FILE__) . "./shared/" . 'Rating.php';
     require_once dirname(__FILE__) . "./../shared/" . 'functions.php';
-    
+
     ?>
-    
+
     <div class="container mt-5 mb-3 d-flex" id="productInfo">
         <div class="col-lg-9 col-12">
             <div class="row flex-wrap">
@@ -41,14 +41,21 @@
                 <div id="productSlide" class="carousel slide col-lg-5 col-md-6 col-12 mr-3" data-ride="carousel">
                     <div class="carousel-inner">
                         <?php
-                        foreach ($bookInfo->getListImage() as $key => $bookImage) {
-                            $class = className($key === 0, "active", "");
-                            echo "
+                        if (count($bookInfo->getListImage()) > 0)
+                            foreach ($bookInfo->getListImage() as $key => $bookImage) {
+                                $class = className($key === 0, "active", "");
+                                echo "
                             <div class='carousel-item {$class}'>
 <img class='d-block w-100' src='{$bookImage->getUrl()}' alt='First slide'>
 </div>
                             ";
-                        }
+                            }
+                        else echo "
+<div class='carousel-item active'>
+<img class='d-block w-100' src='./img/defaultImg.jpg' alt='First slide'>
+</div>";
+
+
                         ?>
 
                         <a class="carousel-control-prev" href="#productSlide" role="button" data-slide="prev">
@@ -68,14 +75,21 @@
 
 
                         <?php
-                        foreach ($bookInfo->getListImage() as $key => $bookImage) {
-                            $class = className($key === 0, "active", "");
-                            echo "
+
+
+
+                        if (count($bookInfo->getListImage()) > 0)
+                            foreach ($bookInfo->getListImage() as $key => $bookImage) {
+                                $class = className($key === 0, "active", "");
+                                echo "
 <li data-target='#productSlide' data-slide-to='{$key}' class='{$class} indicatorWrapper'>
                             <img src='{$bookImage->getUrl()}' class='indicatorImg' />
                         </li>
 ";
-                        }
+                            }
+                        else echo "<li data-target='#productSlide' data-slide-to='0' class='active indicatorWrapper'>
+                            <img src='./img/defaultImg.jpg' class='indicatorImg' />
+                        </li>";
 
                         ?>
 
@@ -119,19 +133,19 @@
                         <div class="bookPriceContainer d-flex">
                             <div class="bookPriceExpected">
                                 <?php
-                                 echo
+                                echo
                                 // $bookInfo->getSale()!=0
                                 // ?
-                                number_format($bookInfo->getPrice() - $bookInfo->getPrice() * $bookInfo->getSale())."VNĐ"   
+                                number_format($bookInfo->getPrice() - $bookInfo->getPrice() * $bookInfo->getSale()) . "VNĐ"
                                 // :""
                                 ?>
-                                
+
                             </div>
                             <div class="bookPriceActual ml-2">
                                 <!-- $40.00 -->
                                 <?php
-                               echo $bookInfo->getSale()!=0 ?
-                                 number_format($bookInfo->getPrice())."VNĐ" :"" ?> 
+                                echo $bookInfo->getSale() != 0 ?
+                                    number_format($bookInfo->getPrice()) . "VNĐ" : "" ?>
                             </div>
                         </div>
                         <div class="productAction">
@@ -353,7 +367,7 @@
                 timeout: 5000,
                 style: "customSnackbar snackbar-success"
             });
-            window.location="./myCart";
+            window.location = "./myCart";
             // window.location.reload();
         });
 
@@ -366,7 +380,7 @@
             $("#loading").removeClass("loadingShow");
         });
 
-        
+
     })
 </script>
 

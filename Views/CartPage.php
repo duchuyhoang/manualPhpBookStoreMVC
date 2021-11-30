@@ -11,18 +11,11 @@
     <link rel="stylesheet" type="text/css" href="./css/cartPage.css">
     <link rel="stylesheet" type="text/css" href="./css/base.css">
 
-    <link rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./css/Footer.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-        crossorigin="anonymous"></script>
-    <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
     </script>
 
     <title>Document</title>
@@ -30,8 +23,8 @@
 
 <body>
     <?php
-  require_once dirname(__FILE__) . "./shared/" . 'Navbar.php';
-  ?>
+    require_once dirname(__FILE__) . "./shared/" . 'Navbar.php';
+    ?>
     <?php require_once dirname(__FILE__) . "./shared/" . 'Loading.php'; ?>
 
 
@@ -55,12 +48,13 @@
                 </thead>
                 <tbody>
                     <?php
-            $currentCart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : null;
-            if ($currentCart) {
-              foreach ($currentCart->getListBook() as $bookItem) {
-                  $avatar = count($bookItem->getBook()->getListImage()) > 0 ? $bookItem->getBook()->getListImage()[0]->getUrl() : "";
-                  echo
-                  "
+                    $currentCart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : null;
+                    if ($currentCart) {
+                        foreach ($currentCart->getListBook() as $bookItem) {
+                            $id_input = "quantity_" . $bookItem->getBook()->getId_book();
+                            $avatar = count($bookItem->getBook()->getListImage()) > 0 ? $bookItem->getBook()->getListImage()[0]->getUrl() : "";
+                            echo
+                            "
                   <tr>
                     <th scope='row'>1</th>
                     <td>
@@ -69,7 +63,7 @@
                     <td>{$bookItem->getBook()->getName()}</td>
                     <td>{$bookItem->getBook()->getPrice()}</td>
                     <td>
-                      <input type='number' placeholder='0' min='1' max='10' step='1' onkeypress='return event.charCode >= 48' value={$bookItem->getQuantity()} class='quantityInput'>
+                      <input id={$id_input} type='number' placeholder='0' min='1' max='10' step='1' onkeypress='return event.charCode >= 48' value={$bookItem->getQuantity()} class='quantityInput'>
                     </td>
                     <td>100</td>
                     <td>
@@ -77,8 +71,9 @@
                     </td>
                   </tr>
                   ";
-                }}
-                ?>
+                        }
+                    }
+                    ?>
                     <!-- <tr>
                         <th scope="row">1</th>
                         <td>
@@ -125,8 +120,7 @@
                             <h3>Coupon</h3>
                             <p>Enter your coupon code if you have one.</p>
                             <div class="d-flex">
-                                <input type="text" class="baseInput couponInput"
-                                    placeholder="Coupon code ">
+                                <input type="text" class="baseInput couponInput" placeholder="Coupon code ">
                                 <div class="blackButton">Apply coupon</div>
                             </div>
                         </div>
@@ -180,5 +174,60 @@
     <?php require_once dirname(__FILE__) . "./shared/" . 'Footer.php'; ?>
 
 </body>
+
+<script>
+    let a = <?php echo json_encode($currentCart->getListBook()) ?>;
+    a.map((bookItem)=>{
+        console.log(bookItem);
+        document.getElementById("quantity_"+bookItem.id_book).addEventListener("change",function(e){
+            console.log(e.target.value);
+        })
+    })
+
+
+function buildHtml(){
+    var html="";
+
+    a.map((bookItem)=>{
+        console.log(bookItem);
+
+html+=`     <tr>
+                    <th scope='row'>1</th>
+                    <td>
+                      <img src=${bookItem.listImage ? bookItem.listImage[0].url : ""} />
+                    </td>
+                    <td>${bookItem.name}</td>
+                    <td>${bookItem.price}</td>
+                    <td>
+                      <input id=${"quantity_"+bookItem.id_book} type='number' placeholder='0' min='1' max='10' step='1' onkeypress='return event.charCode >= 48' value=${bookItem.boughtQuantity} class='quantityInput'>
+                    </td>
+                    <td>100</td>
+                    <td>
+                      <i class='far fa-trash-alt fa-3x deleteIcon'></i>
+                    </td>
+                  </tr>
+
+`
+
+
+
+        // document.getElementById("quantity_"+bookItem.id_book).addEventListener("change",function(e){
+        //     console.log(e.target.value);
+        // })
+    })
+
+
+
+}
+
+
+
+function deleteAnItem(id_book_item){
+
+}
+
+
+</script>
+
 
 </html>

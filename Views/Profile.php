@@ -101,7 +101,43 @@
 
                     <!-- </div> -->
                 </div>
-                <div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="nav-order-tab">...</div>
+                <div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="nav-order-tab">
+                    <div class="row justify-content-around">
+                    <div class="card col-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+                    <div class="card col-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+                    <div class="card col-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+                    </div>
+                   
+                    {listOrderLabel}
+
+                    <div></div>
+
+
+                </div>
                 <div class="tab-pane fade" id="user_password" role="tabpanel" aria-labelledby="nav-user_password-tab">
                     <h2>Password</h2>
 
@@ -161,12 +197,12 @@
                                 <select>
                         </div>
                         <div class="col-12">
-                        <div class="form-group">
-                                    <label for="userWard">Your ward<span class="text-danger ml-1">*</span></label>
-                                    <select class="select p-0" id="userWard">
-                                        <option value="-1">Select a ward</option>
-                                        <select>
-                                </div>
+                            <div class="form-group">
+                                <label for="userWard">Your ward<span class="text-danger ml-1">*</span></label>
+                                <select class="select p-0" id="userWard">
+                                    <option value="-1">Select a ward</option>
+                                    <select>
+                            </div>
                         </div>
 
                     </div>
@@ -204,7 +240,7 @@
 
 
                 if (value != -1 && value != "") {
-                        $userDistrictSelect[0].selectize.addOption({
+                    $userDistrictSelect[0].selectize.addOption({
                         text: "Select a district",
                         value: -1
                     })
@@ -246,11 +282,11 @@
             }
         })
 
-        $userWardSelect=$("#userWard").selectize({
+        $userWardSelect = $("#userWard").selectize({
             ...selectizeSetting
         })
 
-        
+
     })
 </script>
 

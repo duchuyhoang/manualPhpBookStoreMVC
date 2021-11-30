@@ -12,9 +12,11 @@ abstract class DBConnector
     public function __construct()
     {
         // if(!self::$db){
-        $servername = "171.241.46.90";
+        // $servername = "171.241.46.90";
+        $servername = "127.0.0.1";
         $username = "root";
-        $password = "huyhoang10032000@gmail.com";
+        // $password = "huyhoang10032000@gmail.com";
+        $password = "";
         // try{
         $conn = new PDO("mysql:host=$servername;dbname=thuvien", $username, $password);
         // set the PDO error mode to exception
@@ -33,8 +35,13 @@ abstract class DBConnector
         if (!self::$db) {
         
             $servername = "171.241.46.90";
+            // $servername = "127.0.0.1";
             $username = "root";
             $password = "huyhoang10032000@gmail.com";
+            // $username = "pma";
+            // $password = "";
+            // $password = "";
+
             // try{
             $conn = new PDO("mysql:host=$servername;dbname=thuvien", $username, $password);
             // set the PDO error mode to exception

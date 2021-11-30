@@ -3,7 +3,7 @@ require_once dirname(__FILE__) . "./Address.php";
 class User implements JsonSerializable
 {
     private $id_user;
-    private String $name;
+    private String|null $name;
     private DateTime|null $birthday;
     private String|null $self_describe;
     private int|string $delFlag;

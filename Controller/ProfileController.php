@@ -1,6 +1,7 @@
 <?php
 require_once "BaseController.php";
 require_once dirname(__FILE__) . "/../Dao/CityDao.php";
+require_once dirname(__FILE__) . "/../Dao/OrderDao.php";
 require_once dirname(__FILE__) . "/../Dao/DistrictDao.php";
 require_once dirname(__FILE__) . "/../Dao/WardDao.php";
 require_once dirname(__FILE__) . "/../Model/User.php";
@@ -10,6 +11,9 @@ class ProfileController extends BaseController
     private $cityDao;
     private $districtDao;
     private $wardDao;
+    private $orderDao;
+
+
 
     public function showView()
     {
@@ -18,7 +22,7 @@ class ProfileController extends BaseController
             $this->cityDao = new CityDao();
             $this->districtDao = new DistrictDao();
             $this->wardDao = new WardDao();
-
+            $this->orderDao = new OrderDao();
             $this->initialActions();
         } catch (PDOException $e) {
         }
@@ -54,13 +58,17 @@ class ProfileController extends BaseController
         $listCityReturn = $this->cityDao->getAllCity();
         $listDistrict = $this->districtDao->getAll();
         $listWard = $this->wardDao->getAll();
+        $listOrderLabel = $this->orderDao->getAllOrderLabelByUser($currentUser);
+
+
 
         $this->view->load('Profile', array(
             "listCity" => $listCityReturn["listCity"],
             "listCityJson" => $listCityReturn["listCityJson"],
             "listDistrict" => $listDistrict,
             "listWard" => $listWard,
-            "currentUser" => $_SESSION[$CURRENT_USER_INFO]
+            "currentUser" => $_SESSION[$CURRENT_USER_INFO],
+            "listOrderLabel" => $listOrderLabel
         ));
         $this->view->show();
     }

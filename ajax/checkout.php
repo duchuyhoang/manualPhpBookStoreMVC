@@ -69,7 +69,6 @@ switch ($actionType) {
                 if (!$selectedOrderType)
                     throw new Exception('Order type required', 1004);
 
-
                 $isInsertSucceed = $orderDao->insertNewOrder(new Order(
                     generateRandomString(30),
                     $currentCart,

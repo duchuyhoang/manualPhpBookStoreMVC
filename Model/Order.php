@@ -8,6 +8,7 @@ require_once dirname(__FILE__) . "/User.php";
 
 
 class Order
+implements JsonSerializable
 {
     private $id_order;
     private Cart $cart;
@@ -49,8 +50,29 @@ class Order
         $this->payment = $payment;
         $this->orderType = $orderType;
         $this->owner = $owner;
-        $this->note=$note;
+        $this->note = $note;
     }
+
+
+    public function jsonSerialize()
+    {
+        return array(
+            "id_order" => $this->id_order,
+            "cart" => $this->cart,
+            "address" => $this->address,
+            "createAt" => $this->createAt,
+            "status" => $this->status,
+            "receiverName" => $this->receiverName,
+            "receiverPhone" => $this->receiverPhone,
+            "receiverEmail" => $this->receiverEmail,
+            "receiverPostCode" => $this->receiverPostCode,
+            "payment" => $this->payment,
+            "orderType" => $this->orderType,
+            "owner" => $this->owner,
+            "note" => $this->note,
+        );
+    }
+
 
 
     /**
@@ -275,7 +297,7 @@ class Order
 
     /**
      * Get the value of owner
-     */ 
+     */
     public function getOwner()
     {
         return $this->owner;
@@ -285,7 +307,7 @@ class Order
      * Set the value of owner
      *
      * @return  self
-     */ 
+     */
     public function setOwner($owner)
     {
         $this->owner = $owner;
@@ -295,7 +317,7 @@ class Order
 
     /**
      * Get the value of note
-     */ 
+     */
     public function getNote()
     {
         return $this->note;
@@ -305,7 +327,7 @@ class Order
      * Set the value of note
      *
      * @return  self
-     */ 
+     */
     public function setNote($note)
     {
         $this->note = $note;
