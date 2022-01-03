@@ -2,9 +2,6 @@
 
 class View
 {
-    /**
-     * @desc biến lưu trữ các view đã load
-     */
     private $__content = array();
 
     public function __construct()

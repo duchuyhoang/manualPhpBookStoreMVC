@@ -29,9 +29,14 @@ body {
     color: #fff;
     text-decoration: none;
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     align-items: center;
 }
+
+.sidebarItem a i {
+    margin-right: 20px;
+}
+
 
 .sidebarItemActive {
     background-color: #f07c29;
@@ -57,8 +62,91 @@ body {
 }
 
 
+.sidebarUser {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px 0px 20px;
+}
+
+.sidebarUser .avatar {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.sidebarUser .avatar img {
+    border-radius: 50%;
+}
+
+
+.sidebarUser .avatar:hover {
+    border: 1px solid #f07c29;
+    height: 102px;
+    width: 102px;
+    box-shadow: 1.0px 1.0px 1.0px #f07c29;
+    position: relative;
+}
+
+.sidebarUser .avatar .menu {
+    position: absolute;
+    top: 101%;
+    left: -5%;
+    width: max-content;
+    border-radius: 5px;
+    box-shadow: 2.0px 4.0px 4.0px hsl(0deg 0% 0% / 0.38);
+    background-color: rgb(49, 48, 48);
+    display: none;
+    padding: 0px;
+    list-style-type: none;
+}
+
+.sidebarUser .avatar:hover .menu {
+    display: block;
+}
+
+.sidebarUser .avatar .menu li,
+a {
+    padding: 10px;
+    color: #fff !important;
+    ;
+    /* border-radius: 5px; */
+    display: block;
+    text-decoration: none !important;
+}
+
+
+.sidebarUser .avatar .menu li,
+a:first-child {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.sidebarUser .avatar .menu li,
+a:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
+.sidebarUser .avatar:hover .menu li:hover,
+.sidebarUser .avatar:hover .menu a:hover {
+    background: #f07c29;
+}
+
+
+/* .sidebarUser .name {
+  margin-block-end: 0;
+  margin-left: 20px;
+  font-size:20px;
+  color:#fff;
+} */
+
 #adminContent {
-    margin-left: 200px;
+    margin-left: 250px;
     display: flex;
     justify-content: center;
     min-height: 100vh;
@@ -243,7 +331,8 @@ table tr th:first-child {
     color: #6c757d !important
 }
 
-.orderAddress,.orderAddressNote {
+.orderAddress,
+.orderAddressNote {
     padding: 20px;
     margin-top: 1.5rem;
     border: 1px solid #dee2e6;
@@ -253,17 +342,23 @@ table tr th:first-child {
 .orderAddress .orderAddressTitle {
     font-weight: bold;
 }
-.orderAddressNote .orderAddressNoteTitle{
+
+.orderAddressNote .orderAddressNoteTitle {
     font-weight: bold;
 }
-.table .thead-dark th{
-    color: #fff !important;;
+
+.table .thead-dark th {
+    color: #fff !important;
+    ;
 }
-.btn-order-detail{
+
+.btn-order-detail {
     background: #f07c29;
     color: #fff !important;
 }
-.btn-edit-detail{
-    background:rgb(44, 42, 42);;
+
+.btn-edit-detail {
+    background: rgb(44, 42, 42);
+    ;
     color: #fff !important;
 }

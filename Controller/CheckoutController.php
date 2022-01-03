@@ -1,11 +1,11 @@
 <?php
 require_once "BaseController.php";
-require_once dirname(__FILE__) . "/../Dao/CityDao.php";
-require_once dirname(__FILE__) . "/../Dao/DistrictDao.php";
-require_once dirname(__FILE__) . "/../Dao/WardDao.php";
-require_once dirname(__FILE__) . "/../Dao/BookDao.php";
-require_once dirname(__FILE__) . "/../Dao/OrderTypeDao.php";
-require_once dirname(__FILE__) . "/../Dao/PaymentTypeDao.php";
+require_once dirname(__FILE__) . "/../Dao/CityDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/DistrictDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/WardDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/BookDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/OrderTypeDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/PaymentTypeDaoImplement.php";
 require_once dirname(__FILE__) . "/../Model/Cart.php";
 require_once dirname(__FILE__) . "/../Model/BookItem.php";
 
@@ -30,12 +30,12 @@ class CheckoutController extends BaseController
             }
 
             $this->view = new View();
-            $this->cityDao = new CityDao();
-            $this->districtDao = new DistrictDao();
-            $this->wardDao = new WardDao();
-            $this->bookDao = new BookDao();
-            $this->orderTypeDao = new OrderTypeDao();
-            $this->paymentTypeDao = new PaymentTypeDao();
+            $this->cityDao = new CityDaoImplement();
+            $this->districtDao = new DistrictDaoImplement();
+            $this->wardDao = new WardDaoImplement();
+            $this->bookDao = new BookDaoImplement();
+            $this->orderTypeDao = new OrderTypeDaoImplement();
+            $this->paymentTypeDao = new PaymentTypeDaoImplement();
 
             $different = [];
 

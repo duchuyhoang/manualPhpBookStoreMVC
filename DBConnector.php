@@ -33,9 +33,9 @@ abstract class DBConnector
     public static function connectDB()
     {
         if (!self::$db) {
-        
-            $servername = "171.241.46.90";
-            // $servername = "127.0.0.1";
+
+            // $servername = "171.241.46.90";
+            $servername = "127.0.0.1";
             $username = "root";
             $password = "huyhoang10032000@gmail.com";
             // $username = "pma";

@@ -221,7 +221,7 @@
             ctx.fillStyle = "#F07C29";
 
             ctx.font = "30px sans-serif";
-            ctx.fillText('67', (width / 2.27), top + (height / 2));
+            ctx.fillText('67', (width / 2.12), top + (height / 2));
         }
     }
 

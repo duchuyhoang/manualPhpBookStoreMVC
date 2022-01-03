@@ -1,7 +1,7 @@
 <?php
 require_once "BaseController.php";
 // require_once dirname(__FILE__) . "/../Views/ProductInfo.php";
-require_once dirname(__FILE__) . "/../Dao/BookDao.php";
+require_once dirname(__FILE__) . "/../Dao/BookDaoImplement.php";
 
 class ProductInfoController extends BaseController
 {
@@ -14,7 +14,7 @@ class ProductInfoController extends BaseController
         try {
             // require_once dirname(__FILE__) . "/../shared/constant.php";
             $this->view = new View();
-            $this->BookDao = new BookDao();
+            $this->BookDao = new BookDaoImplement();
             // $this->view->load('Home',);
             // $this->view->show();
             $this->initialActions();

@@ -2,7 +2,7 @@
 
 // require "./BaseController.php";
 require_once "BaseController.php";
-require_once dirname(__FILE__) ."/../Dao/BookDao.php";
+require_once dirname(__FILE__) ."/../Dao/BookDaoImplement.php";
 require_once dirname(__FILE__) . "/../Views/View.php";
 
 class ShopController extends BaseController
@@ -14,7 +14,7 @@ class ShopController extends BaseController
 
     public function showView()
     {
-        $this->BookDao = new BookDao();
+        $this->BookDao = new BookDaoImplement();
         $this->View = new View();
         $this->initialActions();
     }

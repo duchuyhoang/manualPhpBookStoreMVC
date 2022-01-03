@@ -2,7 +2,7 @@
 
 // require "./BaseController.php";
 require_once "BaseController.php";
-require_once dirname(__FILE__) ."/../Dao/UserDao.php";;
+require_once dirname(__FILE__) ."/../Dao/UserDaoImplement.php";;
 
 class AuthController extends BaseController
 {
@@ -11,7 +11,7 @@ class AuthController extends BaseController
 
     public function showView()
     {
-        $this->UserDao = new UserDao();
+        $this->UserDao = new UserDaoImplement();
         $this->initialActions();
     }
     public function initialActions()

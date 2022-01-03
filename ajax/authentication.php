@@ -3,7 +3,7 @@ require_once dirname(__FILE__) . "/../Controller/AuthController.php";
 require_once dirname(__FILE__) . "/../shared/constants.php";
 require_once dirname(__FILE__) . "/../shared/actionsType.php";
 require_once dirname(__FILE__) . "/../shared/functions.php";
-require_once dirname(__FILE__) . "/../Dao/UserDao.php";
+require_once dirname(__FILE__) . "/../Dao/UserDaoImplement.php";
 require_once dirname(__FILE__) . "/../Model/Cart.php";
 
 session_start();
@@ -13,7 +13,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 switch ($actionType) {
     case $ACTION_LOGIN: {
             try {
-                $UserDao = new UserDao();
+                $UserDao = new UserDaoImplement();
                 $email = isset($_POST["email"]) ? $_POST["email"] : "";
                 $password = isset($_POST["password"]) ? $_POST["password"] : "";
                 $result = $UserDao->login($email, $password);
@@ -65,7 +65,7 @@ switch ($actionType) {
 
             try {
                 $_avatar = count($avatar) > 0  ? uploadFile($avatar, [$_FILES["avatar"]["tmp_name"]], [$_FILES["avatar"]["error"]])[0] : null;
-                $userDao = new UserDao();
+                $userDao = new UserDaoImplement();
                 $newUserId = $userDao->signUp(
                     User::newSignupUser(
                         $name,

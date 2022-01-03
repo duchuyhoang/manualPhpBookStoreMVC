@@ -207,10 +207,10 @@ ul.star li {
 }
 
 .blackButton {
-  background-color: #252525;
+  background-color: #252525!important;
   border-radius: 0;
   box-shadow: none;
-  color: #fff;
+  color: #fff!important;
   display: inline-block;
   font-size: 13px;
   font-weight: 700;
@@ -227,13 +227,13 @@ ul.star li {
   cursor: pointer;
 }
 
-.blackButton a{
-  color: #fff!important;
+.blackButton{
+  
   text-decoration: none!important;
 }
 
 .blackButton:hover {
-  background: #f07c29;
+  background: #f07c29!important;
 
 }
 

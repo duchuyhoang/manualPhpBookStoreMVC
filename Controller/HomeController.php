@@ -3,9 +3,9 @@
 // require "./BaseController.php";
 require_once "BaseController.php";
 require_once dirname(__FILE__) . "/../Views/View.php";
-require_once dirname(__FILE__) . "/../Dao/HomeDao.php";
-require_once dirname(__FILE__) . "/../Dao/BookDao.php";
-require_once dirname(__FILE__) . "/../Dao/OrderDao.php";
+require_once dirname(__FILE__) . "/../Dao/HomeDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/BookDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/OrderDaoImplement.php";
 
 
 
@@ -21,8 +21,8 @@ class HomeController extends BaseController
         try {
             // require_once dirname(__FILE__) . "/../shared/constant.php";
             $this->view = new View();
-            $this->HomeDao = new HomeDao();
-            $this->BookDao = new BookDao();
+            $this->HomeDao = new HomeDaoImplement();
+            $this->BookDao = new BookDaoImplement();
 
             // $rs = $this->BookDao->getProductByKeyword("đi");
 

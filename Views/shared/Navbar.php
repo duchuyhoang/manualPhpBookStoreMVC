@@ -215,7 +215,7 @@
 <div id="headerAnchor"></div>
 
 <div class="modal fade" id="loginModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
 
         <!-- Modal content-->
         <div class="modal-content">
@@ -223,29 +223,39 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Login</h4>
             </div>
-            <div class="modal-body">
-                <form method="post" id="loginForm">
-                    <div class="d-flex flex-column w-75 m-auto">
+            <div class="modal-body d-flex modal-lg">
 
-                        <div class="form-group">
-                            <label for="email">Email address:</label>
-                            <input type="email" name=<?php echo $LOGIN_EMAIL ?> class="form-control mb-2" id="email" placeholder="Email..." />
+                <div class="col-6 d-flex flex-column align-items-center">
+                    <img src="./img/loginImg.jpg" alt="" width="80%" height="90%">
+
+                </div>
+                <div class="col-6">
+                    <form method="post" id="loginForm">
+                        <div class="d-flex flex-column w-75 m-auto">
+
+                            <div class="form-group">
+                                <label for="email">Email address:</label>
+                                <input type="email" name=<?php echo $LOGIN_EMAIL ?> class="form-control mb-2" id="email" placeholder="Email..." />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" name=<?php echo $LOGIN_PASSWORD ?> class="form-control mb-2" id="password" placeholder="Password..." />
+                            </div>
+                            <div class="form-group">
+                                <p class="text-danger m-0" id="loginError"></p>
+                            </div>
+                            <div class="form-group d-flex justify-content-center w-100">
+                                <button type='submit' class="blackButton btn" name="submit" value=<?php echo $ACTION_LOGIN ?> id="btnLog">Login</button>
+                            </div>
+
                         </div>
 
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" name=<?php echo $LOGIN_PASSWORD ?> class="form-control mb-2" id="password" placeholder="Password..." />
-                        </div>
-                        <div class="form-group">
-                            <p class="text-danger m-0" id="loginError"></p>
-                        </div>
-                        <div class="form-group d-flex justify-content-center w-100">
-                            <button type='submit' class="btn btn-primary" name="submit" value=<?php echo $ACTION_LOGIN ?> id="btnLog">Login</button>
-                        </div>
+                    </form>
 
-                    </div>
+                </div>
 
-                </form>
+
             </div>
             <!-- <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

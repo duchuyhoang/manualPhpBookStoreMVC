@@ -9,10 +9,10 @@ require_once dirname(__FILE__) . "/../Model/Order.php";
 require_once dirname(__FILE__) . "/../Model/OrderType.php";
 require_once dirname(__FILE__) . "/../Model/User.php";
 require_once dirname(__FILE__) . "/../Model/Payment.php";
-require_once dirname(__FILE__) . "/../Dao/CartDao.php";
-require_once dirname(__FILE__) . "/../Dao/OrderDao.php";
-require_once dirname(__FILE__) . "/../Dao/PaymentTypeDao.php";
-require_once dirname(__FILE__) . "/../Dao/OrderTypeDao.php";
+require_once dirname(__FILE__) . "/../Dao/CartDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/OrderDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/PaymentTypeDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/OrderTypeDaoImplement.php";
 require_once dirname(__FILE__) . "/../PDOTransaction.php";
 
 
@@ -50,20 +50,20 @@ switch ($actionType) {
                     throw new Exception('Need a cart', 1001);
                 }
 
-                $cartDao = new CartDao();
+                $cartDao = new CartDaoImplement();
                 // $transactionDb->
                 $addCartStatus = $cartDao->insertNewCart($currentCart);
                 if (!$addCartStatus)
                     throw new Exception('Add cart failed', 1002);
-                $orderDao = new OrderDao();
-                $paymentTypeDao = new PaymentTypeDao();
+                $orderDao = new OrderDaoImplement();
+                $paymentTypeDao = new PaymentTypeDaoImplement();
 
                 $selectedPayment = $paymentTypeDao->getById($receiverPayment);
 
                 if (!$selectedPayment)
                     throw new Exception('Payment required', 1003);
 
-                $orderTypeDao = new OrderTypeDao();
+                $orderTypeDao = new OrderTypeDaoImplement();
 
                 $selectedOrderType = $orderTypeDao->getById($receiverOrderType);
                 if (!$selectedOrderType)

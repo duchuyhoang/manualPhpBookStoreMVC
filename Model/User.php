@@ -87,7 +87,7 @@ class User implements JsonSerializable
         return $user;
     }
 
-    public static function newEditUser($name, $phone, $delFlag, $avatar, $birthday, $permission, $id_user)
+    public static function newEditUser($name, $phone, $delFlag, $avatar, $birthday, $permission,$self_describe, $id_user)
     {
 
         $user = new self();
@@ -98,6 +98,7 @@ class User implements JsonSerializable
         $user->setAvatar($avatar);
         $user->setBirthday($birthday);
         $user->setPermission($permission);
+        $user->setSelf_describe($self_describe);
         return $user;
     }
 

@@ -6,17 +6,14 @@ require_once dirname(__FILE__) . "/../Model/BookImage.php";
 require_once dirname(__FILE__) . "/../Model/BookCategory.php";
 
 
-require_once dirname(__FILE__) . "/../Dao/BookDao.php";
-require_once dirname(__FILE__) . "/../Dao/OrderDao.php";
+require_once dirname(__FILE__) . "/../Dao/BookDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/OrderDaoImplement.php";
 
-require_once dirname(__FILE__) . "/../Dao/BookCategoryDao.php";
+require_once dirname(__FILE__) . "/../Dao/BookCategoryDaoImplement.php";
 
 require_once dirname(__FILE__) . "/../shared/functions.php";
 $actionType = isset($_POST["submit"]) ? $_POST["submit"] : null;
 error_reporting(E_ALL ^ E_NOTICE);
-
-
-
 
 
 switch ($actionType) {
@@ -49,8 +46,8 @@ switch ($actionType) {
                 date("Y-m-d h:i:s"),
                 0
             );
-            $bookDao = new BookDao();
-            $bookCategoryDao = new BookCategoryDao();
+            $bookDao = new BookDaoImplement();
+            $bookCategoryDao = new BookCategoryDaoImplement();
 
             $newBookId = $bookDao->insertProduct($newBook);
             $newBook->setId_book($newBookId);
@@ -92,7 +89,7 @@ switch ($actionType) {
     case $GET_PRODUCT:
         try {
             $params_book = (int)$_POST['idBook'];
-            $currentBook = new BookDao();
+            $currentBook = new BookDaoImplement();
             $currentBook = $currentBook->getById((int)$_POST['idBook']);
             $response = new stdClass();
             $response->message = "OK";
@@ -134,8 +131,8 @@ switch ($actionType) {
                 date("Y-m-d h:i:s"),
                 0
             );
-            $bookDao = new BookDao();
-            $bookCategoryDao = new BookCategoryDao();
+            $bookDao = new BookDaoImplement();
+            $bookCategoryDao = new BookCategoryDaoImplement();
             $selectedBook = $bookDao->getById($_POST["idBook"]);
 
             $bookCategoryDao->editBookCategory($selectedBook, $_POST["newBookCategory"] ? explode(",", $_POST["newBookCategory"]) : []);
@@ -148,7 +145,7 @@ switch ($actionType) {
 
             $listOldImageId = array_intersect($listImageId, array_map(function ($bookImage) {
                 return $bookImage->getId_image();
-            }, $listOldBookImage));;
+            }, $listOldBookImage));
 
 
             for ($i = 0; $i < count($listOldImageId); $i++) {
@@ -165,14 +162,12 @@ switch ($actionType) {
             }
 
 
-            if (count($_FILES) > 0) {
+            if (count($_FILES) > 0 && $_FILES["newImageList"]) {
                 $list = uploadFile($_FILES["newImageList"]["name"], $_FILES["newImageList"]["tmp_name"], $_FILES["newImageList"]["error"]);
                 for ($i = 0; $i < count($list); $i++)
                     $_listBookImage[] = new BookImage("", $list[$i], $selectedBook->getId_book(), 0);
                 // $bookDao->insertBookImages($newBook->getId_book(), $listBookImage);
             }
-
-            $a = 1;
 
             $bookDao->deleteBookImages($selectedBook->getId_book());
             $bookDao->insertBookImages($selectedBook->getId_book(), $_listBookImage);
@@ -197,7 +192,7 @@ switch ($actionType) {
     case $DELETE_PRODUCT:
         try {
 
-            $bookDao = new BookDao();
+            $bookDao = new BookDaoImplement();
 
             $selectedBook = $bookDao->getById($_POST["idBook"]);
 
@@ -212,7 +207,7 @@ switch ($actionType) {
     case $GET_ORDER:
         try {
             $idOrder = $_POST["id_order"];
-            $orderDao = new OrderDao();
+            $orderDao = new OrderDaoImplement();
             $selectedOrder = $orderDao->getOrderDetail($_POST["id_order"]);
             if (!$selectedOrder) throw new Exception("Order not exist");
 

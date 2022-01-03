@@ -12,7 +12,7 @@ require_once dirname(__FILE__) . "/../shared/actionsType.php";
 require_once dirname(__FILE__) . "/../shared/constants.php";
 require_once dirname(__FILE__) . "/../shared/functions.php";
 
-require_once dirname(__FILE__) . "/../Dao/BookDao.php";
+require_once dirname(__FILE__) . "/../Dao/BookDaoImplement.php";
 
 error_reporting(E_ALL ^ E_NOTICE);
 
@@ -22,7 +22,7 @@ $action = isset($_POST["submit"]) ? $_POST["submit"] : null;
 switch ($action) {
 
     case $CART_ADD_PRODUCT:
-        $bookDao = new BookDao();
+        $bookDao = new BookDaoImplement();
         $quantity = intval($_POST["quantity"]) > 0 ? intval($_POST["quantity"]) : 1;
         $price = isset($_POST["price"]) || null;
         $id_product = $_POST["id_product"];

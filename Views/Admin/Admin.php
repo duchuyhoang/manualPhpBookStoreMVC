@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap4.min.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./css/admin.css">
     <link rel="stylesheet" type="text/css" href="./css/base.css">
+    <link rel="stylesheet" type="text/css" href="./css/loading.css">
+
     <!-- <link rel="stylesheet" type="text/css" href="./css/header.css"> -->
 
     <!-- <link rel="stylesheet" type="text/css" href="./css/header.css"> -->
@@ -40,6 +42,7 @@
 
     <title>Document</title>
 </head>
+
 <?php
 require dirname(__FILE__) . "/../../shared/constants.php";
 require dirname(__FILE__) . "/../../shared/actionsType.php";
@@ -63,52 +66,75 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "";
         </div>
 
 
-        <div class="sidebarItem <?php echo $tab == "" || $tab == $LIST_PRODUCT ? "sidebarItemActive" : "" ?>">
-            <!-- onclick="openTab(event,'<?php echo $LIST_PRODUCT ?>')" -->
+        <div class="sidebarUser mb-5">
+            <div class="avatar">
+                <img width="100%" height="100%" src="<?php echo $_SESSION[$CURRENT_USER_INFO]->getAvatar() ?>" alt="" />
 
-            <a href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$LIST_PRODUCT}" ?>'>
-                <i class="fas fa-list"></i>
-                List product
-            </a>
+                <ul class="menu">
+                    <li id="signOutBtn" value="<?php echo $SIGN_OUT ?>">
+                        <i class="fas fa-sign-out-alt mr-2"></i>
+                        Sign out
+                    </li>
+
+                    <a href="./myProfile">
+                        <i class="fa fa-user mr-2"></i>
+                        Profile</a>
+
+                </ul>
+
+            </div>
 
         </div>
-        <div class="sidebarItem <?php echo $tab == $ADD_PRODUCT ? "sidebarItemActive" : "" ?>">
-            <!-- onclick="openTab(event,'<?php echo $ADD_PRODUCT ?>')" -->
 
-            <a href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$ADD_PRODUCT}" ?>'>
-                <i class="fas fa-plus fa-lg"></i>
-                Add product
-            </a>
+
+        <div class="d-flex flex-column flex-grow-1">
+            <div class="sidebarItem <?php echo $tab == "" || $tab == $LIST_PRODUCT ? "sidebarItemActive" : "" ?>">
+                <!-- onclick="openTab(event,'<?php echo $LIST_PRODUCT ?>')" -->
+
+                <a href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$LIST_PRODUCT}" ?>'>
+                    <i class="fas fa-list"></i>
+                    List product
+                </a>
+
+            </div>
+            <div class="sidebarItem <?php echo $tab == $ADD_PRODUCT ? "sidebarItemActive" : "" ?>">
+                <!-- onclick="openTab(event,'<?php echo $ADD_PRODUCT ?>')" -->
+
+                <a href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$ADD_PRODUCT}" ?>'>
+                    <i class="fas fa-plus fa-lg"></i>
+                    Add product
+                </a>
+            </div>
+
+            <div class="sidebarItem <?php echo $tab == $LIST_ODER ? "sidebarItemActive" : "" ?>">
+                <!-- onClick="openTab(event,'<?php echo $LIST_ODER ?>')" -->
+                <a href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$LIST_ODER}" ?>'>
+                    <i class="fas fa-shopping-cart"></i>
+                    List orders
+                </a>
+            </div>
+            <!-- <div class="sidebarItem <?php echo $tab == $ADD_USER ? "sidebarItemActive" : "" ?>">
+                <a href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$ADD_USER}" ?>'>
+                    <i class="fas fa-users fa-lg"></i>
+                    List users
+                </a>
+            </div>
+            <div class="sidebarItem <?php echo $tab == $EDIT_USER ? "sidebarItemActive" : "" ?>">
+                <a href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$EDIT_USER}" ?>'>
+                    <i class="fas fa-user-edit fa-lg"></i>
+                    Add users
+                </a>
+            </div> -->
+            <div class="sidebarItem <?php echo $tab == $STATISTICAL ? "sidebarItemActive" : "" ?>">
+                <a href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$STATISTICAL}" ?>'>
+                    <i class="fas fa-chart-bar fa-lg"></i>
+                    Statistcal
+                </a>
+            </div>
         </div>
 
-        <div class="sidebarItem <?php echo $tab == $LIST_ODER ? "sidebarItemActive" : "" ?>">
-            <!-- onClick="openTab(event,'<?php echo $LIST_ODER ?>')" -->
-            <a href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$LIST_ODER}" ?>'>
-                <i class="fas fa-shopping-cart"></i>
-                List orders
-            </a>
-        </div>
-        <div class="sidebarItem <?php echo $tab == $ADD_USER ? "sidebarItemActive" : "" ?>">
-            <!-- onClick="openTab(event,'<?php echo $ADD_USER ?>')" -->
 
-            <a href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$ADD_USER}" ?>'>
-                <i class="fas fa-users fa-lg"></i>
-                List users
-            </a>
-        </div>
-        <div class="sidebarItem <?php echo $tab == $EDIT_USER ? "sidebarItemActive" : "" ?>">
-            <!-- onClick="openTab(event,'<?php echo $EDIT_USER ?>')" -->
-            <a href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$EDIT_USER}" ?>'>
-                <i class="fas fa-user-edit fa-lg"></i>
-                Add users
-            </a>
-        </div>
-        <div class="sidebarItem <?php echo $tab == $STATISTICAL ? "sidebarItemActive" : "" ?>">
-            <a href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$STATISTICAL}" ?>'>
-                <i class="fas fa-chart-bar fa-lg"></i>
-                Statistcal
-            </a>
-        </div>
+
 
         <!-- <div class="sidebarItem">
             <a href='<?php echo getCurrentUrl($_SERVER['REQUEST_URI']) . "?tab={$STATISTICAL}" ?>'>
@@ -127,33 +153,33 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "";
 
     <section id="adminContent">
 
-        <div id=<?php echo $LIST_PRODUCT ?> class="<?php echo  $tab == '' || $tab == $LIST_PRODUCT ? "active" : "" ?>">
-            <?php
-            $tab == '' || $tab == $LIST_PRODUCT ? require dirname(__FILE__) . "/AdminListProduct.php" : "";
-            ?>
-        </div>
+        <div class="d-flex flex-column">
+            <div id=<?php echo $LIST_PRODUCT ?> class="<?php echo  $tab == '' || $tab == $LIST_PRODUCT ? "active" : "" ?>">
+                <?php
+                $tab == '' || $tab == $LIST_PRODUCT ? require dirname(__FILE__) . "/AdminListProduct.php" : "";
+                ?>
+            </div>
 
-        <div id=<?php echo $LIST_ODER ?> class="<?php echo $tab == $LIST_ODER ? "active" : "" ?>">
-            <?php
-            $tab == $LIST_ODER ? require dirname(__FILE__) . "/AdminListOrder.php" : "";
-            ?>
+            <div id=<?php echo $LIST_ODER ?> class="<?php echo $tab == $LIST_ODER ? "active" : "" ?>">
+                <?php
+                $tab == $LIST_ODER ? require dirname(__FILE__) . "/AdminListOrder.php" : "";
+                ?>
+            </div>
+            <div id=<?php echo $ADD_PRODUCT ?> class="<?php echo $tab == $ADD_PRODUCT ? "active" : "" ?>">
+                <?php
+                $tab == $ADD_PRODUCT ? require dirname(__FILE__) . "/AdminAddProduct.php" : "";
+                ?>
+            </div>
+            <div id=<?php echo $ADD_USER ?> class="<?php echo $tab == $ADD_USER ? "active" : "" ?>"></div>
+            <div id=<?php echo $EDIT_USER ?> class="<?php echo $tab == $EDIT_USER ? "active" : "" ?>"></div>
+            <!-- <div id="manufacture"></div>
+            <div id="orders"></div> -->
+            <div id=<?php echo $STATISTICAL ?> class="<?php echo $tab == $STATISTICAL ? "active" : "" ?>">
+                <?php
+                $tab == $STATISTICAL ? require dirname(__FILE__) . "/AdminStatistical.php" : "";
+                ?>
+            </div>
         </div>
-        <div id=<?php echo $ADD_PRODUCT ?> class="<?php echo $tab == $ADD_PRODUCT ? "active" : "" ?>">
-            <?php
-            $tab == $ADD_PRODUCT ? require dirname(__FILE__) . "/AdminAddProduct.php" : "";
-            ?>
-        </div>
-        <div id=<?php echo $ADD_USER ?> class="<?php echo $tab == $ADD_USER ? "active" : "" ?>"></div>
-        <div id=<?php echo $EDIT_USER ?> class="<?php echo $tab == $EDIT_USER ? "active" : "" ?>"></div>
-        <div id="manufacture"></div>
-        <div id="orders"></div>
-        <div id=<?php echo $STATISTICAL ?> class="<?php echo $tab == $STATISTICAL ? "active" : "" ?>">
-            <?php
-            $tab == $STATISTICAL ? require dirname(__FILE__) . "/AdminStatistical.php" : "";
-            ?>
-        </div>
-
-
 
         <!-- <div id="statistical"></div> -->
 
@@ -164,6 +190,27 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "";
 <script src="https://cdnjs.cloudflare.com/ajax/libs/snackbarjs/1.1.0/snackbar.min.js">
 </script>
 <script>
+    $("#signOutBtn").click(function(event) {
+        $("#loading").addClass("loadingShow");
+        request = $.ajax({
+            url: "./ajax/authentication.php",
+            type: "post",
+            data: {
+                submit: $("#signOutBtn").attr('value')
+            },
+        });
+
+        request.done(function(response, textStatus, jqXHR) {
+            $("#loading").removeClass("loadingShow");
+            window.location.reload();
+        });
+        request.fail(function(jqXHR, textStatus, errorThrown) {
+            $("#loading").removeClass("loadingShow");
+            $("#signupModal").modal('hide');
+        });
+
+    })
+
     // function reset() {
     //     console.log("hello");
     //     $("#addBookForm").trigger('reset');

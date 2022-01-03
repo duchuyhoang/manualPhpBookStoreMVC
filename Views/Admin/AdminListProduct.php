@@ -303,7 +303,7 @@
             }
 
             if (minDateFilter && !isNaN(minDateFilter)) {
-                if (aData._date < minDateFilter) {
+                if (aData._date < minDateFilter || aData._date > maxDateFilter) {
                     return false;
                 }
             }
@@ -323,7 +323,7 @@
         // }));
         // item.addEventListener('click', (function(e) {
         e.preventDefault();
-        $("#loading").addClass("loadingShow");
+        // $("#loading").addClass("loadingShow");
 
         // const idBook = +e.currentTarget.dataset
         //     .idbook;
@@ -345,7 +345,8 @@
                     response)
             addDataToFormEdit(
                 responseData
-                .data)
+                .data);
+            $("#exampleModal").modal('show');
             $("#loading").removeClass(
                 "loadingShow");
         });
@@ -418,7 +419,7 @@
         });
         $newBookCategorySelect[0].selectize.setValue("Search here");
 
-        $("#loading").addClass("loadingShow");
+        // $("#loading").addClass("loadingShow");
 
         $dataTable = <?php echo json_encode($listAllBook); ?>;
         $dataTable = $dataTable.map((data) => {
@@ -501,14 +502,14 @@
                     data: 'quantity'
                 },
                 {
-
+                    // data-target="#exampleModal"
                     // "
                     "render": function(data, type,
                         JsonResultRow) {
                         return `
                         <div class="d-flex flex-column">
                         <button  class="edit btn btn_edit_product" data-idBook="${JsonResultRow.id_book}" 
-                        data-toggle="modal" data-target="#exampleModal" 
+                        data-toggle="modal"  
                         onclick="handleSetListener(event,${JsonResultRow.id_book})">Edit</button>
                         &nbsp<button class="btn btn_delete_product" href="#" id="delete" data-idBook="${JsonResultRow.id_book}" data-toggle="modal" onclick="setDeleteProductId(${JsonResultRow.id_book})" 
                         data-target="#confirmDeleteProduct">Delete</button>

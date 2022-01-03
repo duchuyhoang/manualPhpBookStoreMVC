@@ -197,6 +197,7 @@
                 timeout: 5000,
                 style: "customSnackbar snackbar-success"
             });
+            $("#loading").removeClass("loadingShow");
         });
         request.fail(function(jqXHR, textStatus, errorThrown) {
             console.log(JSON.parse(jqXHR.responseText));

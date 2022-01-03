@@ -1,9 +1,9 @@
 <?php
 require_once "BaseController.php";
-require_once dirname(__FILE__) . "/../Dao/CityDao.php";
-require_once dirname(__FILE__) . "/../Dao/OrderDao.php";
-require_once dirname(__FILE__) . "/../Dao/DistrictDao.php";
-require_once dirname(__FILE__) . "/../Dao/WardDao.php";
+require_once dirname(__FILE__) . "/../Dao/CityDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/OrderDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/DistrictDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/WardDaoImplement.php";
 require_once dirname(__FILE__) . "/../Model/User.php";
 
 class ProfileController extends BaseController
@@ -19,10 +19,10 @@ class ProfileController extends BaseController
     {
         try {
             $this->view = new View();
-            $this->cityDao = new CityDao();
-            $this->districtDao = new DistrictDao();
-            $this->wardDao = new WardDao();
-            $this->orderDao = new OrderDao();
+            $this->cityDao = new CityDaoImplement();
+            $this->districtDao = new DistrictDaoImplement();
+            $this->wardDao = new WardDaoImplement();
+            $this->orderDao = new OrderDaoImplement();
             $this->initialActions();
         } catch (PDOException $e) {
         }
@@ -62,7 +62,7 @@ class ProfileController extends BaseController
 
 
 
-        $this->view->load('Profile', array(
+        $this->view->load('./Profile/Profile', array(
             "listCity" => $listCityReturn["listCity"],
             "listCityJson" => $listCityReturn["listCityJson"],
             "listDistrict" => $listDistrict,

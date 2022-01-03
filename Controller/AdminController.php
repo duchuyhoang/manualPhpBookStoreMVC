@@ -1,11 +1,11 @@
 <?php
 require_once "BaseController.php";
-require_once dirname(__FILE__) . "/../Dao/ManufactureDao.php";
-require_once dirname(__FILE__) . "/../Dao/CategoryDao.php";
-require_once dirname(__FILE__) . "/../Dao/AuthorDao.php";
-require_once dirname(__FILE__) . "/../Dao/OrderDao.php";
+require_once dirname(__FILE__) . "/../Dao/ManufactureDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/CategoryDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/AuthorDaoImplement.php";
+require_once dirname(__FILE__) . "/../Dao/OrderDaoImplement.php";
 
-require_once dirname(__FILE__) . "/../Dao/StatistcalDao.php";
+require_once dirname(__FILE__) . "/../Dao/StatistcalDaoImplement.php";
 
 // 
 class AdminController extends BaseController
@@ -25,11 +25,11 @@ class AdminController extends BaseController
             session_start();
             require dirname(__FILE__) . "/../shared/constants.php";
             $this->view = new View();
-            $this->authorDao = new AuthorDao();
-            $this->manufactureDao = new ManufactureDao();
-            $this->categoryDao = new CategoryDao();
-            $this->bookDao = new BookDao();
-            $this->orderDao = new OrderDao();
+            $this->authorDao = new AuthorDaoImplement();
+            $this->manufactureDao = new ManufactureDaoImplement();
+            $this->categoryDao = new CategoryDaoImplement();
+            $this->bookDao = new BookDaoImplement();
+            $this->orderDao = new OrderDaoImplement();
             $currentUser = isset($_SESSION[$CURRENT_USER_INFO]) ? $_SESSION[$CURRENT_USER_INFO] : null;
 
             if ($currentUser === null || !($currentUser instanceof User)||$currentUser->getPermission()!=$PERMISSION_ADMIN) {

@@ -162,7 +162,6 @@
 
 
         request.fail(function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
             const response = JSON.parse(jqXHR.responseText)
             console.log(textStatus);
             $("#loading").removeClass("loadingShow");
